@@ -1,0 +1,9 @@
+schema = 1
+id = "solarized"
+title = "Solarized"
+description = "Ethan Schoonover's Solarized colours: warm cream in light, deep teal in dark."
+version = "1.0.0"
+author = "Tilman Schieber"
+license = "MIT"
+homepage = "https://ethanschoonover.com/solarized/"
+mdeck = ">=2.3.0"

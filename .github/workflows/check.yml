@@ -1,0 +1,19 @@
+# Every pull request: the packs are checked as mdeck will check them, and
+# every theme and palette goes through the theme check.
+name: check
+
+on:
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    env:
+      MDECK_CHROME: /usr/bin/google-chrome
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      # From npm once 2.3.0 is published, until then from GitHub.
+      - run: npm install -g 'mdeck@>=2.3.0' || npm install -g github:tilman-schieber/mdeck
+      - run: mdeck themes build packs -o site --check

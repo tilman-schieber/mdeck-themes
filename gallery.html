@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>mdeck themes</title>
+<style>
+  :root { color-scheme: light dark; --bg: #fafafa; --ink: #1a1a1a; --muted: #666; --card: #fff; --rule: #e2e2e2; }
+  @media (prefers-color-scheme: dark) { :root { --bg: #141414; --ink: #eee; --muted: #999; --card: #1d1d1d; --rule: #2c2c2c; } }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.5 system-ui, sans-serif; }
+  main { max-width: 1100px; margin: 0 auto; padding: 32px 16px 64px; }
+  h1 { margin: 0 0 4px; font-size: 28px; }
+  p.lead { margin: 0 0 24px; color: var(--muted); }
+  code { font: 14px ui-monospace, monospace; background: var(--card); border: 1px solid var(--rule); padding: 1px 5px; border-radius: 4px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 18px; }
+  .card { background: var(--card); border: 1px solid var(--rule); border-radius: 10px; overflow: hidden; }
+  .card img { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-bottom: 1px solid var(--rule); }
+  .card div { padding: 12px 14px 14px; }
+  .card h2 { margin: 0; font-size: 17px; }
+  .card p { margin: 4px 0 8px; color: var(--muted); font-size: 14px; }
+</style>
+</head>
+<body>
+<main>
+  <h1>mdeck themes</h1>
+  <p class="lead">Themes and palettes for <a href="https://github.com/tilman-schieber/mdeck">mdeck</a>. Install one with <code>mdeck themes install &lt;pack&gt; my-talk.md</code>, or <a href="https://github.com/tilman-schieber/mdeck-themes">add your own</a>.</p>
+  <div class="grid" id="packs"></div>
+</main>
+<script>
+  const esc = value => String(value ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c])
+  fetch('index.json').then(r => r.json()).then(index => {
+    document.getElementById('packs').innerHTML = index.packs.map(pack => {
+      const first = [...pack.themes, ...pack.palettes][0]
+      return `<article class="card">${pack.previews?.[first] ? `<img src="${esc(pack.previews[first])}" alt="">` : ''}<div>
+        <h2>${esc(pack.title)} <small>${esc(pack.version)}</small></h2><p>${esc(pack.description)}</p>
+        <code>mdeck themes install ${esc(pack.id)}</code></div></article>`
+    }).join('')
+  })
+</script>
+</body>
+</html>

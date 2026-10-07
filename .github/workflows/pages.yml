@@ -1,0 +1,37 @@
+# The repository as mdeck reads it: https://gh.tschieber.de/mdeck-themes/
+# (index.json, one file per pack version, previews, and a gallery page).
+name: pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      MDECK_CHROME: /usr/bin/google-chrome
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - run: npm install -g 'mdeck@>=2.3.0' || npm install -g github:tilman-schieber/mdeck
+      - run: mdeck themes build packs -o site --check
+      - run: cp gallery.html site/index.html
+      - uses: actions/upload-pages-artifact@v3
+        with: { path: site }
+      - id: deployment
+        uses: actions/deploy-pages@v4
