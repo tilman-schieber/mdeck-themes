@@ -1,8 +1,8 @@
 schema = 1
 id = "earth"
 title = "Earth"
-description = "Two warm palettes: ember, sand and espresso with a glowing orange, and forest, deep green with moss and ochre."
-version = "1.0.0"
+description = "Forest: deep green with moss and ochre, calm, with contrast."
+version = "1.1.0"
 author = "Tilman Schieber"
 license = "MIT"
 mdeck = ">=3.0.0"
