@@ -1,0 +1,50 @@
+schema = 1
+kind = "theme"
+id = "lightbox"
+title = "Lightbox"
+description = "For talks made of photographs: pictures edge to edge, titles in Instrument Serif on a soft shadow, grids of photos from plain Markdown, neutral greys so nothing tints the pictures."
+version = "0.1.0"
+author = "Tilman Schieber"
+license = "MIT"
+mdeck = ">=3.2.0"  # pictures in the text (class "pictures")
+# The palette this theme uses unless the deck sets one; colours come only from palettes.
+# Neutral greys: a tinted background would tint the photographs.
+palette = "greyscale"
+appearance = "dark"
+fonts = [
+  "https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap",
+]
+
+[files]
+styles = "styles.css"
+
+# Type, spacing and fonts used by styles.css; colours come from the palette.
+[tokens]
+"--fs-display" = "136px"
+"--fs-title" = "112px"
+"--fs-focus" = "84px"
+"--fs-h" = "64px"
+"--fs-sub" = "36px"
+"--fs-body" = "30px"
+"--fs-small" = "22px"
+"--fs-eyebrow" = "18px"
+"--pad-x" = "112px"
+"--pad-y" = "64px"
+"--gap-title" = "36px"
+"--gap-item" = "20px"
+# How wide the picture is on an image + text slide (of 1920).
+"--photo-share" = "1180px"
+"--font-display" = "\"Instrument Serif\", Georgia, serif"
+"--font-body" = "\"Instrument Sans\", system-ui, sans-serif"
+
+[params.fontDisplay]
+token = "--font-display"
+title = "Display font"
+
+[params.fontBody]
+token = "--font-body"
+title = "Body font"
+
+[params.photoShare]
+token = "--photo-share"
+title = "Picture width on image + text slides"
