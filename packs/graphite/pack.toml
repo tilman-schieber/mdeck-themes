@@ -1,0 +1,8 @@
+schema = 1
+id = "graphite"
+title = "Graphite"
+description = "Black and white with a steel-blue accent. Came with mdeck before 3.0."
+version = "1.0.0"
+author = "Tilman Schieber"
+license = "MIT"
+mdeck = ">=3.0.0"
