@@ -1,0 +1,45 @@
+schema = 1
+kind = "theme"
+id = "cinema"
+title = "Cinema"
+description = "Film title cards: black letterbox bars, centred Cormorant titles, quiet subtitles in Inter, the accent as gold."
+version = "1.0.1"
+author = "Tilman Schieber"
+license = "MIT"
+mdeck = ">=4.0.0"
+# The palette this theme uses unless the deck sets one; colours come only from palettes.
+palette = "noir"
+appearance = "dark"
+fonts = [
+  "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Inter:wght@400;500&display=swap",
+]
+
+[files]
+styles = "styles.css"
+
+# Type, spacing and fonts used by styles.css; colours come from the palette.
+[tokens]
+"--fs-display" = "150px"
+"--fs-title" = "120px"
+"--fs-focus" = "88px"
+"--fs-h" = "76px"
+"--fs-sub" = "40px"
+"--fs-body" = "32px"
+"--fs-small" = "24px"
+"--fs-eyebrow" = "20px"
+"--pad-x" = "160px"
+# Room for the letterbox bars (70px) above and below.
+"--pad-y" = "112px"
+"--gap-title" = "48px"
+"--gap-item" = "24px"
+"--letterbox" = "70px"
+"--font-display" = "\"Cormorant Garamond\", Georgia, serif"
+"--font-body" = "Inter, system-ui, sans-serif"
+
+[params.fontDisplay]
+token = "--font-display"
+title = "Display font"
+
+[params.fontBody]
+token = "--font-body"
+title = "Body font"

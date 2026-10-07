@@ -1,0 +1,48 @@
+schema = 1
+kind = "theme"
+id = "pop"
+title = "Pop"
+description = "Thick outlines, hard shadows and flat pastel fills, in the spirit of pop art; Lexend throughout."
+version = "1.0.0"
+author = "Tilman Schieber"
+license = "MIT"
+mdeck = ">=4.0.0"
+# The palette this theme uses unless the deck sets one; colours come only from palettes.
+palette = "candy"
+fonts = [
+  "https://fonts.googleapis.com/css2?family=Lexend:wght@400;600;800&display=swap",
+]
+
+[files]
+styles = "styles.css"
+
+# Type, spacing and fonts used by styles.css; colours come from the palette.
+[tokens]
+"--fs-display" = "140px"
+"--fs-title" = "108px"
+"--fs-focus" = "80px"
+"--fs-h" = "68px"
+"--fs-sub" = "38px"
+"--fs-body" = "32px"
+"--fs-small" = "24px"
+"--fs-eyebrow" = "22px"
+"--pad-x" = "140px"
+"--pad-y" = "80px"
+"--gap-title" = "48px"
+"--gap-item" = "24px"
+"--edge" = "5px"
+"--shadow" = "12px"
+"--font-display" = "Lexend, system-ui, sans-serif"
+"--font-body" = "Lexend, system-ui, sans-serif"
+
+[params.fontDisplay]
+token = "--font-display"
+title = "Display font"
+
+[params.fontBody]
+token = "--font-body"
+title = "Body font"
+
+[params.edge]
+token = "--edge"
+title = "Outline width"

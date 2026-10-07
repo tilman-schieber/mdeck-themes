@@ -1,8 +1,0 @@
-schema = 1
-id = "cinema"
-title = "Cinema"
-description = "Film title cards: letterbox bars, centred serif titles, subtitles in a quiet sans, gold on near-black."
-version = "1.0.1"
-author = "Tilman Schieber"
-license = "MIT"
-mdeck = ">=3.0.0"

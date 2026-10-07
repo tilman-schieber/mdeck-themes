@@ -1,8 +1,0 @@
-schema = 1
-id = "pop"
-title = "Pop"
-description = "Thick outlines, hard shadows and flat pastel fills, in the spirit of pop art."
-version = "1.0.0"
-author = "Tilman Schieber"
-license = "MIT"
-mdeck = ">=3.0.0"

@@ -1,8 +1,0 @@
-schema = 1
-id = "duet"
-title = "Duet"
-description = "Two voices: heavy slab headings, and two accents that take turns, as split fields, diagonal chapters and alternating markers."
-version = "1.0.0"
-author = "Tilman Schieber"
-license = "MIT"
-mdeck = ">=3.0.0"

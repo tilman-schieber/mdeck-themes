@@ -1,4 +1,4 @@
-# Every pull request: the packs are checked as mdeck will check them, and
+# Every pull request: themes and palettes are checked as mdeck will check them, and
 # every theme and palette goes through the theme check.
 name: check
 
@@ -14,8 +14,8 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with: { node-version: 22 }
-      # The packs are checked by mdeck as it is on its main branch.
+      # Checked by mdeck as it is on its main branch.
       - uses: actions/checkout@v4
         with: { repository: tilman-schieber/mdeck, path: .mdeck }
       - run: npm ci --prefix .mdeck --omit=dev
-      - run: node .mdeck/bin/mdeck.js themes build packs -o site --check
+      - run: node .mdeck/bin/mdeck.js themes build . -o site --check

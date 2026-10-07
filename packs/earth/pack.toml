@@ -1,8 +1,0 @@
-schema = 1
-id = "earth"
-title = "Earth"
-description = "Forest: deep green with moss and ochre, calm, with contrast."
-version = "1.1.0"
-author = "Tilman Schieber"
-license = "MIT"
-mdeck = ">=3.0.0"

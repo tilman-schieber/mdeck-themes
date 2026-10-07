@@ -1,5 +1,6 @@
 # The repository as mdeck reads it: https://gh.tschieber.de/mdeck-themes/
-# (index.json, one file per pack version, previews, and a gallery page).
+# (catalogue.json, one file per theme or palette version, previews, and a
+# gallery page).
 name: pages
 
 on:
@@ -28,11 +29,11 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with: { node-version: 22 }
-      # The packs are checked by mdeck as it is on its main branch.
+      # Checked by mdeck as it is on its main branch.
       - uses: actions/checkout@v4
         with: { repository: tilman-schieber/mdeck, path: .mdeck }
       - run: npm ci --prefix .mdeck --omit=dev
-      - run: node .mdeck/bin/mdeck.js themes build packs -o site --check
+      - run: node .mdeck/bin/mdeck.js themes build . -o site --check
       - run: cp gallery.html site/index.html
       - uses: actions/upload-pages-artifact@v3
         with: { path: site }
