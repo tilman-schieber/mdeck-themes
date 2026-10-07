@@ -74,7 +74,7 @@
 <body>
 <header>
   <h1>mdeck themes</h1>
-  <p>Try every theme and palette for <a href="https://github.com/tilman-schieber/mdeck">mdeck</a> on a sample deck, light and dark. Built-in ones work right away; the others are one command away.</p>
+  <p>Try every theme and palette for <a href="https://github.com/tilman-schieber/mdeck">mdeck</a> on a sample deck, light and dark. Those that come with mdeck work right away; the others are one command away.</p>
   <nav><a href="https://gh.tschieber.de/mdeck/theme-repository.html">How to install</a><a href="https://github.com/tilman-schieber/mdeck-themes">Add your own</a></nav>
 </header>
 <div class="layout">
@@ -118,20 +118,21 @@
   function render(reload = true) {
     const t = theme(), p = shownPalette(), appearance = shownAppearance()
     $('themes').innerHTML = looks.themes.map(item => `<button class="theme" aria-pressed="${item.id === t.id}" data-theme="${esc(item.id)}">
-      ${chip(palette(item.palette), item.appearance)}<span><span class="name">${esc(item.title)}</span><span class="where">${item.pack ? `pack ${esc(item.pack)}` : 'built in'}</span></span></button>`).join('')
+      ${chip(palette(item.palette), item.appearance)}<span><span class="name">${esc(item.title)}</span><span class="where">${item.bundled ? 'comes with mdeck' : `pack ${esc(item.pack)}`}</span></span></button>`).join('')
     $('palettes').innerHTML = t.palettes.map(id => palette(id)).filter(Boolean).map(item => `<button class="palette" aria-pressed="${item.id === p.id}" data-palette="${esc(item.id)}">
       ${chip(item, appearance)}${esc(item.title)}${item.id === t.palette ? ' <small>default</small>' : ''}</button>`).join('')
     $('light').setAttribute('aria-pressed', appearance === 'light')
     $('dark').setAttribute('aria-pressed', appearance === 'dark')
 
     // What to run, and what to write at the top of the slide file.
-    const packs = [...new Set([t.pack, p.pack].filter(Boolean))]
+    // Packs that come with mdeck need no install.
+    const packs = [...new Set([t, p].filter(item => item.pack && !item.bundled).map(item => item.pack))]
     const settings = ['---', `theme: ${t.id}`, ...(p.id !== t.palette ? [`palette: ${p.id}`] : []), ...(appearance !== t.appearance ? [`appearance: ${appearance}`] : []), '---'].join('\n')
     $('details').innerHTML = `<div><h2>${esc(t.title)}${p.id !== t.palette ? ` <span style="font-weight:400;color:var(--muted)">with ${esc(p.title)}</span>` : ''}</h2>
         <p>${esc(t.description)}</p>${p.id !== t.palette && p.description ? `<p>${esc(p.title)}: ${esc(p.description)}</p>` : ''}</div>
-      <div><h3>Install</h3>${packs.length ? copyable(packs.map(id => `mdeck themes install ${id} my-talk.md`).join('\n')) : '<p class="note">Built into mdeck: nothing to install.</p>'}
+      <div><h3>Install</h3>${packs.length ? copyable(packs.map(id => `mdeck themes install ${id}`).join('\n')) : '<p class="note">Comes with mdeck: nothing to install.</p>'}
         <h3>At the top of the slide file</h3>${copyable(settings)}
-        ${packs.length ? `<p class="note">Needs mdeck ${esc(looks.mdeck.split('.')[0])} or newer (<code>npm install -g mdeck</code>). Add <code>--global</code> to install it for every deck.</p>` : ''}</div>`
+        ${packs.length ? `<p class="note">Needs mdeck ${esc(looks.mdeck.split('.')[0])} or newer (<code>npm install -g mdeck</code>). This installs it for every deck; add a slide file to put it beside one deck.</p>` : ''}</div>`
 
     const params = new URLSearchParams({ theme: t.id, ...(state.palette ? { palette: p.id } : {}), ...(state.appearance ? { appearance } : {}), ...(state.slide > 1 ? { slide: state.slide } : {}) })
     history.replaceState(null, '', `?${params}`)

@@ -6,8 +6,8 @@ as **packs**. Try them on a sample deck, light and dark, at
 
 ```sh
 mdeck themes search
-mdeck themes install solarized my-talk.md      # beside the deck
-mdeck themes install solarized --global        # for every deck
+mdeck themes install solarized                 # for every deck
+mdeck themes install solarized my-talk.md      # beside one deck
 ```
 
 The design page (`mdeck design my-talk.md`) lists them too, with an Install
@@ -40,6 +40,10 @@ The theme and palette folders are ordinary mdeck extensions; see
 [Create a theme or palette](https://gh.tschieber.de/mdeck/theme-authoring.html).
 While you work on one, keep it in the `extensions/` folder beside a deck and
 look at it with `mdeck design`.
+
+A theme whose palette is in another pack names that pack: `requires = ["lagoon"]`.
+The packs that come with mdeck live in the mdeck repository (`assets/packs/`)
+and are listed here too.
 
 **Rules**, checked for every pull request and again by mdeck when it installs a pack:
 
