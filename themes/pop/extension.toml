@@ -3,12 +3,12 @@ kind = "theme"
 id = "pop"
 title = "Pop"
 description = "Thick outlines, hard shadows and flat pastel fills, in the spirit of pop art; Lexend throughout."
-version = "1.0.0"
+version = "1.1.0"
 author = "Tilman Schieber"
 license = "MIT"
 mdeck = ">=3.1.0"
 # The palette this theme uses unless the deck sets one; colours come only from palettes.
-palette = "candy"
+palette = "swiss"
 fonts = [
   "https://fonts.googleapis.com/css2?family=Lexend:wght@400;600;800&display=swap",
 ]

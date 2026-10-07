@@ -344,23 +344,21 @@ strong { color: var(--ink); font-weight: 600; }
    ═════════════════════════════════════════════ */
 
 .slide {
-  /* A palette may set these for each of light and dark (Candy does);
-     without them a shape is outlined in the ink, filled with pastel
-     mixes of the accents, and its text is the ink. */
-  --pop-edge: var(--edge) solid var(--pop-line, var(--ink));
-  --pop-shadow-colour: var(--pop-shadow, var(--pop-line, var(--ink)));
+  /* Any palette works: a shape is outlined in the ink and filled with a
+     pastel, an accent faded into the background. Its hard shadow is the
+     ink in the light and black in the dark, where a light one would glare. */
+  --pop-edge: var(--edge) solid var(--ink);
+  --pop-shadow-colour: light-dark(var(--ink), #000);
   --pop-shadow-big: var(--shadow) var(--shadow) 0 var(--pop-shadow-colour);
   --pop-shadow-small: calc(var(--shadow) * 0.66) calc(var(--shadow) * 0.66) 0 var(--pop-shadow-colour);
-  --fill-1: var(--pop-fill-1, color-mix(in srgb, var(--accent) 24%, var(--bg)));
-  --fill-2: var(--pop-fill-2, color-mix(in srgb, var(--accent-2) 26%, var(--bg)));
-  --on-pop: var(--pop-ink, var(--ink));
+  --fill-1: color-mix(in srgb, var(--accent) 24%, var(--bg));
+  --fill-2: color-mix(in srgb, var(--accent-2) 26%, var(--bg));
 }
-/* Everything on a shape is written in its ink. */
+/* Everything on a shape is written in the ink, not the softer greys. */
 .slide--title .title-text, .slide--chapter .chapter-content, .slide--focus .slide-body,
 .slide:not(.slide--title, .slide--chapter, .slide--focus) .slide-body h1, .slide-body .callout, .slide-body th, .slide em {
-  --ink: var(--on-pop);
-  --ink-soft: var(--on-pop);
-  --muted: var(--on-pop);
+  --ink-soft: var(--ink);
+  --muted: var(--ink);
 }
 .display, .slide-body h1, .slide--chapter .chapter-title, .focus-statement, .slide--focus .focus-content p { font-weight: 800; letter-spacing: -0.03em; }
 .slide em { font-style: normal; color: var(--ink); background: var(--fill-2); padding: 0 0.12em; border-radius: 0.15em; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
@@ -400,7 +398,7 @@ strong { color: var(--ink); font-weight: 600; }
 .slide-body .callout .callout-title { color: var(--ink); }
 .slide-body .callout p { color: var(--ink); }
 .slide-body .callout-tip { background: var(--fill-1); }
-.slide-body :is(.callout-warning, .callout-important, .callout-caution) { background: color-mix(in srgb, var(--callout-warning) 30%, var(--fill-2)); }
+.slide-body :is(.callout-warning, .callout-important, .callout-caution) { background: color-mix(in srgb, var(--callout-warning) 30%, var(--bg)); }
 .code-block { border: var(--pop-edge); box-shadow: var(--pop-shadow-small); border-radius: 16px; }
 .slide-body table { border: var(--pop-edge); border-radius: 16px; border-collapse: separate; border-spacing: 0; overflow: hidden; box-shadow: var(--pop-shadow-small); }
 .slide-body th { background: var(--fill-2); color: var(--ink); border-bottom: var(--pop-edge); }
