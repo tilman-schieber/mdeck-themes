@@ -1,0 +1,8 @@
+schema = 1
+id = "terminal"
+title = "Terminal"
+description = "A terminal session: JetBrains Mono, headings at a prompt, a blinking cursor, log-line callouts and a tmux status bar; dark by default."
+version = "1.0.0"
+author = "Tilman Schieber"
+license = "MIT"
+mdeck = ">=3.0.0"

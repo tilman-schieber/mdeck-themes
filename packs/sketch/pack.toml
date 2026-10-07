@@ -1,0 +1,8 @@
+schema = 1
+id = "sketch"
+title = "Sketch"
+description = "A sketchbook: Caveat and Patrick Hand on dotted paper, marker scribbles, circled numbers, sticky-note callouts and taped photos; a chalkboard in the dark."
+version = "1.0.0"
+author = "Tilman Schieber"
+license = "MIT"
+mdeck = ">=3.0.0"

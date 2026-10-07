@@ -1,8 +1,8 @@
 # mdeck themes
 
 Themes and palettes for [mdeck](https://github.com/tilman-schieber/mdeck), shared
-as **packs**. Browse them at <https://gh.tschieber.de/mdeck-themes/>, or from a
-terminal:
+as **packs**. Try them on a sample deck, light and dark, at
+<https://gh.tschieber.de/mdeck-themes/>, or list them from a terminal:
 
 ```sh
 mdeck themes search
@@ -33,7 +33,7 @@ description = "Navy and brass, with a serif for headings."
 version = "1.0.0"             # raise it for every change
 author = "Your Name"
 license = "MIT"
-mdeck = ">=2.3.0"             # the oldest mdeck it works with
+mdeck = ">=3.0.0"             # the oldest mdeck it works with
 ```
 
 The theme and palette folders are ordinary mdeck extensions; see
