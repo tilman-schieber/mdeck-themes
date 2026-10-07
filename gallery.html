@@ -26,7 +26,7 @@
   /* Theme list */
   .themes { background: var(--panel); border: 1px solid var(--rule); border-radius: 10px; padding: 6px; position: sticky; top: 12px; max-height: calc(100vh - 24px); overflow: auto; }
   .themes h2 { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin: 10px 10px 6px; font-weight: 600; }
-  .theme { display: grid; grid-template-columns: 34px minmax(0, 1fr); gap: 10px; align-items: center; width: 100%; padding: 8px 10px; border: 0; border-radius: 7px; background: none; color: inherit; text-align: left; font: inherit; cursor: pointer; }
+  .theme { display: grid; grid-template-columns: 72px minmax(0, 1fr); gap: 10px; align-items: center; width: 100%; padding: 8px 10px; border: 0; border-radius: 7px; background: none; color: inherit; text-align: left; font: inherit; cursor: pointer; }
   .theme:hover { background: var(--hover); }
   .theme[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); }
   .theme[aria-pressed="true"] .where { color: inherit; opacity: 0.8; }
@@ -34,6 +34,8 @@
   .theme .where { display: block; font-size: 12px; color: var(--muted); }
   .chip { width: 34px; height: 24px; border-radius: 5px; border: 1px solid rgba(127,127,127,0.35); display: grid; grid-template-columns: 2fr 1fr 1fr; overflow: hidden; }
   .chip i { display: block; }
+  /* A theme's icon: its title slide, small (mdeck themes build renders it). */
+  .icon { display: block; width: 72px; height: 41px; border-radius: 4px; border: 1px solid rgba(127,127,127,0.35); object-fit: cover; }
   /* Stage and controls */
   .stage { background: var(--panel); border: 1px solid var(--rule); border-radius: 10px; overflow: hidden; min-width: 0; }
   .frame { background: var(--stage); aspect-ratio: 16 / 9; position: relative; }
@@ -118,7 +120,7 @@
   function render(reload = true) {
     const t = theme(), p = shownPalette(), appearance = shownAppearance()
     $('themes').innerHTML = looks.themes.map(item => `<button class="theme" aria-pressed="${item.id === t.id}" data-theme="${esc(item.id)}">
-      ${chip(palette(item.palette), item.appearance)}<span><span class="name">${esc(item.title)}</span><span class="where">${item.builtIn ? 'comes with mdeck' : 'to install'}</span></span></button>`).join('')
+      ${item.icon ? `<img class="icon" src="${esc(item.icon)}" alt="" width="72" height="41">` : chip(palette(item.palette), item.appearance)}<span><span class="name">${esc(item.title)}</span><span class="where">${item.builtIn ? 'comes with mdeck' : 'to install'}</span></span></button>`).join('')
     $('palettes').innerHTML = t.palettes.map(id => palette(id)).filter(Boolean).map(item => `<button class="palette" aria-pressed="${item.id === p.id}" data-palette="${esc(item.id)}">
       ${chip(item, appearance)}${esc(item.title)}${item.id === t.palette ? ' <small>default</small>' : ''}</button>`).join('')
     $('light').setAttribute('aria-pressed', appearance === 'light')
