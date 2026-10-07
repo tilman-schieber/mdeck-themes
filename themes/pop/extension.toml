@@ -6,7 +6,7 @@ description = "Thick outlines, hard shadows and flat pastel fills, in the spirit
 version = "1.0.0"
 author = "Tilman Schieber"
 license = "MIT"
-mdeck = ">=4.0.0"
+mdeck = ">=3.1.0"
 # The palette this theme uses unless the deck sets one; colours come only from palettes.
 palette = "candy"
 fonts = [

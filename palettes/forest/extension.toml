@@ -6,7 +6,7 @@ description = "Deep green with moss and ochre; calm, with contrast."
 version = "1.1.0"
 author = "Tilman Schieber"
 license = "MIT"
-mdeck = ">=4.0.0"
+mdeck = ">=3.1.0"
 
 [light]
 "--bg" = "#f6f5ef"

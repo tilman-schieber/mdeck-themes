@@ -6,7 +6,7 @@ description = "Film title cards: black letterbox bars, centred Cormorant titles,
 version = "1.0.1"
 author = "Tilman Schieber"
 license = "MIT"
-mdeck = ">=4.0.0"
+mdeck = ">=3.1.0"
 # The palette this theme uses unless the deck sets one; colours come only from palettes.
 palette = "noir"
 appearance = "dark"

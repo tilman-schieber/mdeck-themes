@@ -6,7 +6,7 @@ description = "A magazine spread: Newsreader headlines, Lora text, drop caps, pu
 version = "1.0.0"
 author = "Tilman Schieber"
 license = "MIT"
-mdeck = ">=4.0.0"
+mdeck = ">=3.1.0"
 # The palette this theme uses unless the deck sets one; colours come only from palettes.
 palette = "terra"
 fonts = [

@@ -6,7 +6,7 @@ description = "A terminal screen: near-black with phosphor green and amber; in l
 version = "1.0.0"
 author = "Tilman Schieber"
 license = "MIT"
-mdeck = ">=4.0.0"
+mdeck = ">=3.1.0"
 
 [light]
 "--bg" = "#fbfbf7"

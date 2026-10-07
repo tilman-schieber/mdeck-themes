@@ -6,7 +6,7 @@ description = "Cream with raspberry and blue, and pastel fills for Pop; dusk vio
 version = "1.0.0"
 author = "Tilman Schieber"
 license = "MIT"
-mdeck = ">=4.0.0"
+mdeck = ">=3.1.0"
 [light]
 "--bg" = "#fffaf0"
 "--surface" = "#fff1d6"

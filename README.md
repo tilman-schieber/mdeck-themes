@@ -32,7 +32,7 @@ with a few more settings at the top of `extension.toml`:
 version = "1.0.0"          # raise it for every change
 author = "Your Name"
 license = "MIT"
-mdeck = ">=4.0.0"          # the oldest mdeck it works with
+mdeck = ">=3.1.0"          # the oldest mdeck it works with
 homepage = "https://…"     # optional
 ```
 

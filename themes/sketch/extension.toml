@@ -6,7 +6,7 @@ description = "A sketchbook: Caveat and Patrick Hand on dotted paper, marker scr
 version = "1.0.1"
 author = "Tilman Schieber"
 license = "MIT"
-mdeck = ">=4.0.0"
+mdeck = ">=3.1.0"
 # The palette this theme uses unless the deck sets one; colours come only from palettes.
 palette = "pastel"
 fonts = [

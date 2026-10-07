@@ -6,7 +6,7 @@ description = "Soft pastels in the Catppuccin style: Latte by day, Mocha by nigh
 version = "1.0.1"
 author = "Tilman Schieber"
 license = "MIT"
-mdeck = ">=4.0.0"
+mdeck = ">=3.1.0"
 
 # Catppuccin Latte; the peach and the muted grey are a shade darker so they
 # can be read on the base.
