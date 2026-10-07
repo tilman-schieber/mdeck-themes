@@ -1,8 +1,8 @@
-/* Sticker — thick outlines, hard shadows, flat pastel fills.
-   Titles, headings, callouts and code are stickers on the page: a heavy
+/* Pop — thick outlines, hard shadows, flat pastel fills.
+   Titles, headings, callouts and code are cut-out shapes on the page: a heavy
    outline in the ink colour, a shadow offset without blur, and a pastel
    fill mixed from the palette's accents. Lexend, heavy for headings.
-   Below: the plain base every layout needs, then the sticker layer. */
+   Below: the plain base every layout needs, then the pop layer. */
 
 /* ─────────────────────────────────────────────
    HEADER / FOOTER: quiet labels, no rules
@@ -340,60 +340,71 @@ strong { color: var(--ink); font-weight: 600; }
 }
 
 /* ═════════════════════════════════════════════
-   STICKER
+   POP
    ═════════════════════════════════════════════ */
 
 .slide {
-  --sticker-edge: var(--edge) solid var(--ink);
-  --sticker-shadow: var(--shadow) var(--shadow) 0 var(--ink);
-  --sticker-shadow-small: calc(var(--shadow) * 0.66) calc(var(--shadow) * 0.66) 0 var(--ink);
-  --fill-1: color-mix(in srgb, var(--accent) 24%, var(--bg));
-  --fill-2: color-mix(in srgb, var(--accent-2) 26%, var(--bg));
+  /* A palette may set these for each of light and dark (Candy does);
+     without them a shape is outlined in the ink, filled with pastel
+     mixes of the accents, and its text is the ink. */
+  --pop-edge: var(--edge) solid var(--pop-line, var(--ink));
+  --pop-shadow-colour: var(--pop-shadow, var(--pop-line, var(--ink)));
+  --pop-shadow-big: var(--shadow) var(--shadow) 0 var(--pop-shadow-colour);
+  --pop-shadow-small: calc(var(--shadow) * 0.66) calc(var(--shadow) * 0.66) 0 var(--pop-shadow-colour);
+  --fill-1: var(--pop-fill-1, color-mix(in srgb, var(--accent) 24%, var(--bg)));
+  --fill-2: var(--pop-fill-2, color-mix(in srgb, var(--accent-2) 26%, var(--bg)));
+  --on-pop: var(--pop-ink, var(--ink));
+}
+/* Everything on a shape is written in its ink. */
+.slide--title .title-text, .slide--chapter .chapter-content, .slide--focus .slide-body,
+.slide:not(.slide--title, .slide--chapter, .slide--focus) .slide-body h1, .slide-body .callout, .slide-body th, .slide em {
+  --ink: var(--on-pop);
+  --ink-soft: var(--on-pop);
+  --muted: var(--on-pop);
 }
 .display, .slide-body h1, .slide--chapter .chapter-title, .focus-statement, .slide--focus .focus-content p { font-weight: 800; letter-spacing: -0.03em; }
 .slide em { font-style: normal; color: var(--ink); background: var(--fill-2); padding: 0 0.12em; border-radius: 0.15em; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
 .slide strong { font-weight: 800; }
 
-/* Title: one sticker around title and subtitle. */
-.slide--title .title-text { border: var(--sticker-edge); box-shadow: var(--sticker-shadow); background: var(--fill-1); padding: 64px 72px; border-radius: 24px; }
+/* Title: one shape around title and subtitle. */
+.slide--title .title-text { border: var(--pop-edge); box-shadow: var(--pop-shadow-big); background: var(--fill-1); padding: 64px 72px; border-radius: 24px; }
 .slide--title .subtitle { color: var(--ink); }
 
-/* Headings on content slides: a small sticker of their own. */
+/* Headings on content slides: a small shape of their own. */
 .slide:not(.slide--title, .slide--chapter, .slide--focus) .slide-body h1 {
   display: inline-block;
   align-self: flex-start;
-  border: var(--sticker-edge);
-  box-shadow: var(--sticker-shadow-small);
+  border: var(--pop-edge);
+  box-shadow: var(--pop-shadow-small);
   background: var(--fill-2);
   padding: 10px 28px 14px;
   border-radius: 16px;
 }
 
-/* Chapters: a sticker with the number in a round badge. */
-.slide--chapter .chapter-content { border: var(--sticker-edge); box-shadow: var(--sticker-shadow); background: var(--fill-1); padding: 56px 64px; border-radius: 24px; width: auto; max-width: 1500px; }
-.slide--chapter .chapter-num { display: inline-grid; place-items: center; min-width: 64px; height: 64px; padding: 0 12px; border: var(--sticker-edge); border-radius: 999px; background: var(--bg); color: var(--ink); font-weight: 800; font-size: 30px; }
+/* Chapters: a shape with the number in a round badge. */
+.slide--chapter .chapter-content { border: var(--pop-edge); box-shadow: var(--pop-shadow-big); background: var(--fill-1); padding: 56px 64px; border-radius: 24px; width: auto; max-width: 1500px; }
+.slide--chapter .chapter-num { display: inline-grid; place-items: center; min-width: 64px; height: 64px; padding: 0 12px; border: var(--pop-edge); border-radius: 999px; background: var(--fill-2); color: var(--ink); font-weight: 800; font-size: 30px; }
 .slide--chapter .chapter-meta { color: var(--ink); align-self: center; }
 .slide--chapter .chapter-desc { color: var(--ink); }
 
-/* Statements: one sticker, the words straight on it. */
+/* Statements: one shape, the words straight on it. */
 .slide--focus .slide-body { justify-content: center; }
 .slide--focus .focus-content, .slide--focus .slide-body { align-items: flex-start; }
-.slide--focus .slide-body { border: var(--sticker-edge); box-shadow: var(--sticker-shadow); border-radius: 24px; padding: 64px 72px; margin: 24px 0; background: var(--fill-2); }
+.slide--focus .slide-body { border: var(--pop-edge); box-shadow: var(--pop-shadow-big); border-radius: 24px; padding: 64px 72px; margin: 24px 0; background: var(--fill-2); }
 .focus-eyebrow, .focus-attribution { color: var(--ink); }
 
 /* Lists, callouts, code, pictures. */
 .slide-body ul li::before { width: 18px; height: 18px; border: 4px solid var(--ink); background: var(--accent); border-radius: 5px; top: 0.36em; }
 .slide-body ol li::before { color: var(--ink); font-weight: 800; }
-.slide-body .callout { border: var(--sticker-edge); box-shadow: var(--sticker-shadow-small); border-radius: 16px; padding: 16px 24px; background: var(--bg); }
+.slide-body .callout { border: var(--pop-edge); box-shadow: var(--pop-shadow-small); border-radius: 16px; padding: 16px 24px; background: var(--fill-2); }
+.slide-body .callout .callout-title { color: var(--ink); }
 .slide-body .callout p { color: var(--ink); }
 .slide-body .callout-tip { background: var(--fill-1); }
-.slide-body .callout-note { background: var(--fill-2); }
-.slide-body .callout-warning { background: color-mix(in srgb, var(--callout-warning) 22%, var(--bg)); }
-.slide-body .callout-important, .slide-body .callout-caution { background: color-mix(in srgb, var(--callout-caution) 16%, var(--bg)); }
-.code-block { border: var(--sticker-edge); box-shadow: var(--sticker-shadow-small); border-radius: 16px; }
-.slide-body table { border: var(--sticker-edge); border-radius: 16px; border-collapse: separate; border-spacing: 0; overflow: hidden; box-shadow: var(--sticker-shadow-small); }
-.slide-body th { background: var(--fill-2); border-bottom: var(--sticker-edge); }
+.slide-body :is(.callout-warning, .callout-important, .callout-caution) { background: color-mix(in srgb, var(--callout-warning) 30%, var(--fill-2)); }
+.code-block { border: var(--pop-edge); box-shadow: var(--pop-shadow-small); border-radius: 16px; }
+.slide-body table { border: var(--pop-edge); border-radius: 16px; border-collapse: separate; border-spacing: 0; overflow: hidden; box-shadow: var(--pop-shadow-small); }
+.slide-body th { background: var(--fill-2); color: var(--ink); border-bottom: var(--pop-edge); }
 .slide-body tr:last-child td { border-bottom: 0; }
-.image-pane, .slide .themed-picture:not(.themed-picture--inline), .slide--title.has-image .title-image, .slide--chapter.has-image .chapter-image { border: var(--sticker-edge); border-radius: 20px; box-shadow: var(--sticker-shadow-small); }
+.image-pane, .slide .themed-picture:not(.themed-picture--inline), .slide--title.has-image .title-image, .slide--chapter.has-image .chapter-image { border: var(--pop-edge); border-radius: 20px; box-shadow: var(--pop-shadow-small); }
 .slide .poll-track, .slide .scale-track { border: 3px solid var(--ink); border-radius: 999px; background: var(--bg); }
 .slide .poll-fill, .slide .scale-fill { border-radius: 999px; }

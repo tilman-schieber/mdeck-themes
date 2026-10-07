@@ -1,8 +1,0 @@
-schema = 1
-id = "sticker"
-title = "Sticker"
-description = "Thick outlines, hard shadows and flat pastel fills, like stickers on a page."
-version = "1.0.0"
-author = "Tilman Schieber"
-license = "MIT"
-mdeck = ">=3.0.0"

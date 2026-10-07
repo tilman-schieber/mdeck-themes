@@ -371,6 +371,9 @@ strong { color: var(--ink); font-weight: 600; }
 .slide strong { font-weight: 600; }
 
 .slide--title .slide-body, .slide--chapter .slide-body, .slide--focus .slide-body { justify-content: center; align-items: center; padding-bottom: 0; }
+/* The credits line (author and date) keeps its distance from the title. */
+.slide--title .slide-body { padding-bottom: 72px; }
+.slide--title.has-image .slide-body { align-items: center; }
 .slide--title .subtitle { margin: 36px auto 0; font-style: italic; color: var(--ink-soft); }
 
 /* Chapters: "CHAPTER 2" as one centred line of spaced capitals. */

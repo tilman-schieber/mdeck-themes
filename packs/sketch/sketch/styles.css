@@ -199,20 +199,25 @@ strong {
   line-height: 1.35;
   padding-left: 80px;
 }
+/* The number sits in the same box as the circle drawn by ::after. Its
+   font is 1.15 times larger, so the box is given in the item's em divided
+   by 1.15; Caveat's digits sit low, so they are lifted a little. */
 .slide-body ol li::before {
   content: counter(slide-ol);
   position: absolute;
-  left: 0;
-  top: -0.12em;
-  width: 1.5em;
-  height: 1.5em;
+  left: calc(-0.1em / 1.15);
+  top: calc(-0.2em / 1.15);
+  width: calc(1.55em / 1.15);
+  height: calc(1.55em / 1.15);
   display: grid;
   place-items: center;
+  line-height: 1;
   font-family: var(--font-display);
   font-weight: 700;
   font-size: 1.15em;
   color: var(--accent);
   background: none;
+  transform: translateY(-0.06em);
 }
 .slide-body ol li::after {
   content: '';
