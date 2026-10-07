@@ -1,3 +1,4 @@
 site/
+.mdeck/
 node_modules/
 .DS_Store
