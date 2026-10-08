@@ -181,11 +181,11 @@ strong {
    LISTS — drawn arrows; numbers written and circled
    ───────────────────────────────────────────── */
 .slide-body ul, .slide-body ol { max-width: 1500px; }
-.slide-body ul li {
+.slide-body ul > li {
   line-height: 1.35;
   padding-left: 72px;
 }
-.slide-body ul li::before {
+.slide-body ul > li::before {
   content: '';
   position: absolute;
   left: 0;
@@ -195,14 +195,14 @@ strong {
   background: var(--accent);
   mask: var(--arrow) center / contain no-repeat;
 }
-.slide-body ol li {
+.slide-body ol > li {
   line-height: 1.35;
   padding-left: 80px;
 }
 /* The number sits in the same box as the circle drawn by ::after. Its
    font is 1.15 times larger, so the box is given in the item's em divided
    by 1.15; Caveat's digits sit low, so they are lifted a little. */
-.slide-body ol li::before {
+.slide-body ol > li::before {
   content: counter(slide-ol);
   position: absolute;
   left: calc(-0.1em / 1.15);
@@ -219,7 +219,7 @@ strong {
   background: none;
   transform: translateY(-0.06em);
 }
-.slide-body ol li::after {
+.slide-body ol > li::after {
   content: '';
   position: absolute;
   left: -0.1em;
@@ -231,7 +231,7 @@ strong {
   opacity: 0.8;
 }
 .slide-body li :is(ul, ol) { margin-top: 10px; gap: 8px; font-size: 0.9em; }
-.slide-body li ul li::before { mask-image: var(--tick); width: 36px; top: 0.45em; height: 0.5em; background: var(--muted); }
+.slide-body li ul > li::before { mask-image: var(--tick); width: 36px; top: 0.45em; height: 0.5em; background: var(--muted); }
 
 /* ─────────────────────────────────────────────
    LAYOUT: TITLE — big handwriting, a double scribble under it

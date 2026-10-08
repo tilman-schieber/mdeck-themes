@@ -215,8 +215,8 @@ strong { color: var(--ink); font-weight: 600; }
 /* ─────────────────────────────────────────────
    LISTS — a short dash, plain numbers
    ───────────────────────────────────────────── */
-.slide-body ul li { line-height: 1.4; padding-left: 40px; position: relative; }
-.slide-body ul li::before {
+.slide-body ul > li { line-height: 1.4; padding-left: 40px; position: relative; }
+.slide-body ul > li::before {
   content: '';
   position: absolute;
   left: 0;
@@ -225,8 +225,8 @@ strong { color: var(--ink); font-weight: 600; }
   height: 2px;
   background: var(--muted);
 }
-.slide-body ol li { padding-left: 52px; position: relative; }
-.slide-body ol li::before {
+.slide-body ol > li { padding-left: 52px; position: relative; }
+.slide-body ol > li::before {
   content: counter(slide-ol) '.';
   position: absolute;
   left: 0;
@@ -404,8 +404,8 @@ strong { color: var(--ink); font-weight: 600; }
 .slide-body > :is(ul, ol, p, .callout, table, .code-block, .columns), .slide-body .katex-display { margin-left: auto; margin-right: auto; }
 .slide-body ul, .slide-body ol { text-align: left; }
 .slide-body p { max-width: 1250px; }
-.slide-body ul li::before { width: 24px; height: 1px; background: var(--accent); top: 0.75em; }
-.slide-body ol li::before { color: var(--accent); font-family: var(--font-display); font-style: italic; }
+.slide-body ul > li::before { width: 24px; height: 1px; background: var(--accent); top: 0.75em; }
+.slide-body ol > li::before { color: var(--accent); font-family: var(--font-display); font-style: italic; }
 .slide-body .callout { width: 1000px; max-width: 100%; text-align: left; border-left: 0; border-top: 1px solid var(--accent); padding: 16px 0 0; }
 .slide-body .callout-title { text-transform: uppercase; letter-spacing: 0.25em; }
 .code-block { border-radius: 0; text-align: left; }

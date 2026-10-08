@@ -430,7 +430,7 @@ blockquote {
    FHNW-style markers: square accent tiles (matches Akzentlinie geometry).
    ───────────────────────────────────────────── */
 .slide-body ul { max-width: 1500px; }
-.slide-body ul li {
+.slide-body ul > li {
   font-weight: 300;
   line-height: 1.4;
   color: var(--ink);
@@ -440,20 +440,20 @@ blockquote {
   background-repeat: no-repeat;
   background-position: left 0.5em;
 }
-.slide-body ul li strong,
-.slide-body ul li b {
+.slide-body ul > li strong,
+.slide-body ul > li b {
   font-weight: 700;
   color: var(--ink);
 }
 .slide-body ol { max-width: 1500px; }
-.slide-body ol li {
+.slide-body ol > li {
   padding-left: 56px;
   font-weight: 300;
   line-height: 1.4;
   color: var(--ink);
 }
 /* Accent square badge with number */
-.slide-body ol li::before {
+.slide-body ol > li::before {
   content: counter(slide-ol);
   position: absolute;
   left: 0;
@@ -633,13 +633,13 @@ blockquote {
 }
 .slide-body .callout p { padding-left: 0; color: var(--ink); font-weight: 300; }
 .slide-body .callout ul { margin: 0; }
-.slide-body .callout ul li {
+.slide-body .callout ul > li {
   background-image: linear-gradient(var(--ink), var(--ink));
   background-size: 12px 12px;
   background-position: left 0.6em;
   padding-left: 36px;
 }
-.slide-body .callout ol li::before { background: var(--ink); color: var(--bg); }
+.slide-body .callout ol > li::before { background: var(--ink); color: var(--bg); }
 .slide-body .callout em {
   background: none;
   padding: 0;

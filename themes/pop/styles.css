@@ -213,8 +213,8 @@ strong { color: var(--ink); font-weight: 600; }
 /* ─────────────────────────────────────────────
    LISTS — a short dash, plain numbers
    ───────────────────────────────────────────── */
-.slide-body ul li { line-height: 1.4; padding-left: 40px; position: relative; }
-.slide-body ul li::before {
+.slide-body ul > li { line-height: 1.4; padding-left: 40px; position: relative; }
+.slide-body ul > li::before {
   content: '';
   position: absolute;
   left: 0;
@@ -223,8 +223,8 @@ strong { color: var(--ink); font-weight: 600; }
   height: 2px;
   background: var(--muted);
 }
-.slide-body ol li { padding-left: 52px; position: relative; }
-.slide-body ol li::before {
+.slide-body ol > li { padding-left: 52px; position: relative; }
+.slide-body ol > li::before {
   content: counter(slide-ol) '.';
   position: absolute;
   left: 0;
@@ -392,8 +392,8 @@ strong { color: var(--ink); font-weight: 600; }
 .focus-eyebrow, .focus-attribution { color: var(--ink); }
 
 /* Lists, callouts, code, pictures. */
-.slide-body ul li::before { width: 18px; height: 18px; border: 4px solid var(--ink); background: var(--accent); border-radius: 5px; top: 0.36em; }
-.slide-body ol li::before { color: var(--ink); font-weight: 800; }
+.slide-body ul > li::before { width: 18px; height: 18px; border: 4px solid var(--ink); background: var(--accent); border-radius: 5px; top: 0.36em; }
+.slide-body ol > li::before { color: var(--ink); font-weight: 800; }
 .slide-body .callout { border: var(--pop-edge); box-shadow: var(--pop-shadow-small); border-radius: 16px; padding: 16px 24px; background: var(--fill-2); }
 .slide-body .callout .callout-title { color: var(--ink); }
 .slide-body .callout p { color: var(--ink); }

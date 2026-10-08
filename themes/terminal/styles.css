@@ -366,13 +366,13 @@ deck-stage[data-deck-static] .slide--title .display::after { animation: none; }
 /* ─────────────────────────────────────────────
    LISTS — > for bullets, [1] for numbers
    ───────────────────────────────────────────── */
-.slide-body ul li {
+.slide-body ul > li {
   font-weight: 400;
   line-height: 1.45;
   padding-left: 1.6em;
   position: relative;
 }
-.slide-body ul li::before {
+.slide-body ul > li::before {
   content: '>';
   position: absolute;
   left: 0;
@@ -380,12 +380,12 @@ deck-stage[data-deck-static] .slide--title .display::after { animation: none; }
   color: var(--accent);
   font-weight: 700;
 }
-.slide-body ol li {
+.slide-body ol > li {
   padding-left: 2.6em;
   font-weight: 400;
   line-height: 1.45;
 }
-.slide-body ol li::before {
+.slide-body ol > li::before {
   content: '[' counter(slide-ol) ']';
   position: absolute;
   left: 0;

@@ -278,8 +278,8 @@ strong { font-weight: 600; color: var(--ink); }
 /* ─────────────────────────────────────────────
    LISTS — a thin dash; numbers in the serif
    ───────────────────────────────────────────── */
-.slide-body ul li { line-height: 1.45; padding-left: 40px; }
-.slide-body ul li::before {
+.slide-body ul > li { line-height: 1.45; padding-left: 40px; }
+.slide-body ul > li::before {
   content: '';
   position: absolute;
   left: 0;
@@ -288,8 +288,8 @@ strong { font-weight: 600; color: var(--ink); }
   height: 1.5px;
   background: var(--muted);
 }
-.slide-body ol li { line-height: 1.45; padding-left: 52px; }
-.slide-body ol li::before {
+.slide-body ol > li { line-height: 1.45; padding-left: 52px; }
+.slide-body ol > li::before {
   content: counter(slide-ol);
   position: absolute;
   left: 0;
