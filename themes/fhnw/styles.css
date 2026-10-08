@@ -602,3 +602,51 @@ blockquote {
   text-align: left;
 }
 
+/* ─────────────────────────────────────────────
+   CALLOUTS (note, tip, definition, example, …)
+   A grey area with a yellow bar, like the code block. Inside, everything
+   stays black: yellow highlights and yellow bullets on the grey surface are
+   too weak and too busy. Warnings and cautions put their title on the
+   yellow, as a signal.
+   ───────────────────────────────────────────── */
+.slide-body .callout {
+  background: var(--surface);
+  border-left: 8px solid var(--accent);
+  padding: 32px 40px;
+  margin: var(--gap-item) 0;
+  max-width: 1500px;
+}
+.slide-body .callout .callout-title {
+  font-family: var(--font-body);
+  font-size: var(--fs-eyebrow);
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink);
+  margin: 0 0 16px 0;
+}
+.slide-body .callout:is(.callout-warning, .callout-caution) .callout-title {
+  display: inline-block;
+  background: var(--accent);
+  color: var(--on-accent);
+  padding: 4px 12px;
+}
+.slide-body .callout p { padding-left: 0; color: var(--ink); font-weight: 300; }
+.slide-body .callout ul { margin: 0; }
+.slide-body .callout ul li {
+  background-image: linear-gradient(var(--ink), var(--ink));
+  background-size: 12px 12px;
+  background-position: left 0.6em;
+  padding-left: 36px;
+}
+.slide-body .callout ol li::before { background: var(--ink); color: var(--bg); }
+.slide-body .callout em {
+  background: none;
+  padding: 0;
+  color: var(--ink);
+  font-weight: 600;
+}
+/* Theorems keep the italic statement from mdeck's shared rule; the title
+   colours of definitions and theorems follow the black of the other blocks. */
+.slide-body .callout:is(.callout-theorem, .callout-lemma, .callout-corollary, .callout-definition) .callout-title { color: var(--ink); }
+.slide-body .callout:is(.callout-theorem, .callout-lemma, .callout-corollary) em { font-style: italic; }
