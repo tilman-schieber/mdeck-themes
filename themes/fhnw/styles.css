@@ -172,7 +172,7 @@ blockquote {
   font-size: var(--fs-sub);
   line-height: 1.35;
   color: var(--ink);
-  margin: 0;
+  margin: 0 0 var(--gap-item);
   padding: 0;
   border: none;
 }

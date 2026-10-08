@@ -548,3 +548,24 @@ deck-stage[data-deck-static] .slide--title .display::after { animation: none; }
   overflow-x: auto;
   overflow-y: hidden;
 }
+
+/* ─────────────────────────────────────────────
+   QUOTATIONS — quoted as in a mail or a commit message: each paragraph
+   after a '>' in the accent, the text in the softer ink
+   ───────────────────────────────────────────── */
+.slide-body blockquote {
+  margin: 0 0 var(--gap-item);
+  padding: 0;
+  border: 0;
+  color: var(--ink-soft);
+}
+.slide-body blockquote > p {
+  position: relative;
+  padding-left: 2ch;
+}
+.slide-body blockquote > p::before {
+  content: '>';
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+}

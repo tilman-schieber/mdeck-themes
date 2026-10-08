@@ -381,3 +381,27 @@ strong { font-weight: 600; color: var(--ink); }
 .slide .poll-track, .slide .poll-fill, .slide .scale-track, .slide .scale-fill { border-radius: 2px; }
 .slide .poll-track, .slide .scale-track { background: var(--surface); }
 .slide .question-cards li { border-radius: 2px; background: var(--surface); }
+
+/* ─────────────────────────────────────────────
+   QUOTATIONS — like a caption beside a photograph: Instrument Serif
+   italic, a grey quotation mark, no colour to tint the pictures
+   ───────────────────────────────────────────── */
+.slide-body blockquote {
+  margin: 0 0 var(--gap-item);
+  padding: 0;
+  border: 0;
+  max-width: 1100px;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: calc(var(--fs-body) * 1.45);
+  line-height: 1.2;
+  color: var(--ink);
+}
+.slide-body blockquote::before {
+  content: '\201C';
+  display: block;
+  height: 0.42em;
+  font-size: 2em;
+  line-height: 0.85;
+  color: var(--muted);
+}

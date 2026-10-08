@@ -571,3 +571,30 @@ strong { color: var(--ink); font-weight: 700; }
   overflow-x: auto;
   overflow-y: hidden;
 }
+
+/* ─────────────────────────────────────────────
+   QUOTATIONS — the two voices' bars beside the quote, as on a statement
+   slide, the quote in the slab
+   ───────────────────────────────────────────── */
+.slide-body blockquote {
+  position: relative;
+  margin: 0 0 var(--gap-item);
+  padding: 0 0 0 58px;
+  border: 0;
+  font-family: var(--font-display);
+  font-size: calc(var(--fs-body) * 1.15);
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--ink);
+}
+.slide-body blockquote::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.1em;
+  bottom: 0.1em;
+  width: 30px;
+  background:
+    linear-gradient(var(--accent), var(--accent)) 0 0 / 10px 100% no-repeat,
+    linear-gradient(var(--accent-2), var(--accent-2)) 20px 0 / 10px 100% no-repeat;
+}
