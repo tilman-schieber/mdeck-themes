@@ -4,7 +4,7 @@
    without frames. Only a title gets a raised pane of frosted glass: it
    blurs and brightens what lies behind it, catches light along its upper
    edge and has a bright rim that fades round its sides. Labels are glass
-   capsules, list markers droplets, a chapter number sits in a round glass
+   capsules, list markers glass beads, a chapter number sits in a round glass
    lens. Quiet by design: the light is a tint, not a picture.
    Dark by default; in light the glass is milky. All colours are the
    palette's: light-dark() picks the bright side of the palette (--bg in
@@ -340,7 +340,8 @@ strong { font-weight: 650; color: var(--ink); }
   padding: 72px 104px 80px;
   border-radius: calc(var(--glass-radius) * 1.4);
 }
-.slide--title .display { max-width: 1400px; }
+/* The title is an h1: as large as .display, not a content heading. */
+.slide--title .display { font-size: var(--fs-display); margin: 0; max-width: 1400px; }
 .slide--title .subtitle { margin-top: 32px; max-width: 1100px; }
 
 /* With a picture: the picture in a bezel at the right, the pane at the left. */
