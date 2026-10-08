@@ -362,6 +362,19 @@ strong { color: var(--ink); font-weight: 600; }
 }
 .display, .slide-body h1, .slide--chapter .chapter-title, .focus-statement, .slide--focus .focus-content p { font-weight: 800; letter-spacing: -0.03em; }
 .slide em { font-style: normal; color: var(--ink); background: var(--fill-2); padding: 0 0.12em; border-radius: 0.15em; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+/* On a shape a marker would be a second pastel block on the first: there,
+   emphasis is underlined in the ink, as thick as the outlines. */
+:is(.slide--title .title-text, .slide--chapter .chapter-content, .slide--focus .slide-body,
+    .slide:not(.slide--title, .slide--chapter, .slide--focus) .slide-body h1,
+    .slide-body .callout, .slide-body th, .slide-body blockquote) em {
+  background: none;
+  padding: 0;
+  border-radius: 0;
+  text-decoration: underline;
+  text-decoration-color: var(--ink);
+  text-decoration-thickness: max(var(--edge), 0.07em);
+  text-underline-offset: 0.12em;
+}
 .slide strong { font-weight: 800; }
 
 /* Title: one shape around title and subtitle. */
