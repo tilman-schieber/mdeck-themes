@@ -6,7 +6,7 @@ or from a terminal:
 
 ```sh
 mdeck themes search
-mdeck themes install duet                 # for every deck; brings its palette, cobalt
+mdeck themes install terminal             # for every deck; brings its palette, phosphor
 mdeck themes install duet my-talk.md      # beside one deck
 mdeck palettes search
 mdeck palettes install solarized
