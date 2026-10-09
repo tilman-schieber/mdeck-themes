@@ -3,10 +3,10 @@ kind = "theme"
 id = "terminal"
 title = "Terminal"
 description = "A terminal session: JetBrains Mono, headings at a prompt, a blinking cursor, log-line callouts and a tmux status bar; dark by default."
-version = "1.1.0"
+version = "1.1.1"
 author = "Tilman Schieber"
 license = "MIT"
-mdeck = ">=3.1.0"
+mdeck = ">=3.6.0"  # the [guide] below
 # The palette this theme uses unless the deck sets one; colours come only from palettes.
 palette = "phosphor"
 appearance = "dark"
@@ -40,3 +40,15 @@ styles = "styles.css"
 "--pad-y" = "72px"
 "--gap-title" = "44px"
 "--gap-item" = "24px"
+
+# What this theme is for and how to write for it: shown in listings, and read
+# by assistants that write slides as the theme author's advice.
+[guide]
+suits = ["developer and ops talks", "live demos and tooling", "command-line tutorials"]
+avoid = ["photo-led talks", "non-technical audiences"]
+writing = """
+Monospace throughout, dark by default. Headings read as commands typed at a
+prompt, so short lowercase headings fit well ("install the tools"). Code
+blocks are terminal windows with a title bar; callouts are log lines. Use real
+commands and output where they make the point.
+"""

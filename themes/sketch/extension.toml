@@ -3,10 +3,10 @@ kind = "theme"
 id = "sketch"
 title = "Sketch"
 description = "A sketchbook: Caveat and Patrick Hand on dotted paper, marker scribbles, circled numbers, sticky-note callouts and taped photos; a chalkboard in the dark."
-version = "1.1.0"
+version = "1.1.1"
 author = "Tilman Schieber"
 license = "MIT"
-mdeck = ">=3.1.0"
+mdeck = ">=3.6.0"  # the [guide] below
 # The palette this theme uses unless the deck sets one; colours come only from palettes.
 palette = "pastel"
 fonts = [
@@ -50,3 +50,16 @@ title = "Display font"
 [params.fontBody]
 token = "--font-body"
 title = "Body font"
+
+# What this theme is for and how to write for it: shown in listings, and read
+# by assistants that write slides as the theme author's advice.
+[guide]
+suits = ["workshops and brainstorming", "teaching and explaining ideas", "informal team talks"]
+avoid = ["formal reports", "code-heavy talks"]
+writing = """
+A sketchbook: handwriting fonts, numbers circled by hand, list arrows,
+sticky-note callouts and photos taped in. Keep text short, as on a sheet of
+notes. Callouts (::: tip, ::: note) are sticky notes, a statement (layout:
+focus) is a speech bubble, and pictures look taped in. In the dark it is a
+chalkboard.
+"""

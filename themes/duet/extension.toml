@@ -3,10 +3,10 @@ kind = "theme"
 id = "duet"
 title = "Duet"
 description = "Two voices: heavy slab headings, and two accents that take turns, as split fields, diagonal chapters and alternating markers."
-version = "1.1.0"
+version = "1.1.1"
 author = "Tilman Schieber"
 license = "MIT"
-mdeck = ">=3.1.0"
+mdeck = ">=3.6.0"  # the [guide] below
 # The palette this theme uses unless the deck sets one; colours come only from palettes.
 palette = "cobalt"
 fonts = [
@@ -48,3 +48,16 @@ title = "Display font"
 [params.fontBody]
 token = "--font-body"
 title = "Body font"
+
+# What this theme is for and how to write for it: shown in listings, and read
+# by assistants that write slides as the theme author's advice.
+[guide]
+suits = ["comparisons and debates", "before and after", "pros and cons, two sides of a question"]
+avoid = ["photo-led talks"]
+writing = """
+Two accents take turns, so the theme is at its best with two of something. A
+split slide (layout: split) is a dialogue of two colour fields: put one side
+in each, with a heading that names the contrast. Chapter slides are cut
+diagonally between the two colours. Headings are heavy slab serif: keep them
+short.
+"""

@@ -32,9 +32,27 @@ with a few more settings at the top of `extension.toml`:
 version = "1.0.0"          # raise it for every change
 author = "Your Name"
 license = "MIT"
-mdeck = ">=3.1.0"          # the oldest mdeck it works with
+mdeck = ">=3.1.0"          # the oldest mdeck it works with (">=3.6.0" with a [guide])
 homepage = "https://…"     # optional
 ```
+
+Give a theme a `[guide]` too: what it suits, what to avoid, and a few
+sentences on writing slides for it. `mdeck list` and `mdeck themes search`
+show it, the gallery shows it under the theme, and mdeck's slide-writing skill
+picks themes by it and follows its advice:
+
+```toml
+[guide]
+suits = ["photo essays", "travel talks"]   # up to 8 phrases of one line
+avoid = ["code", "dense tables"]
+writing = """
+One photograph per slide, edge to edge. Several pictures alone in a
+paragraph become a grid. Keep titles short.
+"""
+```
+
+Keep it to what the theme is for and how to write for it: it is read as
+advice about the look, and pull requests are checked for that.
 
 A theme names its default palette (`palette = "harbour-night"`). That palette
 must be here or come with mdeck; installing the theme installs it too. A

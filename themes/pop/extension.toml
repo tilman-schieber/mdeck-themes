@@ -3,10 +3,10 @@ kind = "theme"
 id = "pop"
 title = "Pop"
 description = "Thick outlines, hard shadows and flat pastel fills, in the spirit of pop art; Lexend throughout."
-version = "1.2.1"
+version = "1.2.2"
 author = "Tilman Schieber"
 license = "MIT"
-mdeck = ">=3.1.0"
+mdeck = ">=3.6.0"  # the [guide] below
 # The palette this theme uses unless the deck sets one; colours come only from palettes.
 palette = "swiss"
 fonts = [
@@ -46,3 +46,15 @@ title = "Body font"
 [params.edge]
 token = "--edge"
 title = "Outline width"
+
+# What this theme is for and how to write for it: shown in listings, and read
+# by assistants that write slides as the theme author's advice.
+[guide]
+suits = ["workshops and classes", "playful and creative talks", "short points in big type"]
+avoid = ["formal or sombre talks", "dense tables"]
+writing = """
+Titles, headings, callouts and code are cut-out shapes with thick outlines and
+hard shadows, so keep text short: one idea per shape. Emphasis (*word*) is a
+marker highlight in running text and an underline on the shapes; use it for a
+word or two.
+"""

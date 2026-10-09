@@ -3,10 +3,10 @@ kind = "theme"
 id = "lightbox"
 title = "Lightbox"
 description = "For talks made of photographs: pictures edge to edge, titles in Instrument Serif on a soft shadow, grids of photos from plain Markdown, neutral greys so nothing tints the pictures."
-version = "0.2.0"
+version = "0.2.1"
 author = "Tilman Schieber"
 license = "MIT"
-mdeck = ">=3.2.0"  # pictures in the text (class "pictures")
+mdeck = ">=3.6.0"  # the [guide] below
 # The palette this theme uses unless the deck sets one; colours come only from palettes.
 # Neutral greys: a tinted background would tint the photographs.
 palette = "greyscale"
@@ -48,3 +48,17 @@ title = "Body font"
 [params.photoShare]
 token = "--photo-share"
 title = "Picture width on image + text slides"
+
+# What this theme is for and how to write for it: shown in listings, and read
+# by assistants that write slides as the theme author's advice.
+[guide]
+suits = ["photo essays and travel talks", "portfolio and project reviews", "fieldwork, places and objects"]
+avoid = ["code", "dense tables", "long lists"]
+writing = """
+Talks made of photographs. Give title and chapter slides an image: (it fills
+the slide), and use layout: full-bleed-image for the strongest photos. On a
+content slide, a picture alone in a paragraph fills the slide below the
+heading; several pictures in one paragraph make a grid, and a sentence after
+them is the caption. Keep titles short and the text quiet. The greyscale
+palette keeps colours off the photos.
+"""

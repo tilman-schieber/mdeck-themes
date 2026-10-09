@@ -57,6 +57,9 @@
   .details { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 20px; padding: 16px 14px 18px; border-top: 1px solid var(--rule); }
   .details h2 { margin: 0 0 2px; font-size: 18px; }
   .details p { margin: 0 0 10px; color: var(--soft); }
+  .details strong { color: var(--ink); font-weight: 600; }
+  .guide summary { cursor: pointer; color: var(--accent); font-size: 14px; margin-bottom: 6px; }
+  .guide p { white-space: pre-line; }
   .details h3 { margin: 0 0 6px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); font-weight: 600; }
   pre { position: relative; margin: 0 0 10px; padding: 10px 12px; padding-right: 64px; background: var(--bg); border: 1px solid var(--rule); border-radius: 7px; font: 13px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace; white-space: pre-wrap; word-break: break-word; }
   pre .copy { position: absolute; top: 6px; right: 6px; padding: 2px 8px; font-size: 12px; }
@@ -132,10 +135,13 @@
     const installs = [...(!t.builtIn ? [`mdeck themes install ${t.id}`] : []), ...(!p.builtIn && p.id !== t.palette ? [`mdeck palettes install ${p.id}`] : [])]
     const settings = ['---', `theme: ${t.id}`, ...(p.id !== t.palette ? [`palette: ${p.id}`] : []), ...(appearance !== t.appearance ? [`appearance: ${appearance}`] : []), '---'].join('\n')
     $('details').innerHTML = `<div><h2>${esc(t.title)}${p.id !== t.palette ? ` <span style="font-weight:400;color:var(--muted)">with ${esc(p.title)}</span>` : ''}</h2>
-        <p>${esc(t.description)}</p>${p.id !== t.palette && p.description ? `<p>${esc(p.title)}: ${esc(p.description)}</p>` : ''}</div>
+        <p>${esc(t.description)}</p>${p.id !== t.palette && p.description ? `<p>${esc(p.title)}: ${esc(p.description)}</p>` : ''}
+        ${t.guide?.suits ? `<p><strong>Good for</strong> ${esc(t.guide.suits.join(' · '))}</p>` : ''}
+        ${t.guide?.avoid ? `<p><strong>Less suited to</strong> ${esc(t.guide.avoid.join(' · '))}</p>` : ''}
+        ${t.guide?.writing ? `<details class="guide"><summary>Writing slides for it</summary><p>${esc(t.guide.writing)}</p></details>` : ''}</div>
       <div><h3>Install</h3>${installs.length ? copyable(installs.join('\n')) : '<p class="note">Comes with mdeck: nothing to install.</p>'}
         <h3>At the top of the slide file</h3>${copyable(settings)}
-        ${installs.length ? `<p class="note">Needs mdeck ${esc(looks.mdeck.split('.')[0])} or newer (<code>npm install -g mdeck</code>). This installs it for every deck; add a slide file to put it beside one deck.</p>` : ''}</div>`
+        ${installs.length ? `<p class="note">Needs mdeck ${esc((t.mdeck ?? '').replace(/^>=\s*/, '') || looks.mdeck.split('.')[0])} or newer (<code>npm install -g mdeck</code>). This installs it for every deck; add a slide file to put it beside one deck.</p>` : ''}</div>`
 
     const params = new URLSearchParams({ theme: t.id, ...(state.palette ? { palette: p.id } : {}), ...(state.appearance ? { appearance } : {}), ...(state.slide > 1 ? { slide: state.slide } : {}) })
     history.replaceState(null, '', `?${params}`)

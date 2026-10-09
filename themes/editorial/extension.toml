@@ -3,10 +3,10 @@ kind = "theme"
 id = "editorial"
 title = "Editorial"
 description = "A magazine spread: Newsreader headlines, Lora text, drop caps, pull quotes and Roman chapter numerals."
-version = "1.1.0"
+version = "1.1.1"
 author = "Tilman Schieber"
 license = "MIT"
-mdeck = ">=3.1.0"
+mdeck = ">=3.6.0"  # the [guide] below
 # The palette this theme uses unless the deck sets one; colours come only from palettes.
 palette = "terra"
 fonts = [
@@ -48,3 +48,16 @@ title = "Display font"
 [params.fontBody]
 token = "--font-body"
 title = "Body font"
+
+# What this theme is for and how to write for it: shown in listings, and read
+# by assistants that write slides as the theme author's advice.
+[guide]
+suits = ["essays and long-form arguments", "humanities and writing", "talks that read like an article"]
+avoid = ["code-heavy talks", "dashboards and dense data"]
+writing = """
+Set like a magazine: a paragraph right after a slide's heading opens with a
+drop cap, so lead with a sentence, not a list. A quotation (> …) is a pull
+quote, and a statement (layout: focus) a large one; callouts are margin
+notes. Chapters open with a Roman numeral (layout: chapter, number: 2).
+Write in full sentences; the serif type is made for reading.
+"""

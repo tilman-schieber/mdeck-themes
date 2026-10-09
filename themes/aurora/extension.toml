@@ -3,10 +3,10 @@ kind = "theme"
 id = "aurora"
 title = "Aurora"
 description = "Northern lights: curtains of light in the accent colours, night-sky chapter and statement slides, frosted glass."
-version = "1.0.0"
+version = "1.0.1"
 author = "Tilman Schieber"
 license = "MIT"
-mdeck = ">=3.1.0"
+mdeck = ">=3.6.0"  # the [guide] below
 # The palette this theme uses unless the deck sets one; colours come only from palettes.
 palette = "neon"
 fonts = [
@@ -39,3 +39,16 @@ styles = "styles.css"
 # Type families
 "--font-display" = "\"Plus Jakarta Sans\", \"Helvetica Neue\", Helvetica, Arial, sans-serif"
 "--font-body" = "\"Plus Jakarta Sans\", \"Helvetica Neue\", Helvetica, Arial, sans-serif"
+
+# What this theme is for and how to write for it: shown in listings, and read
+# by assistants that write slides as the theme author's advice.
+[guide]
+suits = ["workshops and evening talks", "inspiring keynotes", "talks with a few big moments"]
+avoid = ["dense tables", "slides mostly read on paper"]
+writing = """
+The light is strongest on title, chapter and statement slides, and chapter
+and statement slides turn to a night sky: give the talk a title slide,
+numbered chapters (layout: chapter, number: 2) and a few statements
+(layout: focus) for its turns. Emphasis (*word*) glows in the accent gradient:
+one key word per slide. Content slides stay calm: a heading and a few points.
+"""
