@@ -1,0 +1,52 @@
+schema = 1
+kind = "palette"
+id = "primaries"
+title = "Primaries"
+description = "The three primaries on paper: signal red, cobalt blue and chrome yellow on warm off-white, black for text; at night, the same on black."
+version = "1.0.0"
+author = "Tilman Schieber"
+license = "MIT"
+mdeck = ">=3.1.0"
+
+# Red is the accent, blue the second; yellow has no role of its own, so it is
+# the warning colour, and the bauhaus theme takes its yellow from there. The
+# tip is red, the note blue, as on the theme's lists.
+
+[light]
+"--bg" = "#f2ece0"
+"--surface" = "#e6ddcc"
+"--ink" = "#151515"
+"--ink-soft" = "#262626"
+"--muted" = "#625d53"
+"--rule" = "#d6cbb6"
+"--accent" = "#c8281e"
+"--accent-2" = "#1d4b9c"
+"--on-accent" = "#ffffff"
+"--callout-note" = "#1d4b9c"
+"--callout-tip" = "#c8281e"
+"--callout-important" = "#151515"
+"--callout-warning" = "#f0b400"
+"--callout-caution" = "#c8281e"
+"--token-default" = "#151515"
+"--token-comment" = "#7a7466"
+"--token-string" = "#8a5a00"
+"--token-number" = "#c8281e"
+"--token-keyword" = "#1d4b9c"
+"--token-function" = "#c8281e"
+"--token-operator" = "#625d53"
+
+[dark]
+"--bg" = "#121212"
+"--surface" = "#1f1e1c"
+"--ink" = "#f2ece0"
+"--ink-soft" = "#ddd5c5"
+"--muted" = "#a39b8b"
+"--rule" = "#34322e"
+"--accent" = "#ec4a3c"
+"--accent-2" = "#5b8be0"
+"--on-accent" = "#121212"
+"--callout-note" = "#5b8be0"
+"--callout-tip" = "#ec4a3c"
+"--callout-important" = "#f2ece0"
+"--callout-warning" = "#f5c218"
+"--callout-caution" = "#ec4a3c"

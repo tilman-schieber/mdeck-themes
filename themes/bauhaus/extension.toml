@@ -1,0 +1,70 @@
+schema = 1
+kind = "theme"
+id = "bauhaus"
+title = "Bauhaus"
+description = "Red, blue and yellow on paper: Jost in bold capitals over thick black rules, circle, square and triangle on the title and chapter slides, lists marked with the three shapes."
+version = "0.1.0"
+author = "Tilman Schieber"
+license = "MIT"
+mdeck = ">=3.6.0"  # the [guide] below
+# The palette this theme uses unless the deck sets one; colours come only from palettes.
+palette = "primaries"
+fonts = [
+  "https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,400..800;1,400..800&display=swap",
+]
+
+[files]
+styles = "styles.css"
+
+# Type, spacing and fonts used by styles.css; colours come from the palette.
+[tokens]
+"--fs-display" = "148px"
+"--fs-title" = "112px"
+"--fs-focus" = "80px"
+"--fs-h" = "68px"
+"--fs-sub" = "38px"
+"--fs-body" = "34px"
+"--fs-small" = "24px"
+"--fs-eyebrow" = "22px"
+"--pad-x" = "144px"
+"--pad-y" = "72px"
+"--gap-title" = "56px"
+"--gap-item" = "24px"
+# The black bar under headings.
+"--bar" = "12px"
+# Circle, square and triangle on title, chapter and focus slides: block, or none.
+"--shapes" = "block"
+"--font-display" = "\"Jost\", \"Futura\", \"Century Gothic\", system-ui, sans-serif"
+"--font-body" = "\"Jost\", \"Futura\", \"Century Gothic\", system-ui, sans-serif"
+
+[params.fontDisplay]
+token = "--font-display"
+title = "Display font"
+
+[params.fontBody]
+token = "--font-body"
+title = "Body font"
+
+[params.shapes]
+token = "--shapes"
+title = "Shapes on title, chapter and focus slides"
+description = "block shows the circle, square and triangle; none leaves only type and rules."
+
+[params.bar]
+token = "--bar"
+title = "Thickness of the bar under headings"
+
+# What this theme is for and how to write for it: shown in listings, and read
+# by assistants that write slides as the theme author's advice.
+[guide]
+suits = ["design and architecture talks", "teaching with clear structure", "short talks with few words per slide", "workshops and kick-offs"]
+avoid = ["long headings", "dense text", "photographs that need a calm frame"]
+writing = """
+Headings are set in bold capitals over a thick black bar, so keep them to a
+few words; put one word in *emphasis* to turn it red. Title and chapter
+slides carry a circle, square and triangle in red, blue and yellow, a focus
+slide a yellow disc (params: shapes: none removes them); a title or chapter with an image: shows the
+picture there instead. Lists are marked with the three shapes in turn, so
+short lists of two or three points read best. Callouts are marked with a
+coloured bar above them.
+"""
