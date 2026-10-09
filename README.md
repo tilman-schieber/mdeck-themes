@@ -26,7 +26,10 @@ palettes/harbour-night/  extension.toml
 
 They are ordinary mdeck extensions (see
 [Create a theme or palette](https://gh.tschieber.de/mdeck/theme-authoring.html)),
-with a few more settings at the top of `extension.toml`:
+with a few more settings at the top of `extension.toml`. [AUTHORING.md](AUTHORING.md)
+lists the classes a theme's stylesheet has to cover.
+
+The extra settings:
 
 ```toml
 version = "1.0.0"          # raise it for every change
