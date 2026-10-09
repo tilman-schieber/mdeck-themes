@@ -3,14 +3,14 @@ kind = "palette"
 id = "primaries"
 title = "Primaries"
 description = "The three primaries on paper: signal red, cobalt blue and chrome yellow on warm off-white, black for text; at night, the same on black."
-version = "1.0.0"
+version = "1.1.0"
 author = "Tilman Schieber"
 license = "MIT"
 mdeck = ">=3.1.0"
 
-# Red is the accent, blue the second; yellow has no role of its own, so it is
-# the warning colour, and the bauhaus theme takes its yellow from there. The
-# tip is red, the note blue, as on the theme's lists.
+# Red is the accent, blue the second, chrome yellow the third: the three
+# primaries. Yellow is too light to read as text, which a third accent need
+# not be; it marks warnings, and the bauhaus theme's triangles.
 
 [light]
 "--bg" = "#f2ece0"
@@ -21,12 +21,8 @@ mdeck = ">=3.1.0"
 "--rule" = "#d6cbb6"
 "--accent" = "#c8281e"
 "--accent-2" = "#1d4b9c"
+"--accent-3" = "#f0b400"
 "--on-accent" = "#ffffff"
-"--callout-note" = "#1d4b9c"
-"--callout-tip" = "#c8281e"
-"--callout-important" = "#151515"
-"--callout-warning" = "#f0b400"
-"--callout-caution" = "#c8281e"
 "--token-default" = "#151515"
 "--token-comment" = "#7a7466"
 "--token-string" = "#8a5a00"
@@ -44,9 +40,5 @@ mdeck = ">=3.1.0"
 "--rule" = "#34322e"
 "--accent" = "#ec4a3c"
 "--accent-2" = "#5b8be0"
+"--accent-3" = "#f5c218"
 "--on-accent" = "#121212"
-"--callout-note" = "#5b8be0"
-"--callout-tip" = "#ec4a3c"
-"--callout-important" = "#f2ece0"
-"--callout-warning" = "#f5c218"
-"--callout-caution" = "#ec4a3c"

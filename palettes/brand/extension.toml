@@ -2,12 +2,15 @@ schema = 1
 kind = "palette"
 id = "brand"
 title = "FHNW"
-description = "The FHNW corporate colours: black, white and FHNW yellow."
-version = "1.0.0"
+description = "The FHNW corporate colours: black, white and FHNW yellow, with TrueTangerine for warnings."
+version = "1.1.0"
 author = "Tilman Schieber"
 license = "MIT"
 mdeck = ">=3.1.0"
-# Only for the fhnw theme: its corporate colours.
+# Only for the fhnw theme: its corporate colours, from the FHNW style guide
+# (https://webteam.pages.fhnw.ch/fhnw-styleguide-v4/colors/). The third
+# accent, attention, is the guide's orange accent TrueTangerine; its error
+# red (Fehlerrot) would say more than a warning on a slide does.
 theme = "fhnw"
 
 [light]
@@ -19,6 +22,7 @@ theme = "fhnw"
 "--rule" = "#deded9"
 "--accent" = "#fde70e"
 "--accent-2" = "#000000"
+"--accent-3" = "#ea8700"
 "--on-accent" = "#000000"
 
 [dark]
@@ -30,4 +34,5 @@ theme = "fhnw"
 "--rule" = "#333333"
 "--accent" = "#fde70e"
 "--accent-2" = "#ffffff"
+"--accent-3" = "#ea8700"
 "--on-accent" = "#000000"

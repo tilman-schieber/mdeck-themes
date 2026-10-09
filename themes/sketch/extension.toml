@@ -3,10 +3,10 @@ kind = "theme"
 id = "sketch"
 title = "Sketch"
 description = "A sketchbook: Caveat and Patrick Hand on dotted paper, marker scribbles, circled numbers, sticky-note callouts and taped photos; a chalkboard in the dark."
-version = "1.1.1"
+version = "1.2.0"
 author = "Tilman Schieber"
 license = "MIT"
-mdeck = ">=3.6.0"  # the [guide] below
+mdeck = ">=3.7.0"  # the third accent, --accent-3
 # The palette this theme uses unless the deck sets one; colours come only from palettes.
 palette = "pastel"
 fonts = [

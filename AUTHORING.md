@@ -95,15 +95,30 @@ the theme leaves alone is unstyled text, so cover every row above.
 
 The stylesheet has no colour values of its own: it uses the palette's roles
 (`--bg`, `--surface`, `--ink`, `--ink-soft`, `--muted`, `--rule`, `--accent`,
-`--accent-2`, `--on-accent`), mixes of them (`color-mix(in oklab, …)`), and
-`--inverse-*` for an inverted slide. This is what lets every palette repaint
-the theme.
+`--accent-2`, `--accent-3`, `--on-accent`), mixes of them
+(`color-mix(in oklab, …)`), and `--inverse-*` for an inverted slide. This is
+what lets every palette repaint the theme.
+
+The three accents mean something, and a theme uses them for that:
+
+| Accent | Meaning | Callouts |
+|---|---|---|
+| `--accent` | Emphasis | note, tip, important |
+| `--accent-2` | The accent's companion: gradients, a contrast to the accent | definitions |
+| `--accent-3` | Attention; pops, so use it sparingly | warning, caution |
+
+`--accent-3` marks things (bars, shapes, tinted backgrounds) and is never set
+as text: a palette may make it a yellow that cannot be read on the
+background. For a callout title in it, mix it with the ink, as mdeck does
+(`color-mix(in oklab, var(--accent-3) 45%, var(--ink))`).
+
+Every palette sets all three; the one-colour palettes (`phosphor` here,
+`greyscale` in mdeck) use shades of that colour.
 
 Two exceptions are fine: white text on a photograph with a dark shadow behind
 it (full-bleed and image slides, both appearances), and plain black or white
-shadows. Palettes may also set `--token-*` (code), `--callout-*` and
-`--logo-filter`; use those variables rather than picking colours for code and
-callouts yourself.
+shadows. Palettes may also set `--token-*` (code) and `--logo-filter`; use
+those variables rather than picking colours for code yourself.
 
 ## Before the pull request
 

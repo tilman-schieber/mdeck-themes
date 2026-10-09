@@ -3,10 +3,10 @@ kind = "theme"
 id = "pop"
 title = "Pop"
 description = "Thick outlines, hard shadows and flat pastel fills, in the spirit of pop art; Lexend throughout."
-version = "1.2.2"
+version = "1.3.0"
 author = "Tilman Schieber"
 license = "MIT"
-mdeck = ">=3.6.0"  # the [guide] below
+mdeck = ">=3.7.0"  # the third accent, --accent-3
 # The palette this theme uses unless the deck sets one; colours come only from palettes.
 palette = "swiss"
 fonts = [

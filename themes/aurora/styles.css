@@ -592,11 +592,9 @@ strong { color: var(--ink); font-weight: 700; }
 }
 .slide-body .callout p { padding-left: 0; color: var(--ink); font-size: var(--fs-body); }
 .slide-body .callout-tip .callout-title { color: var(--accent); }
-/* Signal colours mixed with the text colour, readable on the glass in light and dark */
-.slide-body .callout-note .callout-title { color: color-mix(in oklab, var(--callout-note) 65%, var(--ink)); }
-.slide-body .callout-important .callout-title { color: color-mix(in oklab, var(--callout-important) 65%, var(--ink)); }
-.slide-body .callout-warning .callout-title { color: color-mix(in oklab, var(--callout-warning) 45%, var(--ink)); }
-.slide-body .callout-caution .callout-title { color: color-mix(in oklab, var(--callout-caution) 65%, var(--ink)); }
+/* The accents mixed with the text colour, readable on the glass in light and dark */
+.slide-body :is(.callout-note, .callout-important) .callout-title { color: color-mix(in oklab, var(--accent) 65%, var(--ink)); }
+.slide-body :is(.callout-warning, .callout-caution) .callout-title { color: color-mix(in oklab, var(--accent-3) 45%, var(--ink)); }
 /* Lecture blocks: theorems glow in the accent, definitions in the second */
 .slide-body :is(.callout-theorem, .callout-lemma, .callout-corollary) .callout-title { color: var(--accent); }
 .slide-body .callout-definition .callout-title { color: var(--accent-2); }

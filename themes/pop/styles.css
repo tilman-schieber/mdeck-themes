@@ -295,11 +295,8 @@ strong { color: var(--ink); font-weight: 600; }
   margin: 32px 0 0;
   max-width: 1200px;
 }
-.slide-body .callout-tip { border-left-color: var(--accent); }
-.slide-body .callout-note { border-left-color: var(--callout-note); }
-.slide-body .callout-important { border-left-color: var(--callout-important); }
-.slide-body .callout-warning { border-left-color: var(--callout-warning); }
-.slide-body .callout-caution { border-left-color: var(--callout-caution); }
+.slide-body :is(.callout-note, .callout-tip, .callout-important) { border-left-color: var(--accent); }
+.slide-body :is(.callout-warning, .callout-caution) { border-left-color: var(--accent-3); }
 .slide-body .callout-title { margin-bottom: 8px; }
 .slide-body .callout p { padding-left: 0; color: var(--ink); font-size: var(--fs-body); }
 /* Lecture blocks: theorems in the accent, definitions in the second */
@@ -411,7 +408,8 @@ strong { color: var(--ink); font-weight: 600; }
 .slide-body .callout .callout-title { color: var(--ink); }
 .slide-body .callout p { color: var(--ink); }
 .slide-body .callout-tip { background: var(--fill-1); }
-.slide-body :is(.callout-warning, .callout-important, .callout-caution) { background: color-mix(in srgb, var(--callout-warning) 30%, var(--bg)); }
+.slide-body .callout-important { background: var(--fill-1); }
+.slide-body :is(.callout-warning, .callout-caution) { background: color-mix(in srgb, var(--accent-3) 30%, var(--bg)); }
 .code-block { border: var(--pop-edge); box-shadow: var(--pop-shadow-small); border-radius: 16px; }
 .slide-body table { border: var(--pop-edge); border-radius: 16px; border-collapse: separate; border-spacing: 0; overflow: hidden; box-shadow: var(--pop-shadow-small); }
 .slide-body th { background: var(--fill-2); color: var(--ink); border-bottom: var(--pop-edge); }

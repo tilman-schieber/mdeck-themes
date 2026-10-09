@@ -3,10 +3,10 @@ kind = "theme"
 id = "bauhaus"
 title = "Bauhaus"
 description = "Red, blue and yellow on paper: Jost in bold capitals over thick black rules, circle, square and triangle on the title and chapter slides, lists marked with the three shapes."
-version = "0.1.0"
+version = "0.2.0"
 author = "Tilman Schieber"
 license = "MIT"
-mdeck = ">=3.6.0"  # the [guide] below
+mdeck = ">=3.7.0"  # the third accent, --accent-3
 # The palette this theme uses unless the deck sets one; colours come only from palettes.
 palette = "primaries"
 fonts = [

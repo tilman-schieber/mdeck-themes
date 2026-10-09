@@ -1,15 +1,14 @@
 /* Bauhaus — the three primaries and the three basic shapes.
    Jost, a geometric sans in the line of Futura, in bold capitals for every
-   heading, each over a thick black bar. Red marks emphasis, blue the
-   second voice, yellow the third; the palette has two accents, so the
-   yellow is its warning colour. Title and chapter slides carry a red
+   heading, each over a thick black bar. The palette's three accents are the
+   three primaries: red marks emphasis, blue the second voice, yellow (the
+   third accent, attention) the third. Title and chapter slides carry a red
    circle, a blue square and a yellow triangle, and a focus slide a yellow
    disc; `shapes: none` takes them away and leaves type and bars. Lists are
    marked with circle, square and triangle in turn. No rounded corners, no
    shadows, no gradients except under text on a photograph. */
 
 .slide {
-  --yellow: var(--callout-warning);
   --shape-display: var(--shapes, block);
 }
 
@@ -128,7 +127,7 @@ strong { color: var(--ink); font-weight: 700; }
   height: 286px;
   bottom: 80px;
   right: 48px;
-  background: var(--yellow);
+  background: var(--accent-3);
   clip-path: polygon(50% 0, 100% 100%, 0 100%);
 }
 /* a chapter has its slide number in the corner: the triangle stands clear of it */
@@ -224,7 +223,7 @@ strong { color: var(--ink); font-weight: 700; }
   width: 112px;
   height: 112px;
   border-radius: 50%;
-  background: var(--yellow);
+  background: var(--accent-3);
   margin-bottom: 56px;
 }
 .focus-content { display: flex; flex-direction: column; align-items: flex-start; max-width: 1480px; }
@@ -344,7 +343,7 @@ strong { color: var(--ink); font-weight: 700; }
   width: 0.5em;
   left: 0.06em;
   top: 0.44em;
-  background: var(--yellow);
+  background: var(--accent-3);
   clip-path: polygon(50% 0, 100% 100%, 0 100%);
 }
 .slide-body li li { font-size: 0.9em; }
@@ -371,11 +370,8 @@ strong { color: var(--ink); font-weight: 700; }
   margin: 32px 0 0;
   max-width: 1100px;
 }
-.slide-body .callout-tip { border-top-color: var(--callout-tip); }
-.slide-body .callout-note { border-top-color: var(--callout-note); }
-.slide-body .callout-important { border-top-color: var(--callout-important); }
-.slide-body .callout-warning { border-top-color: var(--callout-warning); }
-.slide-body .callout-caution { border-top-color: var(--callout-caution); }
+.slide-body :is(.callout-note, .callout-tip, .callout-important) { border-top-color: var(--accent); }
+.slide-body :is(.callout-warning, .callout-caution) { border-top-color: var(--accent-3); }
 .slide-body :is(.callout-theorem, .callout-lemma, .callout-corollary) { border-top-color: var(--accent); }
 .slide-body .callout-definition { border-top-color: var(--accent-2); }
 .slide-body :is(.callout-example, .callout-remark, .callout-proposition) { border-top-color: var(--ink); }
@@ -427,7 +423,7 @@ strong { color: var(--ink); font-weight: 700; }
   margin: 0 0 var(--gap-item);
   padding: 4px 0 4px 32px;
   border: 0;
-  border-left: var(--bar) solid var(--yellow);
+  border-left: var(--bar) solid var(--accent-3);
   color: var(--ink);
 }
 

@@ -522,11 +522,8 @@ strong {
 }
 .slide-body .callout p { padding-left: 0; color: var(--ink); margin-bottom: 0; }
 .slide-body .callout > * + * { margin-top: 10px; }
-.slide-body :is(.callout-tip, .callout-theorem, .callout-lemma, .callout-corollary) { --note: var(--accent); }
-.slide-body .callout-note { --note: var(--callout-note); }
-.slide-body .callout-important { --note: var(--callout-important); }
-.slide-body .callout-warning { --note: var(--callout-warning); }
-.slide-body .callout-caution { --note: var(--callout-caution); }
+.slide-body :is(.callout-note, .callout-tip, .callout-important, .callout-theorem, .callout-lemma, .callout-corollary) { --note: var(--accent); }
+.slide-body :is(.callout-warning, .callout-caution) { --note: var(--accent-3); }
 
 /* A proof is written on the page, not stuck on it: "Proof." and a
    square at the end. */
