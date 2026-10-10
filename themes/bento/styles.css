@@ -1,0 +1,657 @@
+/* Bento — rounded tiles, as on a product page.
+   The slide is a tray and the content sits on tiles in the surface colour:
+   every paragraph, table, callout and block of code, and every item of a
+   list. A list is a grid of tiles sized by how many items it has: two to
+   eight fill two rows, and when the number is odd the first item becomes a
+   feature tile twice as tall, in the accent. An item that opens with a bold
+   figure on a line of its own shows the figure as a big number. Title,
+   chapter and statement slides are compositions of a few tiles. No borders
+   and no shadows: the tiles stand out by their colour alone. */
+
+/* ─────────────────────────────────────────────
+   TILES — one look for every tile
+   ───────────────────────────────────────────── */
+.slide {
+  --tile-bg: var(--surface);
+  /* The accent as text: mixed with the ink, so it reads on a tile with
+     every palette, as mdeck does for callout titles. */
+  --accent-text: color-mix(in oklab, var(--accent) 70%, var(--ink));
+}
+
+/* ─────────────────────────────────────────────
+   HEADER / FOOTER — the section and the page number on capsules
+   ───────────────────────────────────────────── */
+.slide-header {
+  font-family: var(--font-body);
+  font-size: var(--fs-eyebrow);
+  font-weight: 600;
+  color: var(--muted);
+  margin-bottom: 20px;
+}
+.slide-header .brand { color: var(--ink-soft); }
+.slide-header > span:not(.brand):not(:empty),
+.slide-footer > span:last-child:not(:empty) {
+  background: var(--tile-bg);
+  border-radius: 999px;
+  padding: 8px 22px;
+}
+.slide-logo {
+  position: absolute;
+  top: var(--pad-y);
+  inset-inline-end: var(--pad-x);
+  height: 80px;
+  width: auto;
+  max-width: 360px;
+  object-fit: contain;
+  filter: var(--logo-filter, none);
+}
+.slide-footer {
+  font-family: var(--font-body);
+  font-size: var(--fs-small);
+  font-weight: 500;
+  color: var(--muted);
+  margin-top: 20px;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ─────────────────────────────────────────────
+   TYPOGRAPHY
+   ───────────────────────────────────────────── */
+.eyebrow {
+  font-family: var(--font-body);
+  font-size: var(--fs-eyebrow);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--accent-text);
+  margin: 0;
+}
+.display {
+  font-family: var(--font-display);
+  font-size: var(--fs-display);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.035em;
+  margin: 0;
+  color: var(--ink);
+  text-wrap: balance;
+}
+.title {
+  font-family: var(--font-display);
+  font-size: var(--fs-h);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  margin: 0;
+  color: var(--ink);
+  text-wrap: balance;
+}
+.subtitle {
+  font-family: var(--font-body);
+  font-size: var(--fs-sub);
+  font-weight: 500;
+  line-height: 1.3;
+  color: var(--ink-soft);
+  margin: 0;
+  text-wrap: pretty;
+}
+.body-text {
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: 1.45;
+  color: var(--ink-soft);
+  margin: 0;
+  text-wrap: pretty;
+}
+.meta {
+  font-family: var(--font-body);
+  font-size: var(--fs-small);
+  color: var(--muted);
+}
+em { font-style: normal; color: var(--accent-text); }
+strong { color: var(--ink); font-weight: 700; }
+.slide-body code:not(.code-block code) {
+  font-family: var(--font-mono);
+  font-size: 0.86em;
+  background: var(--bg);
+  border-radius: 8px;
+  padding: 0.05em 0.3em;
+}
+
+/* ─────────────────────────────────────────────
+   LAYOUT: TITLE — a large tile for the title, two small ones beside it in
+   the accents; a picture takes their place
+   ───────────────────────────────────────────── */
+.slide--title .slide-body {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+  grid-template-rows: minmax(0, 3fr) minmax(0, 2fr);
+  gap: var(--tile-gap);
+}
+.slide--title .title-text {
+  grid-column: 1;
+  grid-row: 1 / 3;
+  background: var(--tile-bg);
+  border-radius: var(--tile-radius);
+  padding: 72px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: 0;
+}
+.slide-body h1.display { font-size: var(--fs-display); letter-spacing: -0.035em; line-height: 1; margin: 0; }
+.slide--title .subtitle { margin-top: 32px; max-width: 1000px; }
+.slide--title:not(.has-image) .slide-body::before,
+.slide--title:not(.has-image) .slide-body::after {
+  content: '';
+  border-radius: var(--tile-radius);
+}
+.slide--title:not(.has-image) .slide-body::before {
+  grid-column: 2;
+  grid-row: 1;
+  background:
+    radial-gradient(circle at 70% 30%, var(--accent-2) 0 22%, transparent 23%),
+    var(--accent);
+}
+.slide--title:not(.has-image) .slide-body::after {
+  grid-column: 2;
+  grid-row: 2;
+  background:
+    radial-gradient(circle, color-mix(in oklab, var(--accent-2) 55%, var(--tile-bg)) 0 3px, transparent 4px) 0 0 / 28px 28px,
+    var(--tile-bg);
+}
+.slide--title.has-image .title-image {
+  grid-column: 2;
+  grid-row: 1 / 3;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: var(--tile-radius);
+  min-height: 0;
+}
+.slide--title.has-image h1.display { font-size: calc(var(--fs-display) * 0.82); }
+
+/* ─────────────────────────────────────────────
+   LAYOUT: CHAPTER — the number on an accent tile, the title on a tile
+   beside it
+   ───────────────────────────────────────────── */
+.slide--chapter .slide-body { justify-content: stretch; }
+.slide--chapter .chapter-content {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+  grid-template-rows: minmax(0, 1fr) minmax(0, 1fr);
+  column-gap: var(--tile-gap);
+}
+.slide--chapter .chapter-content::before {
+  content: '';
+  grid-column: 2;
+  grid-row: 1 / 3;
+  background: var(--tile-bg);
+  border-radius: var(--tile-radius);
+}
+.slide--chapter .chapter-num {
+  grid-column: 1;
+  grid-row: 1 / 3;
+  background: var(--accent);
+  color: var(--on-accent);
+  border-radius: var(--tile-radius);
+  padding: 40px 48px;
+  margin: 0;
+  display: flex;
+  align-items: flex-end;
+  font-family: var(--font-display);
+  font-size: 320px;
+  font-weight: 800;
+  line-height: 0.85;
+  letter-spacing: -0.05em;
+  font-variant-numeric: tabular-nums;
+  overflow: hidden;
+}
+.slide--chapter .chapter-meta {
+  grid-column: 1;
+  grid-row: 1;
+  align-self: start;
+  z-index: 1;
+  padding: var(--tile-pad) 48px;
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: var(--fs-eyebrow);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--on-accent);
+}
+/* Without a number, the label alone sits on the surface. */
+.slide--chapter .chapter-content:not(:has(.chapter-num)) .chapter-meta { color: var(--accent-text); }
+.slide--chapter .chapter-title {
+  grid-column: 2;
+  grid-row: 1;
+  align-self: end;
+  z-index: 1;
+  padding: 0 64px 24px;
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: var(--fs-title);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.035em;
+  color: var(--ink);
+  text-wrap: balance;
+}
+.slide--chapter .chapter-desc {
+  grid-column: 2;
+  grid-row: 2;
+  align-self: start;
+  z-index: 1;
+  padding: 0 64px;
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: var(--fs-sub);
+  font-weight: 500;
+  line-height: 1.3;
+  color: var(--ink-soft);
+}
+.slide--chapter.has-image .slide-body {
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+  gap: var(--tile-gap);
+}
+.slide--chapter.has-image .chapter-content { grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); }
+.slide--chapter.has-image .chapter-num { font-size: 220px; }
+.slide--chapter.has-image .chapter-title { font-size: calc(var(--fs-title) * 0.72); padding-inline: 48px; }
+.slide--chapter.has-image .chapter-desc { padding-inline: 48px; font-size: var(--fs-body); }
+.slide--chapter.has-image .chapter-image {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  object-fit: cover;
+  border-radius: var(--tile-radius);
+}
+
+/* ─────────────────────────────────────────────
+   LAYOUT: FOCUS — one statement on one large tile
+   ───────────────────────────────────────────── */
+.slide--focus .slide-body {
+  justify-content: center;
+  align-items: flex-start;
+  background: var(--tile-bg);
+  border-radius: var(--tile-radius);
+  padding: 96px 120px;
+}
+.focus-eyebrow {
+  font-family: var(--font-body);
+  font-size: var(--fs-eyebrow);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--accent-text);
+  margin: 0 0 36px 0;
+}
+.focus-statement,
+.slide--focus .focus-content h1,
+.slide--focus .focus-content p {
+  font-family: var(--font-display);
+  font-size: var(--fs-focus);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+  max-width: 1450px;
+  margin: 0;
+  text-wrap: balance;
+}
+.focus-content { display: flex; flex-direction: column; align-items: flex-start; width: 100%; }
+.focus-attribution {
+  font-family: var(--font-body);
+  font-size: var(--fs-small);
+  font-weight: 600;
+  color: var(--muted);
+  margin: 40px 0 0 0;
+}
+
+/* ─────────────────────────────────────────────
+   LAYOUT: IMAGE + TEXT — a picture tile and a text tile
+   ───────────────────────────────────────────── */
+.slide--image-text .slide-body { gap: var(--tile-gap); }
+.image-pane {
+  flex: 1.2;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--tile-bg);
+  border-radius: var(--tile-radius);
+  overflow: hidden;
+  position: relative;
+}
+.image-placeholder { width: 100%; height: 100%; background: var(--tile-bg); display: flex; align-items: center; justify-content: center; }
+.image-placeholder span { font-family: var(--font-body); font-size: var(--fs-small); color: var(--muted); }
+.slide--image-text .text-pane {
+  background: var(--tile-bg);
+  border-radius: var(--tile-radius);
+  padding: 64px;
+  gap: 20px;
+}
+.text-pane .title { font-size: calc(var(--fs-h) * 0.85); }
+
+/* ─────────────────────────────────────────────
+   LAYOUT: SPLIT — each column a tile
+   ───────────────────────────────────────────── */
+.split-columns { gap: var(--tile-gap); }
+.split-left, .split-right {
+  background: var(--tile-bg);
+  border-radius: var(--tile-radius);
+  padding: 48px 56px;
+  justify-content: flex-start;
+}
+.split-left > :first-child, .split-right > :first-child { margin-top: 0; }
+
+/* ─────────────────────────────────────────────
+   LAYOUT: FULL-BLEED IMAGE — the picture edge to edge, the title on a tile
+   ───────────────────────────────────────────── */
+.slide--full-bleed-image .slide-body { align-items: flex-start; }
+.slide--full-bleed-image .overlay-title {
+  font-family: var(--font-display);
+  font-size: var(--fs-h);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+  background: var(--tile-bg);
+  border-radius: var(--tile-radius);
+  padding: 32px 44px;
+  margin: 0;
+  max-width: 1200px;
+  text-wrap: balance;
+}
+
+/* ─────────────────────────────────────────────
+   CONTENT SLIDE — the heading above, then tiles from the top
+   ───────────────────────────────────────────── */
+.slide:not([class*="slide--"]) > .slide-body {
+  justify-content: flex-start;
+  gap: var(--tile-gap);
+}
+.slide:not([class*="slide--"]) > .slide-body > :is(ul, ol) { margin-top: 0; }
+.slide-body h1 {
+  font-family: var(--font-display);
+  font-size: var(--fs-h);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+  margin: 0 0 calc(var(--gap-title) - var(--tile-gap)) 0;
+  max-width: 1500px;
+  text-wrap: balance;
+}
+.slide-body h2 {
+  font-family: var(--font-display);
+  font-size: var(--fs-sub);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin: 0 0 var(--gap-item) 0;
+}
+.slide-body p {
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: 1.45;
+  color: var(--ink-soft);
+  margin: 0 0 var(--gap-item) 0;
+  text-wrap: pretty;
+}
+/* A paragraph straight on the slide is a tile; the last one in a tile or
+   column needs no room below. */
+.slide:not([class*="slide--"]) > .slide-body > p:not(.pictures) {
+  background: var(--tile-bg);
+  border-radius: var(--tile-radius);
+  padding: 32px var(--tile-pad);
+  margin: 0;
+}
+.slide-body :is(.split-left, .split-right, .callout, li) > p:last-child { margin-bottom: 0; }
+.slide-body p.pictures > :is(img, .themed-picture) { border-radius: var(--tile-radius); }
+
+/* ─────────────────────────────────────────────
+   LISTS — a list on the slide is a grid of tiles. Its columns follow the
+   number of items: 2–4 in two, 5–6 in three, 7–8 in four, so they fill two
+   rows; an odd number makes the first a feature tile two rows tall, in the
+   accent. Lists inside a tile or a column stay lists.
+   ───────────────────────────────────────────── */
+.slide:not([class*="slide--"]) > .slide-body > :is(ul, ol) {
+  --cols: 1;
+  display: grid;
+  grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
+  grid-auto-rows: minmax(160px, 1fr);
+  gap: var(--tile-gap);
+  /* The tiles take the room the slide has left, as a bento box is full. */
+  flex: 1 1 auto;
+  min-height: 0;
+  max-height: 760px;
+}
+.slide:not([class*="slide--"]) > .slide-body > :is(ul, ol):has(> li:nth-child(2)) { --cols: 2; }
+.slide:not([class*="slide--"]) > .slide-body > :is(ul, ol):has(> li:nth-child(5)) { --cols: 3; }
+.slide:not([class*="slide--"]) > .slide-body > :is(ul, ol):has(> li:nth-child(7)) { --cols: 4; }
+.slide:not([class*="slide--"]) > .slide-body > :is(ul, ol) > li {
+  background: var(--tile-bg);
+  border-radius: var(--tile-radius);
+  padding: 32px var(--tile-pad);
+  line-height: 1.35;
+  color: var(--ink);
+  font-weight: 500;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 8px;
+}
+/* The marker: a small rounded square for bullets, a number for steps, both
+   at the top of the tile. */
+.slide:not([class*="slide--"]) > .slide-body > ul > li::before {
+  content: '';
+  width: 18px;
+  height: 18px;
+  border-radius: 6px;
+  background: var(--accent);
+  margin-bottom: auto;
+  flex: none;
+}
+.slide:not([class*="slide--"]) > .slide-body > ol > li::before {
+  content: counter(slide-ol, decimal-leading-zero);
+  font-size: var(--fs-small);
+  font-weight: 700;
+  color: var(--accent-text);
+  margin-bottom: auto;
+  padding-bottom: 16px;
+  font-variant-numeric: tabular-nums;
+}
+/* The feature tile: the first of an odd number, two rows tall, in the accent. */
+.slide:not([class*="slide--"]) > .slide-body > :is(ul, ol):is(
+    :has(> li:nth-child(3)):not(:has(> li:nth-child(4))),
+    :has(> li:nth-child(5)):not(:has(> li:nth-child(6))),
+    :has(> li:nth-child(7)):not(:has(> li:nth-child(8)))
+  ) > li:first-child {
+  grid-row: span 2;
+  background: var(--accent);
+  color: var(--on-accent);
+  font-size: calc(var(--fs-body) * 1.2);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+.slide:not([class*="slide--"]) > .slide-body > :is(ul, ol):is(
+    :has(> li:nth-child(3)):not(:has(> li:nth-child(4))),
+    :has(> li:nth-child(5)):not(:has(> li:nth-child(6))),
+    :has(> li:nth-child(7)):not(:has(> li:nth-child(8)))
+  ) > li:first-child :is(strong, em, a) { color: inherit; }
+.slide:not([class*="slide--"]) > .slide-body > ul:is(
+    :has(> li:nth-child(3)):not(:has(> li:nth-child(4))),
+    :has(> li:nth-child(5)):not(:has(> li:nth-child(6))),
+    :has(> li:nth-child(7)):not(:has(> li:nth-child(8)))
+  ) > li:first-child::before { background: var(--on-accent); }
+.slide:not([class*="slide--"]) > .slide-body > ol:is(
+    :has(> li:nth-child(3)):not(:has(> li:nth-child(4))),
+    :has(> li:nth-child(5)):not(:has(> li:nth-child(6))),
+    :has(> li:nth-child(7)):not(:has(> li:nth-child(8)))
+  ) > li:first-child::before { color: var(--on-accent); }
+/* A key figure: an item that opens with bold text and a line break shows
+   the bold as a big number. */
+.slide-body li > strong:first-child:has(+ br) {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 2.4em;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: var(--accent-text);
+  margin-bottom: 6px;
+}
+.slide-body li > strong:first-child:has(+ br) + br { display: none; }
+.slide:not([class*="slide--"]) > .slide-body > :is(ul, ol):is(
+    :has(> li:nth-child(3)):not(:has(> li:nth-child(4))),
+    :has(> li:nth-child(5)):not(:has(> li:nth-child(6))),
+    :has(> li:nth-child(7)):not(:has(> li:nth-child(8)))
+  ) > li:first-child > strong:first-child:has(+ br) { color: inherit; }
+/* A key-figure tile needs no marker: the number is the mark. */
+.slide:not([class*="slide--"]) > .slide-body > ul > li:has(> strong:first-child + br)::before { display: none; }
+/* Lists inside a tile, a column or an item: plain lists with small markers. */
+.slide-body :is(.split-left, .split-right, .callout, li, .text-pane) :is(ul, ol) > li {
+  padding-inline-start: 34px;
+  position: relative;
+  line-height: 1.4;
+}
+.slide-body :is(.split-left, .split-right, .callout, li, .text-pane) ul > li::before {
+  content: '';
+  position: absolute;
+  inset-inline-start: 0;
+  top: 0.5em;
+  width: 12px;
+  height: 12px;
+  border-radius: 4px;
+  background: var(--accent);
+}
+.slide-body :is(.split-left, .split-right, .callout, li, .text-pane) ol > li::before {
+  content: counter(slide-ol) '.';
+  position: absolute;
+  inset-inline-start: 0;
+  font-weight: 700;
+  color: var(--accent-text);
+}
+.slide-body li li { font-size: 0.82em; font-weight: 400; }
+.slide:not([class*="slide--"]) > .slide-body > :is(ul, ol) > li > :is(ul, ol) { margin-top: 4px; gap: 4px; }
+.slide:not([class*="slide--"]) > .slide-body > :is(ul, ol):is(
+    :has(> li:nth-child(3)):not(:has(> li:nth-child(4))),
+    :has(> li:nth-child(5)):not(:has(> li:nth-child(6))),
+    :has(> li:nth-child(7)):not(:has(> li:nth-child(8)))
+  ) > li:first-child ul > li::before { background: currentColor; }
+
+/* ─────────────────────────────────────────────
+   CALLOUTS — tiles tinted with their accent
+   ───────────────────────────────────────────── */
+.slide-body .callout {
+  background: color-mix(in oklab, var(--accent) 10%, var(--tile-bg));
+  border: 0;
+  border-radius: var(--tile-radius);
+  padding: 28px var(--tile-pad);
+  margin: 0;
+}
+.slide-body .callout-title {
+  font-family: var(--font-body);
+  font-size: var(--fs-eyebrow);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin: 0 0 8px 0;
+}
+.slide-body .callout p { padding-inline-start: 0; color: var(--ink); font-size: var(--fs-body); }
+.slide-body .callout:is(.callout-warning, .callout-caution) { background: color-mix(in oklab, var(--accent-3) 18%, var(--tile-bg)); }
+.slide-body .callout.callout-definition { background: color-mix(in oklab, var(--accent-2) 12%, var(--tile-bg)); }
+.slide-body .callout:is(.callout-example, .callout-remark) { background: var(--tile-bg); }
+.slide-body .callout.callout-proof { background: none; }
+
+/* ─────────────────────────────────────────────
+   TABLES — on a tile, rows divided by hairlines
+   ───────────────────────────────────────────── */
+.slide-body table {
+  background: var(--tile-bg);
+  border-radius: var(--tile-radius);
+  border-collapse: separate;
+  border-spacing: 0;
+  padding: 16px 24px;
+  margin: 0;
+  font-variant-numeric: tabular-nums;
+}
+.slide-body th, .slide-body td { padding: 14px 16px; border-bottom: 1px solid var(--rule); }
+.slide-body tr:last-child td { border-bottom: 0; }
+.slide-body th {
+  font-size: var(--fs-small);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted);
+  border-bottom: 1px solid var(--rule);
+}
+.slide-body :is(th, td)[align="right"] { text-align: end; }
+.slide-body :is(th, td)[align="center"] { text-align: center; }
+
+/* ─────────────────────────────────────────────
+   CODE — a tile of its own
+   ───────────────────────────────────────────── */
+.code-block {
+  --code-bg: var(--tile-bg);
+  --code-radius: var(--tile-radius);
+  --code-size: 28px;
+  background: var(--code-bg);
+  border-radius: var(--code-radius);
+  padding: 36px 44px;
+  margin: 0;
+  overflow: hidden;
+  font-size: var(--code-size);
+  font-family: var(--font-mono);
+  line-height: 1.55;
+}
+.code-block code { font-family: inherit; font-size: inherit; background: none; padding: 0; }
+.split-left .code-block, .split-right .code-block { background: var(--bg); }
+
+/* ─────────────────────────────────────────────
+   AUDIENCE QUESTIONS — rounded bars
+   ───────────────────────────────────────────── */
+.slide .poll-track, .slide .scale-track { background: var(--tile-bg); border-radius: 999px; overflow: hidden; }
+.slide .poll-fill, .slide .scale-fill { border-radius: 999px; }
+
+/* ─────────────────────────────────────────────
+   MATH (KaTeX)
+   ───────────────────────────────────────────── */
+.slide .katex-display {
+  font-size: var(--fs-sub);
+  margin: 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+/* ─────────────────────────────────────────────
+   QUOTATIONS — a tile with a large quotation mark in the accent
+   ───────────────────────────────────────────── */
+.slide-body blockquote {
+  margin: 0;
+  padding: 32px var(--tile-pad);
+  padding-inline-start: 132px;
+  border: 0;
+  border-radius: var(--tile-radius);
+  background: var(--tile-bg);
+  position: relative;
+  font-size: calc(var(--fs-body) * 1.1);
+  font-weight: 600;
+  color: var(--ink);
+}
+.slide-body blockquote::before {
+  content: '\201C';
+  position: absolute;
+  inset-inline-start: 40px;
+  top: 18px;
+  font-family: var(--font-display);
+  font-size: 120px;
+  font-weight: 800;
+  line-height: 1;
+  color: var(--accent-text);
+}

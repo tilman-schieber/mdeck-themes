@@ -1,0 +1,75 @@
+schema = 1
+kind = "theme"
+id = "bento"
+title = "Bento"
+description = "Rounded tiles, as on a product page: every list item, paragraph, table and callout on a tile of its own; lists become grids with a feature tile in the accent, bold figures become big numbers; Plus Jakarta Sans throughout."
+version = "0.1.0"
+author = "Tilman Schieber"
+license = "MIT"
+mdeck = ">=3.7.0"  # the third accent, --accent-3
+# The palette this theme uses unless the deck sets one; colours come only from palettes.
+palette = "lagoon"
+fonts = [
+  "https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400..800;1,400..800&family=JetBrains+Mono:wght@400;600&display=swap",
+]
+
+[files]
+styles = "styles.css"
+
+# Type, spacing and fonts used by styles.css; colours come from the palette.
+# Deck settings (params) override these.
+[tokens]
+
+# Type scale (px) — projection-appropriate at 1920×1080
+"--fs-display" = "116px"
+"--fs-title" = "96px"
+"--fs-focus" = "76px"
+"--fs-h" = "64px"
+"--fs-sub" = "40px"
+"--fs-body" = "34px"
+"--fs-small" = "24px"
+"--fs-eyebrow" = "22px"
+
+# Spacing
+"--pad-x" = "96px"
+"--pad-y" = "64px"
+"--gap-title" = "36px"
+"--gap-item" = "24px"
+
+# The tiles: corner radius, the space between them and inside them.
+"--tile-radius" = "32px"
+"--tile-gap" = "24px"
+"--tile-pad" = "40px"
+
+# Type families
+"--font-display" = "\"Plus Jakarta Sans\", system-ui, -apple-system, \"Segoe UI\", sans-serif"
+"--font-body" = "\"Plus Jakarta Sans\", system-ui, -apple-system, \"Segoe UI\", sans-serif"
+"--font-mono" = "\"JetBrains Mono\", ui-monospace, Menlo, Consolas, monospace"
+
+# Settings authors can change under `params:` in the deck; each points at a token above.
+[params.fontDisplay]
+token = "--font-display"
+title = "Display font"
+
+[params.fontBody]
+token = "--font-body"
+title = "Body font"
+
+[params.tileRadius]
+token = "--tile-radius"
+title = "Tile corners"
+
+# What this theme is for and how to write for it: shown in listings, and read
+# by assistants that write slides as the theme author's advice.
+[guide]
+suits = ["product updates and feature overviews", "project status and summaries", "key figures and results", "team and company talks"]
+avoid = ["long running text", "photo essays", "formal or sombre talks"]
+writing = """
+Everything sits on tiles, and a list is a grid of them, so write lists of two
+to eight short items: each is a tile, and an odd number makes the first a
+large feature tile in the accent. An item that starts with a bold figure on a
+line of its own (end the line with a backslash, the words on the next) shows
+the figure as a big number, like the key-figure tiles of a product page. Keep
+paragraphs short; each is a tile too. A heading stays above the tiles.
+Callouts, quotations, tables and code get tiles of their own.
+"""
