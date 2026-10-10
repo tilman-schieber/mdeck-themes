@@ -38,7 +38,7 @@
 .slide-logo {
   position: absolute;
   top: var(--pad-y);
-  right: var(--pad-x);
+  inset-inline-end: var(--pad-x);
   height: 88px;
   width: auto;
   max-width: 340px;
@@ -183,12 +183,12 @@ strong {
 .slide-body ul, .slide-body ol { max-width: 1500px; }
 .slide-body ul > li {
   line-height: 1.35;
-  padding-left: 72px;
+  padding-inline-start: 72px;
 }
 .slide-body ul > li::before {
   content: '';
   position: absolute;
-  left: 0;
+  inset-inline-start: 0;
   top: 0.3em;
   width: 48px;
   height: 0.75em;
@@ -197,7 +197,7 @@ strong {
 }
 .slide-body ol > li {
   line-height: 1.35;
-  padding-left: 80px;
+  padding-inline-start: 80px;
 }
 /* The number sits in the same box as the circle drawn by ::after. Its
    font is 1.15 times larger, so the box is given in the item's em divided
@@ -205,7 +205,7 @@ strong {
 .slide-body ol > li::before {
   content: counter(slide-ol);
   position: absolute;
-  left: calc(-0.1em / 1.15);
+  inset-inline-start: calc(-0.1em / 1.15);
   top: calc(-0.2em / 1.15);
   width: calc(1.55em / 1.15);
   height: calc(1.55em / 1.15);
@@ -222,7 +222,7 @@ strong {
 .slide-body ol > li::after {
   content: '';
   position: absolute;
-  left: -0.1em;
+  inset-inline-start: -0.1em;
   top: -0.2em;
   width: 1.55em;
   height: 1.55em;
@@ -368,7 +368,7 @@ strong {
   font-size: calc(var(--fs-eyebrow) * 1.3);
   font-weight: 700;
   color: var(--accent);
-  margin: 0 0 20px 40px;
+  margin-block: 0 20px; margin-inline: 40px 0;
   transform: rotate(-3deg);
 }
 .focus-content {
@@ -386,15 +386,15 @@ strong {
 .focus-content::after {
   content: '';
   position: absolute;
-  left: 140px;
+  inset-inline-start: 140px;
   bottom: -44px;
   width: 64px;
   height: 64px;
   background: var(--bg);
-  border-right: 5px solid var(--ink);
+  border-inline-end: 5px solid var(--ink);
   border-bottom: 5px solid var(--ink);
   transform: skewX(-28deg) rotate(42deg);
-  border-bottom-right-radius: 12px;
+  border-end-end-radius: 12px;
 }
 .focus-statement,
 .slide--focus .focus-content h1,
@@ -412,7 +412,7 @@ strong {
   font-family: var(--font-body);
   font-size: var(--fs-body);
   color: var(--muted);
-  margin: 64px 0 0 240px;
+  margin-block: 64px 0; margin-inline: 240px 0;
 }
 
 /* ─────────────────────────────────────────────
@@ -520,7 +520,7 @@ strong {
   color: var(--ink);
   margin: 0 0 6px 0;
 }
-.slide-body .callout p { padding-left: 0; color: var(--ink); margin-bottom: 0; }
+.slide-body .callout p { padding-inline-start: 0; color: var(--ink); margin-bottom: 0; }
 .slide-body .callout > * + * { margin-top: 10px; }
 .slide-body :is(.callout-note, .callout-tip, .callout-important, .callout-theorem, .callout-lemma, .callout-corollary) { --note: var(--accent); }
 .slide-body :is(.callout-warning, .callout-caution) { --note: var(--accent-3); }
@@ -536,15 +536,15 @@ strong {
 }
 .slide-body .callout.callout-proof::before { display: none; }
 .slide-body .callout.callout-proof .callout-title {
-  float: left;
-  margin: 0 0.3em 0 0;
+  float: inline-start;
+  margin-block: 0; margin-inline: 0 0.3em;
   font-size: calc(var(--fs-body) * 1.2);
   line-height: 1.15;
   color: var(--accent);
 }
 .slide-body .callout.callout-proof .callout-title::after { content: '.'; }
 .slide-body .callout.callout-proof p { color: var(--ink-soft); }
-.slide-body .callout.callout-proof > :last-child::after { content: '\25A1'; margin-left: 0.5em; color: var(--accent); }
+.slide-body .callout.callout-proof > :last-child::after { content: '\25A1'; margin-inline-start: 0.5em; color: var(--accent); }
 
 /* ─────────────────────────────────────────────
    CODE — a box drawn round the listing
@@ -587,7 +587,7 @@ strong {
 .slide-body table { font-size: var(--fs-body); }
 .slide-body th,
 .slide-body td {
-  padding: 10px 28px 10px 0;
+  padding-block: 10px; padding-inline: 0 28px;
   border-bottom: 2px dashed var(--hairline);
 }
 .slide-body th {
@@ -641,7 +641,7 @@ strong {
 .slide-body blockquote {
   position: relative;
   margin: 0 0 var(--gap-item);
-  padding: 0 0 0 70px;
+  padding-block: 0; padding-inline: 70px 0;
   border: 0;
   font-family: var(--font-display);
   font-size: calc(var(--fs-body) * 1.35);
@@ -650,10 +650,11 @@ strong {
   transform: rotate(-0.8deg);
   transform-origin: left center;
 }
+.slide-body blockquote:dir(rtl) { transform-origin: right center; }
 .slide-body blockquote::before {
   content: '\201C';
   position: absolute;
-  left: 0;
+  inset-inline-start: 0;
   top: -0.12em;
   font-size: 2.4em;
   line-height: 1;

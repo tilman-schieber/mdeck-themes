@@ -3,7 +3,7 @@ kind = "theme"
 id = "editorial"
 title = "Editorial"
 description = "A magazine spread: Newsreader headlines, Lora text, drop caps, pull quotes and Roman chapter numerals."
-version = "1.2.0"
+version = "1.2.1"
 author = "Tilman Schieber"
 license = "MIT"
 mdeck = ">=3.7.0"  # the third accent, --accent-3

@@ -26,7 +26,7 @@
 .slide-logo {
   position: absolute;
   top: var(--pad-y);
-  right: var(--pad-x);
+  inset-inline-end: var(--pad-x);
   height: 120px;
   width: auto;
   max-width: 480px;
@@ -210,6 +210,9 @@ strong { color: var(--ink); font-weight: 700; }
   background: var(--accent-2);
   clip-path: polygon(40% 0, 43% 0, 33% 100%, 30% 100%);
 }
+/* Right to left: the field and its seam on the right, where the line starts. */
+.slide--chapter:not(.has-image):dir(rtl)::before { clip-path: polygon(100% 0, 60% 0, 70% 100%, 100% 100%); }
+.slide--chapter:not(.has-image):dir(rtl)::after { clip-path: polygon(60% 0, 57% 0, 67% 100%, 70% 100%); }
 .slide--chapter > * { position: relative; z-index: 1; }
 .slide--chapter > .slide-ink { position: absolute; z-index: 50; }
 .slide--chapter:not(.has-image) .slide-header .brand,
@@ -222,10 +225,10 @@ strong { color: var(--ink); font-weight: 700; }
   position: static;
 }
 /* The title starts clear of the seam (the slide is 1920 px wide). */
-.slide--chapter:not(.has-image) .slide-body { padding-left: calc(880px - var(--pad-x)); }
+.slide--chapter:not(.has-image) .slide-body { padding-inline-start: calc(880px - var(--pad-x)); }
 .chapter-num {
   position: absolute;
-  left: var(--pad-x);
+  inset-inline-start: var(--pad-x);
   bottom: calc(var(--pad-y) + 110px);
   font-family: var(--font-display);
   font-size: 360px;
@@ -298,13 +301,13 @@ strong { color: var(--ink); font-weight: 700; }
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--accent);
-  margin: 0 0 48px 96px;
+  margin-block: 0 48px; margin-inline: 96px 0;
 }
 .focus-content {
   display: flex;
   flex-direction: column;
   width: 100%;
-  padding-left: 96px;
+  padding-inline-start: 96px;
   box-sizing: border-box;
 }
 /* The bars stand beside the statement only, not beside code or a list below it. */
@@ -312,7 +315,7 @@ strong { color: var(--ink); font-weight: 700; }
 .focus-content > :is(h1, h2, h3, p, blockquote):first-child::before {
   content: '';
   position: absolute;
-  left: -96px;
+  inset-inline-start: -96px;
   top: 0.08em;
   bottom: 0.08em;
   width: 50px;
@@ -340,7 +343,7 @@ strong { color: var(--ink); font-weight: 700; }
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--muted);
-  margin: 56px 0 0 96px;
+  margin-block: 56px 0; margin-inline: 96px 0;
 }
 
 /* ─────────────────────────────────────────────
@@ -406,13 +409,13 @@ strong { color: var(--ink); font-weight: 700; }
 .slide-body ul > li {
   font-weight: 400;
   line-height: 1.32;
-  padding-left: 48px;
+  padding-inline-start: 48px;
   position: relative;
 }
 .slide-body ul > li::before {
   content: '';
   position: absolute;
-  left: 0;
+  inset-inline-start: 0;
   top: 0.55em;
   width: 24px;
   height: 7px;
@@ -420,13 +423,13 @@ strong { color: var(--ink); font-weight: 700; }
 }
 .slide-body ol > li {
   counter-increment: slide-ol;
-  padding-left: 56px;
+  padding-inline-start: 56px;
   position: relative;
 }
 .slide-body ol > li::before {
   content: counter(slide-ol);
   position: absolute;
-  left: 0;
+  inset-inline-start: 0;
   top: -0.04em;
   font-family: var(--font-display);
   font-size: calc(var(--fs-body) * 1.15);
@@ -500,7 +503,7 @@ strong { color: var(--ink); font-weight: 700; }
   --tab: var(--accent);
   --tab-ink: var(--on-accent);
   background: var(--tint-1);
-  border-left: 0;
+  border-inline-start: 0;
   border-top: 6px solid var(--tab);
   padding: 0 36px 28px;
   margin: 44px 0 0;
@@ -522,7 +525,7 @@ strong { color: var(--ink); font-weight: 700; }
   padding: 6px 18px 8px;
   margin: 0 0 20px;
 }
-.slide-body .callout p { padding-left: 0; color: var(--ink); font-size: var(--fs-body); }
+.slide-body .callout p { padding-inline-start: 0; color: var(--ink); font-size: var(--fs-body); }
 
 /* ─────────────────────────────────────────────
    CODE BLOCK — a tinted surface with a rule of the first accent on top
@@ -558,8 +561,8 @@ strong { color: var(--ink); font-weight: 700; }
 .slide .poll-row:nth-child(even) .poll-fill,
 .slide .scale-column:nth-child(even) .scale-fill { background: var(--accent-2); }
 .slide .question-cards li { border-radius: 0; background: var(--tint-1); }
-.slide .question-cards li:nth-child(even) { background: var(--tint-2); border-left-color: var(--accent-2); }
-.slide .question-cards li:first-child { border-left-color: var(--accent); }
+.slide .question-cards li:nth-child(even) { background: var(--tint-2); border-inline-start-color: var(--accent-2); }
+.slide .question-cards li:first-child { border-inline-start-color: var(--accent); }
 .slide .poll-join { border-radius: 0; border: 3px solid var(--accent); }
 
 /* ─────────────────────────────────────────────
@@ -579,7 +582,7 @@ strong { color: var(--ink); font-weight: 700; }
 .slide-body blockquote {
   position: relative;
   margin: 0 0 var(--gap-item);
-  padding: 0 0 0 58px;
+  padding-block: 0; padding-inline: 58px 0;
   border: 0;
   font-family: var(--font-display);
   font-size: calc(var(--fs-body) * 1.15);
@@ -590,7 +593,7 @@ strong { color: var(--ink); font-weight: 700; }
 .slide-body blockquote::before {
   content: '';
   position: absolute;
-  left: 0;
+  inset-inline-start: 0;
   top: 0.1em;
   bottom: 0.1em;
   width: 30px;

@@ -45,7 +45,7 @@ html, body { font-weight: 300; }
 .slide-logo {
   position: absolute;
   top: var(--pad-y);
-  left: var(--pad-x);
+  inset-inline-start: var(--pad-x);
   height: 128px;
   width: auto;
   max-width: 480px;
@@ -201,8 +201,8 @@ blockquote {
   color: var(--on-accent);
   display: inline-block;
   /* Pull left edge to the slide corner; keep interior text at pad-x. */
-  margin-left: calc(var(--pad-x) * -1);
-  padding: var(--akzent-pad-y) var(--akzent-pad-x) calc(var(--akzent-pad-y) + 6px) var(--pad-x);
+  margin-inline-start: calc(var(--pad-x) * -1);
+  padding-block: var(--akzent-pad-y) calc(var(--akzent-pad-y) + 6px); padding-inline: var(--pad-x) var(--akzent-pad-x);
   font-size: 132px;
   font-weight: 700;
   line-height: 1.0;
@@ -213,7 +213,7 @@ blockquote {
 }
 /* If the slide also has a subtitle, let the akzentfläche hug content. */
 .slide--title .display + .subtitle {
-  padding-left: 0;
+  padding-inline-start: 0;
 }
 /* TITLE + image: right-column with yellow-bordered photo */
 .slide--title.has-image .slide-body {
@@ -226,7 +226,7 @@ blockquote {
   display: flex;
   flex-direction: column;
   gap: 32px;
-  padding-right: 64px;
+  padding-inline-end: 64px;
 }
 .slide--title.has-image .title-image {
   width: 100%;
@@ -314,7 +314,7 @@ blockquote {
 .slide--focus .slide-body {
   justify-content: center;
   align-items: flex-start;
-  text-align: left;
+  text-align: start;
 }
 .focus-eyebrow {
   font-family: var(--font-body);
@@ -324,7 +324,7 @@ blockquote {
   text-transform: uppercase;
   color: var(--muted);
   margin: 0 0 40px 0;
-  padding-left: 48px;
+  padding-inline-start: 48px;
   background-image: linear-gradient(var(--accent), var(--accent));
   background-size: 32px 6px;
   background-repeat: no-repeat;
@@ -348,7 +348,7 @@ blockquote {
   flex-direction: column;
   align-items: flex-start;
   width: 100%;
-  text-align: left;
+  text-align: start;
 }
 .focus-content h1,
 .focus-content p {
@@ -362,7 +362,7 @@ blockquote {
   color: var(--ink);
   margin: 0;
   text-wrap: balance;
-  text-align: left;
+  text-align: start;
   max-width: 1500px;
 }
 .focus-content p + p,
@@ -434,7 +434,7 @@ blockquote {
   font-weight: 300;
   line-height: 1.4;
   color: var(--ink);
-  padding-left: 44px;
+  padding-inline-start: 44px;
   background-image: linear-gradient(var(--accent), var(--accent));
   background-size: 18px 18px;
   background-repeat: no-repeat;
@@ -447,7 +447,7 @@ blockquote {
 }
 .slide-body ol { max-width: 1500px; }
 .slide-body ol > li {
-  padding-left: 56px;
+  padding-inline-start: 56px;
   font-weight: 300;
   line-height: 1.4;
   color: var(--ink);
@@ -456,7 +456,7 @@ blockquote {
 .slide-body ol > li::before {
   content: counter(slide-ol);
   position: absolute;
-  left: 0;
+  inset-inline-start: 0;
   top: 0.2em;
   width: 36px;
   height: 36px;
@@ -495,7 +495,7 @@ blockquote {
   color: var(--on-accent);
   background: var(--accent);
   margin: 0 0 var(--pad-y) 0;
-  padding: var(--akzent-pad-y) var(--akzent-pad-x) calc(var(--akzent-pad-y) + 4px) var(--pad-x);
+  padding-block: var(--akzent-pad-y) calc(var(--akzent-pad-y) + 4px); padding-inline: var(--pad-x) var(--akzent-pad-x);
   max-width: 1500px;
   text-wrap: balance;
 }
@@ -575,7 +575,7 @@ blockquote {
   --code-size: 26px;
   background: var(--code-bg);
   border-radius: 0;
-  border-left: 8px solid var(--accent);
+  border-inline-start: 8px solid var(--accent);
   padding: 32px 40px;
   margin: 0;
   overflow: hidden;
@@ -599,7 +599,7 @@ blockquote {
   margin: 40px 0;
   overflow-x: auto;
   overflow-y: hidden;
-  text-align: left;
+  text-align: start;
 }
 
 /* ─────────────────────────────────────────────
@@ -611,7 +611,7 @@ blockquote {
    ───────────────────────────────────────────── */
 .slide-body .callout {
   background: var(--surface);
-  border-left: 8px solid var(--accent);
+  border-inline-start: 8px solid var(--accent);
   padding: 32px 40px;
   margin: var(--gap-item) 0;
   max-width: 1500px;
@@ -631,13 +631,13 @@ blockquote {
   color: var(--on-accent);
   padding: 4px 12px;
 }
-.slide-body .callout p { padding-left: 0; color: var(--ink); font-weight: 300; }
+.slide-body .callout p { padding-inline-start: 0; color: var(--ink); font-weight: 300; }
 .slide-body .callout ul { margin: 0; }
 .slide-body .callout ul > li {
   background-image: linear-gradient(var(--ink), var(--ink));
   background-size: 12px 12px;
   background-position: left 0.6em;
-  padding-left: 36px;
+  padding-inline-start: 36px;
 }
 .slide-body .callout ol > li::before { background: var(--ink); color: var(--bg); }
 .slide-body .callout em {
@@ -650,3 +650,12 @@ blockquote {
    colours of definitions and theorems follow the black of the other blocks. */
 .slide-body .callout:is(.callout-theorem, .callout-lemma, .callout-corollary, .callout-definition) .callout-title { color: var(--ink); }
 .slide-body .callout:is(.callout-theorem, .callout-lemma, .callout-corollary) em { font-style: italic; }
+
+/* ─────────────────────────────────────────────
+   RIGHT TO LEFT — the accent marks sit where the line starts
+   ───────────────────────────────────────────── */
+.slide-footer:dir(rtl) { background-position: right top; }
+.focus-eyebrow:dir(rtl) { background-position: right 0.55em; }
+.slide-body ul > li:dir(rtl) { background-position: right 0.5em; }
+.slide--full-bleed-image:not(:has(.overlay-title)) .slide-body:dir(rtl) { background-position: right bottom; }
+.slide-body .callout ul > li:dir(rtl) { background-position: right 0.6em; }

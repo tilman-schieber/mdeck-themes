@@ -28,7 +28,7 @@
 .slide-logo {
   position: absolute;
   top: var(--pad-y);
-  right: var(--pad-x);
+  inset-inline-end: var(--pad-x);
   height: 96px;
   width: auto;
   max-width: 360px;
@@ -37,7 +37,7 @@
   transform: translateY(calc(var(--fs-eyebrow) * 0.5 - 50%));
   /* The rule stops before the logo instead of crossing it. */
   background: var(--bg);
-  padding-left: 28px;
+  padding-inline-start: 28px;
 }
 
 .slide-footer {
@@ -199,7 +199,7 @@ strong { color: var(--ink); font-weight: 600; }
   line-height: 1;
   letter-spacing: 0;
   color: var(--accent);
-  margin: 0 0 8px -6px;
+  margin-block: 0 8px; margin-inline: -6px 0;
   user-select: none;
 }
 /* A whole number shows as a Roman numeral (the layout passes it as
@@ -273,8 +273,8 @@ strong { color: var(--ink); font-weight: 600; }
 .slide--focus .slide-body {
   justify-content: center;
   align-items: flex-start;
-  text-align: left;
-  padding-left: 140px;
+  text-align: start;
+  padding-inline-start: 140px;
 }
 .focus-eyebrow {
   font-family: var(--font-body);
@@ -291,12 +291,12 @@ strong { color: var(--ink); font-weight: 600; }
   flex-direction: column;
   align-items: flex-start;
   width: 100%;
-  text-align: left;
+  text-align: start;
 }
 .focus-content::before {
   content: '\201C';
   position: absolute;
-  left: -168px;
+  inset-inline-start: -168px;
   top: 0;
   font-family: var(--font-display);
   font-size: 300px;
@@ -319,7 +319,7 @@ strong { color: var(--ink); font-weight: 600; }
   max-width: 1480px;
   margin: 0;
   text-wrap: balance;
-  text-align: left;
+  text-align: start;
 }
 /* Emphasis inside the quote stays in its italic, a touch heavier, in the accent. */
 .slide--focus .focus-content em { font-style: italic; font-weight: 500; }
@@ -381,13 +381,13 @@ strong { color: var(--ink); font-weight: 600; }
 .slide-body ul > li {
   font-weight: 400;
   line-height: 1.5;
-  padding-left: 64px;
+  padding-inline-start: 64px;
   position: relative;
 }
 .slide-body ul > li::before {
   content: '\2014';
   position: absolute;
-  left: 0;
+  inset-inline-start: 0;
   top: 0;
   font-family: var(--font-display);
   font-weight: 700;
@@ -396,14 +396,14 @@ strong { color: var(--ink); font-weight: 600; }
 .slide-body ol { max-width: 1500px; }
 .slide-body ol > li {
   counter-increment: slide-ol;
-  padding-left: 64px;
+  padding-inline-start: 64px;
   line-height: 1.5;
   position: relative;
 }
 .slide-body ol > li::before {
   content: counter(slide-ol) '.';
   position: absolute;
-  left: 0;
+  inset-inline-start: 0;
   top: -0.08em;
   font-family: var(--font-display);
   font-style: italic;
@@ -474,12 +474,12 @@ strong { color: var(--ink); font-weight: 600; }
 }
 .slide-body > p { max-width: 1500px; }
 .slide-body > h1 + p::first-letter {
-  float: left;
+  float: inline-start;
   font-family: var(--font-display);
   font-size: 3.4em;
   font-weight: 700;
   line-height: 0.82;
-  margin: 0.08em 0.1em 0 0;
+  margin-block: 0.08em 0; margin-inline: 0 0.1em;
   color: var(--accent);
 }
 
@@ -499,18 +499,18 @@ strong { color: var(--ink); font-weight: 600; }
 .slide-body .callout {
   background: none;
   border: 0;
-  border-left: 3px solid var(--rule);
+  border-inline-start: 3px solid var(--rule);
   border-radius: 0;
-  padding: 4px 0 4px 32px;
+  padding-block: 4px; padding-inline: 32px 0;
   margin: 40px 0 0;
   max-width: 1200px;
 }
-.slide-body :is(.callout-note, .callout-tip, .callout-important) { border-left-color: var(--accent); }
+.slide-body :is(.callout-note, .callout-tip, .callout-important) { border-inline-start-color: var(--accent); }
 .slide-body .callout-tip .callout-title { color: var(--accent); }
-.slide-body :is(.callout-warning, .callout-caution) { border-left-color: var(--accent-3); }
+.slide-body :is(.callout-warning, .callout-caution) { border-inline-start-color: var(--accent-3); }
 /* Lecture blocks: theorems in the accent's margin, definitions in the second accent */
-.slide-body :is(.callout-theorem, .callout-lemma, .callout-corollary) { border-left-color: var(--accent); }
-.slide-body .callout-definition { border-left-color: var(--accent-2); }
+.slide-body :is(.callout-theorem, .callout-lemma, .callout-corollary) { border-inline-start-color: var(--accent); }
+.slide-body .callout-definition { border-inline-start-color: var(--accent-2); }
 .slide-body .callout-title {
   font-family: var(--font-body);
   font-size: var(--fs-eyebrow);
@@ -520,7 +520,7 @@ strong { color: var(--ink); font-weight: 600; }
   margin-bottom: 8px;
 }
 .slide-body .callout p {
-  padding-left: 0;
+  padding-inline-start: 0;
   font-style: italic;
   color: var(--ink);
   font-size: var(--fs-body);
@@ -591,7 +591,7 @@ strong { color: var(--ink); font-weight: 600; }
 .slide-body blockquote::before {
   content: '\201C';
   position: absolute;
-  left: -0.62em;
+  inset-inline-start: -0.62em;
   top: 0.12em;
   font-size: 2.4em;
   line-height: 1;

@@ -3,7 +3,7 @@ kind = "theme"
 id = "cinema"
 title = "Cinema"
 description = "Film title cards: black letterbox bars, centred Cormorant titles, quiet subtitles in Inter, the accent as gold."
-version = "1.2.0"
+version = "1.2.1"
 author = "Tilman Schieber"
 license = "MIT"
 mdeck = ">=3.7.0"  # the third accent, --accent-3

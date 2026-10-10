@@ -3,7 +3,7 @@ kind = "theme"
 id = "fhnw"
 title = "FHNW"
 description = "The FHNW corporate design: Inter, black on white, yellow accent areas."
-version = "1.1.3"
+version = "1.1.4"
 author = "Tilman Schieber"
 license = "MIT"
 mdeck = ">=3.6.0"  # the [guide] below

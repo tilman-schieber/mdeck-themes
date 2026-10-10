@@ -29,7 +29,7 @@
 .slide-logo {
   position: absolute;
   top: 0;
-  right: 0;
+  inset-inline-end: 0;
   height: 88px;
   width: auto;
   max-width: 400px;
@@ -109,7 +109,7 @@ strong { color: var(--ink); font-weight: 700; }
   width: 330px;
   height: 330px;
   top: 140px;
-  right: 220px;
+  inset-inline-end: 220px;
   border-radius: 50%;
   background: var(--accent);
 }
@@ -118,7 +118,7 @@ strong { color: var(--ink); font-weight: 700; }
   width: 300px;
   height: 300px;
   bottom: 128px;
-  right: 410px;
+  inset-inline-end: 410px;
   background: var(--accent-2);
 }
 /* the triangle, low on the right */
@@ -126,7 +126,7 @@ strong { color: var(--ink); font-weight: 700; }
   width: 330px;
   height: 286px;
   bottom: 80px;
-  right: 48px;
+  inset-inline-end: 48px;
   background: var(--accent-3);
   clip-path: polygon(50% 0, 100% 100%, 0 100%);
 }
@@ -326,11 +326,11 @@ strong { color: var(--ink); font-weight: 700; }
    LISTS — circle, square, triangle in turn; numbers in bold red
    ───────────────────────────────────────────── */
 .slide-body li { line-height: 1.35; }
-.slide-body ul > li { padding-left: 1.15em; }
+.slide-body ul > li { padding-inline-start: 1.15em; }
 .slide-body ul > li::before {
   content: '';
   position: absolute;
-  left: 0.1em;
+  inset-inline-start: 0.1em;
   top: 0.48em;
   width: 0.42em;
   height: 0.42em;
@@ -341,17 +341,17 @@ strong { color: var(--ink); font-weight: 700; }
 .slide-body ul > li:nth-child(3n)::before {
   border-radius: 0;
   width: 0.5em;
-  left: 0.06em;
+  inset-inline-start: 0.06em;
   top: 0.44em;
   background: var(--accent-3);
   clip-path: polygon(50% 0, 100% 100%, 0 100%);
 }
 .slide-body li li { font-size: 0.9em; }
-.slide-body ol > li { padding-left: 1.5em; }
+.slide-body ol > li { padding-inline-start: 1.5em; }
 .slide-body ol > li::before {
   content: counter(slide-ol);
   position: absolute;
-  left: 0;
+  inset-inline-start: 0;
   font-family: var(--font-display);
   font-weight: 800;
   color: var(--accent);
@@ -381,7 +381,7 @@ strong { color: var(--ink); font-weight: 700; }
   letter-spacing: 0.1em;
   margin-bottom: 6px;
 }
-.slide-body .callout p { padding-left: 0; color: var(--ink); font-size: var(--fs-body); }
+.slide-body .callout p { padding-inline-start: 0; color: var(--ink); font-size: var(--fs-body); }
 
 /* ─────────────────────────────────────────────
    CODE — on the surface, a blue bar on the left
@@ -392,7 +392,7 @@ strong { color: var(--ink); font-weight: 700; }
   --code-size: 26px;
   background: var(--code-bg);
   border-radius: 0;
-  border-left: var(--bar) solid var(--accent-2);
+  border-inline-start: var(--bar) solid var(--accent-2);
   padding: 28px 40px;
   margin: 0;
   overflow: hidden;
@@ -421,9 +421,9 @@ strong { color: var(--ink); font-weight: 700; }
    ───────────────────────────────────────────── */
 .slide-body blockquote {
   margin: 0 0 var(--gap-item);
-  padding: 4px 0 4px 32px;
+  padding-block: 4px; padding-inline: 32px 0;
   border: 0;
-  border-left: var(--bar) solid var(--accent-3);
+  border-inline-start: var(--bar) solid var(--accent-3);
   color: var(--ink);
 }
 

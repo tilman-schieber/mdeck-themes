@@ -110,7 +110,7 @@ deck-stage[data-deck-static] .slide::before { animation: none; }
   display: inline-flex;
   align-items: center;
   gap: 12px;
-  padding: 8px 22px 8px 16px;
+  padding-block: 8px; padding-inline: 16px 22px;
   border-radius: 999px;
   background: var(--glass-edge) border-box;
   border: 1px solid transparent;
@@ -141,7 +141,7 @@ deck-stage[data-deck-static] .slide::before { animation: none; }
 .slide-logo {
   position: absolute;
   top: var(--pad-y);
-  right: var(--pad-x);
+  inset-inline-end: var(--pad-x);
   height: 96px;
   width: auto;
   max-width: 360px;
@@ -259,7 +259,7 @@ strong { color: var(--ink); font-weight: 700; }
   grid-template-columns: 1.1fr 1fr;
   column-gap: 88px;
   align-items: stretch;
-  text-align: left;
+  text-align: start;
   padding-bottom: 32px;
 }
 .slide--title.has-image .title-text {
@@ -294,14 +294,14 @@ strong { color: var(--ink); font-weight: 700; }
      below the glyphs' height cut off the bottom of the digits. The full line
      height, with the spacing taken back by the margins. */
   line-height: 1.05;
-  padding-right: 0.04em;
+  padding-inline-end: 0.04em;
   letter-spacing: -0.06em;
   background: var(--aurora-gradient);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   filter: drop-shadow(0 0 40px color-mix(in oklab, var(--aurora-c) 45%, transparent));
-  margin: -0.12em 0 -0.06em -12px;
+  margin-block: -0.12em -0.06em; margin-inline: -12px 0;
 }
 .chapter-meta {
   font-family: var(--font-body);
@@ -364,7 +364,7 @@ strong { color: var(--ink); font-weight: 700; }
   display: inline-flex;
   align-items: center;
   gap: 12px;
-  padding: 10px 28px 10px 20px;
+  padding-block: 10px; padding-inline: 20px 28px;
   border-radius: 999px;
   background: var(--glass);
   -webkit-backdrop-filter: blur(20px);
@@ -460,13 +460,13 @@ strong { color: var(--ink); font-weight: 700; }
 .slide-body ul > li {
   font-weight: 400;
   line-height: 1.35;
-  padding-left: 46px;
+  padding-inline-start: 46px;
   position: relative;
 }
 .slide-body ul > li::before {
   content: '';
   position: absolute;
-  left: 0;
+  inset-inline-start: 0;
   top: 0.42em;
   width: 14px;
   height: 14px;
@@ -475,13 +475,13 @@ strong { color: var(--ink); font-weight: 700; }
   box-shadow: 0 0 14px color-mix(in oklab, var(--aurora-a) 55%, transparent);
 }
 .slide-body ol > li {
-  padding-left: 60px;
+  padding-inline-start: 60px;
   position: relative;
 }
 .slide-body ol > li::before {
   content: counter(slide-ol);
   position: absolute;
-  left: 0;
+  inset-inline-start: 0;
   top: 0;
   font-family: var(--font-display);
   font-weight: 800;
@@ -590,7 +590,7 @@ strong { color: var(--ink); font-weight: 700; }
   background: currentColor;
   box-shadow: 0 0 10px currentColor;
 }
-.slide-body .callout p { padding-left: 0; color: var(--ink); font-size: var(--fs-body); }
+.slide-body .callout p { padding-inline-start: 0; color: var(--ink); font-size: var(--fs-body); }
 .slide-body .callout-tip .callout-title { color: var(--accent); }
 /* The accents mixed with the text colour, readable on the glass in light and dark */
 .slide-body :is(.callout-note, .callout-important) .callout-title { color: color-mix(in oklab, var(--accent) 65%, var(--ink)); }
@@ -628,7 +628,7 @@ strong { color: var(--ink); font-weight: 700; }
 .slide .poll-track, .slide .scale-track { border-radius: 999px; background: color-mix(in oklab, var(--rule) 55%, transparent); }
 .slide .poll-fill { border-radius: 999px; background: var(--aurora-gradient); box-shadow: 0 0 18px color-mix(in oklab, var(--aurora-a) 45%, transparent); }
 .slide .scale-fill { border-radius: 12px 12px 0 0; background: linear-gradient(to top, var(--aurora-a), var(--aurora-b)); }
-.slide .question-cards li { border-radius: 18px; border-left: 0; background: var(--glass); box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--rule) 70%, transparent); }
+.slide .question-cards li { border-radius: 18px; border-inline-start: 0; background: var(--glass); box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--rule) 70%, transparent); }
 .slide .poll-join { border-radius: 24px; }
 
 /* ─────────────────────────────────────────────
@@ -648,7 +648,7 @@ strong { color: var(--ink); font-weight: 700; }
 .slide-body blockquote {
   position: relative;
   margin: 0 0 var(--gap-item);
-  padding: 0 0 0 76px;
+  padding-block: 0; padding-inline: 76px 0;
   border: 0;
   max-width: 1300px;
   color: var(--ink);
@@ -656,7 +656,7 @@ strong { color: var(--ink); font-weight: 700; }
 .slide-body blockquote::before {
   content: '\201C';
   position: absolute;
-  left: 0;
+  inset-inline-start: 0;
   top: -18px;
   font-size: 120px;
   font-weight: 800;

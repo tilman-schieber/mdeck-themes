@@ -34,7 +34,7 @@
 .slide-logo {
   position: absolute;
   top: var(--pad-y);
-  right: var(--pad-x);
+  inset-inline-end: var(--pad-x);
   height: 64px;
   width: auto;
   max-width: 280px;
@@ -196,12 +196,12 @@ strong { font-weight: 600; color: var(--ink); }
    ───────────────────────────────────────────── */
 .slide--image-text .slide-header,
 .slide--image-text .slide-footer,
-.slide--image-text .slide-footnotes { margin-left: calc(var(--photo-share) - var(--pad-x) + 72px); }
-.slide--image-text .slide-body { padding-left: calc(var(--photo-share) - var(--pad-x) + 72px); gap: 0; }
+.slide--image-text .slide-footnotes { margin-inline-start: calc(var(--photo-share) - var(--pad-x) + 72px); }
+.slide--image-text .slide-body { padding-inline-start: calc(var(--photo-share) - var(--pad-x) + 72px); gap: 0; }
 .image-pane {
   position: absolute;
   top: 0;
-  left: 0;
+  inset-inline-start: 0;
   bottom: 0;
   width: var(--photo-share);
   background: var(--surface);
@@ -278,21 +278,21 @@ strong { font-weight: 600; color: var(--ink); }
 /* ─────────────────────────────────────────────
    LISTS — a thin dash; numbers in the serif
    ───────────────────────────────────────────── */
-.slide-body ul > li { line-height: 1.45; padding-left: 40px; }
+.slide-body ul > li { line-height: 1.45; padding-inline-start: 40px; }
 .slide-body ul > li::before {
   content: '';
   position: absolute;
-  left: 0;
+  inset-inline-start: 0;
   top: 0.72em;
   width: 20px;
   height: 1.5px;
   background: var(--muted);
 }
-.slide-body ol > li { line-height: 1.45; padding-left: 52px; }
+.slide-body ol > li { line-height: 1.45; padding-inline-start: 52px; }
 .slide-body ol > li::before {
   content: counter(slide-ol);
   position: absolute;
-  left: 0;
+  inset-inline-start: 0;
   top: -0.12em;
   font-family: var(--font-display);
   font-size: 1.3em;
@@ -339,8 +339,8 @@ strong { font-weight: 600; color: var(--ink); }
 .slide-body .callout {
   background: none;
   border: 0;
-  border-left: 2px solid var(--hairline);
-  padding: 4px 0 4px 28px;
+  border-inline-start: 2px solid var(--hairline);
+  padding-block: 4px; padding-inline: 28px 0;
   margin: var(--gap-item) 0;
   max-width: 1200px;
 }
@@ -352,10 +352,10 @@ strong { font-weight: 600; color: var(--ink); }
   text-transform: uppercase;
   margin: 0 0 8px;
 }
-.slide-body .callout p { color: var(--ink); padding-left: 0; margin-bottom: 0; }
-.slide-body .callout-tip { border-left-color: var(--accent); }
-.slide-body :is(.callout-theorem, .callout-lemma, .callout-corollary) { border-left-color: var(--accent); }
-.slide-body .callout-definition { border-left-color: var(--accent-2); }
+.slide-body .callout p { color: var(--ink); padding-inline-start: 0; margin-bottom: 0; }
+.slide-body .callout-tip { border-inline-start-color: var(--accent); }
+.slide-body :is(.callout-theorem, .callout-lemma, .callout-corollary) { border-inline-start-color: var(--accent); }
+.slide-body .callout-definition { border-inline-start-color: var(--accent-2); }
 .code-block {
   --code-bg: var(--surface);
   --code-radius: 2px;

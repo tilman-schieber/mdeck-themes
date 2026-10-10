@@ -26,7 +26,7 @@
 .slide-logo {
   position: absolute;
   top: var(--pad-y);
-  right: var(--pad-x);
+  inset-inline-end: var(--pad-x);
   height: 120px;
   width: auto;
   max-width: 480px;
@@ -50,11 +50,11 @@
   /* Across the bottom edge, in the slide's lower padding, out of the flow
      (a negative margin would make the slide look overfull to fit.js). */
   position: absolute;
-  left: 0;
-  right: 0;
+  inset-inline-start: 0;
+  inset-inline-end: 0;
   bottom: 0;
   z-index: 1;
-  padding: 0 var(--pad-x) 0 0;
+  padding-block: 0; padding-inline: 0 var(--pad-x);
   height: 52px;
 }
 .slide-footer::before {
@@ -67,12 +67,12 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  padding: 0 28px 0 var(--pad-x);
+  padding-block: 0; padding-inline: var(--pad-x) 28px;
   background: var(--accent);
   color: var(--on-accent);
   font-weight: 700;
 }
-.slide-footer > span:last-child:not(:first-child) { margin-left: auto; color: var(--ink); font-weight: 700; }
+.slide-footer > span:last-child:not(:first-child) { margin-inline-start: auto; color: var(--ink); font-weight: 700; }
 
 /* ─────────────────────────────────────────────
    TYPOGRAPHY HELPERS
@@ -168,7 +168,7 @@ strong { color: var(--ink); font-weight: 700; }
   display: inline-block;
   width: 0.55em;
   height: 0.95em;
-  margin-left: 0.15em;
+  margin-inline-start: 0.15em;
   vertical-align: -0.12em;
   background: var(--accent);
 }
@@ -360,8 +360,8 @@ deck-stage[data-deck-static] .slide--title .display::after { animation: none; }
    LAYOUT: SPLIT — two panes, divided like a tmux split
    ───────────────────────────────────────────── */
 .slide--split .split-columns { gap: 0; }
-.slide--split .split-left { padding-right: 56px; }
-.slide--split .split-right { padding-left: 56px; border-left: 2px solid var(--rule); }
+.slide--split .split-left { padding-inline-end: 56px; }
+.slide--split .split-right { padding-inline-start: 56px; border-inline-start: 2px solid var(--rule); }
 
 /* ─────────────────────────────────────────────
    LISTS — > for bullets, [1] for numbers
@@ -369,26 +369,26 @@ deck-stage[data-deck-static] .slide--title .display::after { animation: none; }
 .slide-body ul > li {
   font-weight: 400;
   line-height: 1.45;
-  padding-left: 1.6em;
+  padding-inline-start: 1.6em;
   position: relative;
 }
 .slide-body ul > li::before {
   content: '>';
   position: absolute;
-  left: 0;
+  inset-inline-start: 0;
   top: 0;
   color: var(--accent);
   font-weight: 700;
 }
 .slide-body ol > li {
-  padding-left: 2.6em;
+  padding-inline-start: 2.6em;
   font-weight: 400;
   line-height: 1.45;
 }
 .slide-body ol > li::before {
   content: '[' counter(slide-ol) ']';
   position: absolute;
-  left: 0;
+  inset-inline-start: 0;
   top: 0;
   font-weight: 700;
   color: var(--accent);
@@ -483,7 +483,7 @@ deck-stage[data-deck-static] .slide--title .display::after { animation: none; }
 }
 .slide-body .callout .callout-title::before { content: '['; }
 .slide-body .callout .callout-title::after { content: ']'; }
-.slide-body .callout p { padding-left: 0; margin: 0; color: var(--ink); font-size: var(--fs-body); }
+.slide-body .callout p { padding-inline-start: 0; margin: 0; color: var(--ink); font-size: var(--fs-body); }
 .slide-body .callout > :not(.callout-title) + * { margin-top: 8px; }
 /* A proof is a log line too: [proof] … ∎ */
 .slide-body .callout.callout-proof { display: flex; }
@@ -561,11 +561,19 @@ deck-stage[data-deck-static] .slide--title .display::after { animation: none; }
 }
 .slide-body blockquote > p {
   position: relative;
-  padding-left: 2ch;
+  padding-inline-start: 2ch;
 }
 .slide-body blockquote > p::before {
   content: '>';
   position: absolute;
-  left: 0;
+  inset-inline-start: 0;
   color: var(--accent);
 }
+
+/* ─────────────────────────────────────────────
+   RIGHT TO LEFT — the commands still read as typed, left to right
+   ───────────────────────────────────────────── */
+:is(.slide-body, .split-heading) > h1:first-child:dir(rtl)::before { direction: ltr; unicode-bidi: isolate; margin-left: 0.6em; }
+.chapter-num:dir(rtl),
+.slide--title .title-text:dir(rtl)::before,
+.focus-content:dir(rtl)::before { direction: ltr; unicode-bidi: isolate; text-align: right; }
