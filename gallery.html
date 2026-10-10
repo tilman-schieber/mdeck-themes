@@ -36,16 +36,6 @@
   .chip i { display: block; }
   /* A theme's icon: its title slide, small (mdeck themes build renders it). */
   .icon { display: block; width: 72px; height: 41px; border-radius: 4px; border: 1px solid rgba(127,127,127,0.35); object-fit: cover; }
-  /* Tags above the list: a click narrows it, several narrow it further. */
-  .tags { display: flex; flex-direction: column; gap: 5px; margin: 0 8px 8px; padding-bottom: 10px; border-bottom: 1px solid var(--rule); }
-  .tags div { display: flex; flex-wrap: wrap; gap: 4px; }
-  .tag { appearance: none; border: 1px solid var(--rule); background: var(--bg); color: var(--soft); border-radius: 999px; padding: 1px 9px; font: inherit; font-size: 12px; cursor: pointer; }
-  .tag:hover { background: var(--hover); }
-  .tag small { color: var(--muted); font-size: 11px; margin-left: 3px; font-variant-numeric: tabular-nums; }
-  .tag[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
-  .tag[aria-pressed="true"] small { color: inherit; opacity: 0.8; }
-  .tag:disabled { opacity: 0.4; cursor: default; }
-  .tag:disabled:hover { background: var(--bg); }
   /* Stage and controls */
   .stage { background: var(--panel); border: 1px solid var(--rule); border-radius: 10px; overflow: hidden; min-width: 0; }
   .frame { background: var(--stage); aspect-ratio: 16 / 9; position: relative; }
@@ -77,10 +67,9 @@
   footer { padding: 0 24px 32px; color: var(--muted); font-size: 13px; }
   @media (max-width: 860px) {
     .layout { grid-template-columns: 1fr; }
-    .themes { position: static; max-height: none; padding: 8px; }
+    .themes { position: static; max-height: none; display: flex; gap: 6px; overflow-x: auto; padding: 8px; }
     .themes h2 { display: none; }
-    .tags { margin: 0 0 8px; }
-    #themes { display: flex; gap: 6px; overflow-x: auto; }
+    #themes { display: flex; gap: 6px; }
     .theme { flex: 0 0 auto; width: auto; }
     .details { grid-template-columns: 1fr; }
   }
@@ -94,7 +83,7 @@
   <nav><a href="https://gh.tschieber.de/mdeck/theme-repository.html">How to install</a><a href="https://github.com/tilman-schieber/mdeck-themes">Add your own</a></nav>
 </header>
 <div class="layout">
-  <aside class="themes" aria-label="Themes"><h2>Themes</h2><div class="tags" id="tags" role="group" aria-label="Show themes for"></div><div id="themes"></div></aside>
+  <aside class="themes" aria-label="Themes"><h2>Themes</h2><div id="themes"></div></aside>
   <main class="stage">
     <div class="frame"><iframe id="deck" title="Sample deck in the chosen look"></iframe></div>
     <div class="bar">
@@ -119,34 +108,7 @@
   const esc = value => String(value ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c])
   const query = new URLSearchParams(location.search)
   let looks
-  // What each theme is for, and how it looks: the tags above the list. A
-  // theme missing here shows only while no tag is chosen.
-  const USES = ['teaching', 'research', 'business', 'keynote', 'workshop', 'data', 'tech', 'storytelling', 'photos']
-  const LOOKS = ['quiet', 'bold', 'playful', 'dark']
-  const TAGS = {
-    academic: ['teaching', 'research', 'data', 'quiet'],
-    glass: ['keynote', 'tech', 'dark'],
-    minimal: ['teaching', 'business', 'quiet'],
-    neue: ['keynote', 'bold'],
-    plain: ['business', 'quiet'],
-    work: ['business', 'data', 'quiet'],
-    aurora: ['keynote', 'workshop', 'dark'],
-    bauhaus: ['teaching', 'workshop', 'bold'],
-    bento: ['business', 'data', 'tech', 'bold'],
-    cinema: ['keynote', 'storytelling', 'photos', 'dark'],
-    duet: ['keynote', 'teaching', 'bold'],
-    editorial: ['research', 'storytelling', 'quiet'],
-    fhnw: ['business', 'teaching', 'bold'],
-    lightbox: ['storytelling', 'photos', 'quiet'],
-    margin: ['research', 'teaching', 'data', 'quiet'],
-    pop: ['workshop', 'teaching', 'playful'],
-    sketch: ['workshop', 'teaching', 'playful'],
-    terminal: ['tech', 'teaching', 'dark'],
-  }
-  const label = tag => tag[0].toUpperCase() + tag.slice(1)
-  const tagged = (item, tags) => tags.every(tag => TAGS[item.id]?.includes(tag))
-  const state = { tags: (query.get('tags') || '').split(',').filter(tag => USES.includes(tag) || LOOKS.includes(tag)),
-    theme: query.get('theme') || 'neue', palette: query.get('palette') || '', appearance: query.get('appearance') || '', slide: Number(query.get('slide')) || 1 }
+  const state = { theme: query.get('theme') || 'neue', palette: query.get('palette') || '', appearance: query.get('appearance') || '', slide: Number(query.get('slide')) || 1 }
 
   const theme = () => looks.themes.find(t => t.id === state.theme) ?? looks.themes[0]
   const palette = id => looks.palettes.find(p => p.id === id)
@@ -160,15 +122,7 @@
 
   function render(reload = true) {
     const t = theme(), p = shownPalette(), appearance = shownAppearance()
-    // Each tag counts the themes left if it were chosen too; one that would
-    // leave none is greyed out. The theme on show stays in the list.
-    const tagButton = tag => {
-      const on = state.tags.includes(tag)
-      const left = looks.themes.filter(item => tagged(item, on ? state.tags : [...state.tags, tag])).length
-      return `<button class="tag" aria-pressed="${on}" data-tag="${tag}"${!on && !left ? ' disabled' : ''}>${label(tag)}<small>${left}</small></button>`
-    }
-    $('tags').innerHTML = `<div><button class="tag" aria-pressed="${!state.tags.length}" data-tag="">All<small>${looks.themes.length}</small></button>${USES.map(tagButton).join('')}</div><div>${LOOKS.map(tagButton).join('')}</div>`
-    $('themes').innerHTML = looks.themes.filter(item => item.id === t.id || tagged(item, state.tags)).map(item => `<button class="theme" aria-pressed="${item.id === t.id}" data-theme="${esc(item.id)}">
+    $('themes').innerHTML = looks.themes.map(item => `<button class="theme" aria-pressed="${item.id === t.id}" data-theme="${esc(item.id)}">
       ${item.icon ? `<img class="icon" src="${esc(item.icon)}" alt="" width="72" height="41">` : chip(palette(item.palette), item.appearance)}<span><span class="name">${esc(item.title)}</span><span class="where">${item.builtIn ? 'comes with mdeck' : 'to install'}</span></span></button>`).join('')
     $('palettes').innerHTML = t.palettes.map(id => palette(id)).filter(Boolean).map(item => `<button class="palette" aria-pressed="${item.id === p.id}" data-palette="${esc(item.id)}">
       ${chip(item, appearance)}${esc(item.title)}${item.id === t.palette ? ' <small>default</small>' : ''}</button>`).join('')
@@ -189,7 +143,7 @@
         <h3>At the top of the slide file</h3>${copyable(settings)}
         ${installs.length ? `<p class="note">Needs mdeck ${esc((t.mdeck ?? '').replace(/^>=\s*/, '') || looks.mdeck.split('.')[0])} or newer (<code>npm install -g mdeck</code>). This installs it for every deck; add a slide file to put it beside one deck.</p>` : ''}</div>`
 
-    const params = new URLSearchParams({ ...(state.tags.length ? { tags: state.tags.join(',') } : {}), theme: t.id, ...(state.palette ? { palette: p.id } : {}), ...(state.appearance ? { appearance } : {}), ...(state.slide > 1 ? { slide: state.slide } : {}) })
+    const params = new URLSearchParams({ theme: t.id, ...(state.palette ? { palette: p.id } : {}), ...(state.appearance ? { appearance } : {}), ...(state.slide > 1 ? { slide: state.slide } : {}) })
     history.replaceState(null, '', `?${params}`)
     if (reload) {
       $('count').textContent = ''
@@ -217,14 +171,8 @@
   })
 
   document.addEventListener('click', event => {
-    const el = event.target.closest('[data-theme], [data-palette], [data-copy], [data-tag]')
+    const el = event.target.closest('[data-theme], [data-palette], [data-copy]')
     if (!el) return
-    if (el.dataset.tag !== undefined) {
-      const tag = el.dataset.tag
-      state.tags = !tag ? [] : state.tags.includes(tag) ? state.tags.filter(x => x !== tag) : [...state.tags, tag]
-      render(false)
-      return
-    }
     if (el.dataset.copy) {
       navigator.clipboard?.writeText(el.dataset.copy).then(() => { el.textContent = 'Copied'; setTimeout(() => { el.textContent = 'Copy' }, 1200) })
       return
