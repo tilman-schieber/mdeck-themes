@@ -1,0 +1,78 @@
+schema = 1
+kind = "theme"
+id = "margin"
+title = "Margin"
+description = "A handout in the manner of Edward Tufte: EB Garamond on ivory, a wide right margin where footnotes, references and callouts become sidenotes, italic headings, small caps, booktabs tables and nothing that is not content."
+version = "0.1.0"
+author = "Tilman Schieber"
+license = "MIT"
+mdeck = ">=3.7.0"  # the third accent, --accent-3
+# The palette this theme uses unless the deck sets one; colours come only from palettes.
+palette = "ivory"
+fonts = [
+  "https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..700;1,400..700&family=Inconsolata:wght@400;600&display=swap",
+]
+
+[files]
+styles = "styles.css"
+
+# Type, spacing and fonts used by styles.css; colours come from the palette.
+# Deck settings (params) override these.
+[tokens]
+
+# Type scale (px) — projection-appropriate at 1920×1080. EB Garamond is small
+# on the body, so the text is set larger than in most themes.
+"--fs-display" = "128px"
+"--fs-title" = "104px"
+"--fs-focus" = "68px"
+"--fs-h" = "80px"
+"--fs-sub" = "48px"
+"--fs-body" = "42px"
+"--fs-small" = "30px"
+"--fs-eyebrow" = "28px"
+
+# Spacing
+"--pad-x" = "140px"
+"--pad-y" = "80px"
+"--gap-title" = "44px"
+"--gap-item" = "22px"
+
+# The margin: its width and the gutter before it. The text column takes the rest.
+"--margin-width" = "470px"
+"--margin-gap" = "110px"
+
+# Type families
+"--font-display" = "\"EB Garamond\", \"ET Book\", Palatino, \"Palatino Linotype\", \"Book Antiqua\", Georgia, serif"
+"--font-body" = "\"EB Garamond\", \"ET Book\", Palatino, \"Palatino Linotype\", \"Book Antiqua\", Georgia, serif"
+"--font-mono" = "Inconsolata, Consolas, \"Liberation Mono\", Menlo, monospace"
+
+# Settings authors can change under `params:` in the deck; each points at a token above.
+[params.fontDisplay]
+token = "--font-display"
+title = "Display font"
+
+[params.fontBody]
+token = "--font-body"
+title = "Body font"
+
+[params.marginWidth]
+token = "--margin-width"
+title = "Margin width"
+
+# What this theme is for and how to write for it: shown in listings, and read
+# by assistants that write slides as the theme author's advice.
+[guide]
+suits = ["research talks and seminars", "data and evidence with commentary", "slides also read as handouts", "lectures with sources and footnotes"]
+avoid = ["keynotes with few words", "playful or loud talks", "photo-led talks"]
+writing = """
+Set like a page of Tufte's: a narrow text column and a wide margin beside it.
+Footnotes ([^1]) and references ([@key]) do not sit at the bottom but in the
+margin, and a callout (:::note) becomes a margin note beside the paragraph
+before it: put remarks, sources and asides there and keep the column for the
+argument. The margin is narrow: two or three references fit beside a
+slide, a long list belongs on a slide of its own (<bibliography />). Write
+in sentences; the first line after a heading is set in small caps. Tables
+get booktabs rules only, so let the numbers carry them. Colour is rare: the
+accent marks note numbers, citations and list markers; emphasis (*…*) is
+italic, not coloured.
+"""

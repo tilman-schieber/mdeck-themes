@@ -1,0 +1,639 @@
+/* Margin — a handout in the manner of Edward Tufte.
+   Every slide is a page with a text column and a wide margin beside it, as
+   in Tufte's books and his tufte-css: the argument runs in the column, and
+   what comments on it goes to the margin. Footnotes and references leave the
+   foot of the slide for the margin; a callout is no box but a margin note,
+   set beside the paragraph before it. A picture beside text is a
+   figure with its caption in the margin.
+   EB Garamond in place of ET Book (both descend from the Venetian book faces),
+   roman titles, italic headings, the first line after a heading in small caps,
+   old-style figures in the text and lining ones in tables, booktabs rules and
+   no vertical lines. Nothing is boxed or shaded, and the text stays in
+   ink: the accent marks only what ties the text to the margin (note
+   numbers, citations in its companion) and the list markers. */
+
+/* ─────────────────────────────────────────────
+   THE PAGE — a grid of the text column and the margin. The header and the
+   footer run across both; footnotes and references stand in the margin,
+   at its foot. Full-bleed pictures keep the whole slide.
+   ───────────────────────────────────────────── */
+.slide:not(.slide--full-bleed-image) {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) var(--margin-width);
+  grid-template-rows: auto minmax(0, 1fr) auto auto auto;
+  column-gap: var(--margin-gap);
+}
+.slide:not(.slide--full-bleed-image) > .slide-header { grid-column: 1 / -1; grid-row: 1; }
+.slide:not(.slide--full-bleed-image) > .slide-body { grid-column: 1; grid-row: 2 / 5; min-width: 0; }
+.slide:not(.slide--full-bleed-image) > .slide-footnotes { grid-column: 2; grid-row: 3; }
+.slide:not(.slide--full-bleed-image) > .slide-citations { grid-column: 2; grid-row: 4; }
+.slide:not(.slide--full-bleed-image) > .slide-footer { grid-column: 1 / -1; grid-row: 5; }
+/* Title, chapter and statement slides use the whole width; their notes, if
+   any, still go to the margin below. */
+.slide:is(.slide--title, .slide--chapter, .slide--focus, .slide--image-text) > .slide-body { grid-column: 1 / -1; grid-row: 2; }
+
+/* A content slide is the page itself: its body steps aside (display:
+   contents) and every paragraph, list and table takes a row of the text
+   column, and the whole page sits in the middle of the slide, as on the
+   other slides. A callout takes the margin beside the row before it, and
+   the footnotes and references follow it there, so margin notes stand next
+   to what they comment on and never cover each other. */
+.slide:not([class*="slide--"]) {
+  grid-template-rows: none;
+  grid-auto-rows: auto;
+  align-content: safe center;
+  row-gap: 0;
+  padding-block: calc(var(--pad-y) + 64px) var(--pad-y);
+}
+.slide:not([class*="slide--"]) > .slide-body { display: contents; }
+.slide:not([class*="slide--"]) > .slide-body > * { grid-column: 1; min-width: 0; }
+.slide:not([class*="slide--"]) > .slide-body > .callout:not(.callout-proof) {
+  grid-column: 2;
+  grid-row: span 2;
+  align-self: start;
+}
+.slide:not([class*="slide--"]) > :is(.slide-footnotes, .slide-citations) { grid-column: 2; grid-row: auto; align-self: start; }
+.slide:not([class*="slide--"]) > .slide-header {
+  position: absolute;
+  grid-area: auto;
+  inset-inline: var(--pad-x);
+  top: var(--pad-y);
+}
+
+/* ─────────────────────────────────────────────
+   HEADER / FOOTER — a running head, as in tufte-latex: the organisation and
+   the section in small caps on the left, the page number on the right, at
+   the top of the page. The footer moves up into it, so the margin runs
+   free to the foot of the slide. The title slide keeps its author below.
+   ───────────────────────────────────────────── */
+.slide-header {
+  font-family: var(--font-body);
+  font-size: var(--fs-eyebrow);
+  font-variant-caps: all-small-caps;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  justify-content: flex-start;
+  gap: 1.2em;
+  min-height: calc(var(--fs-small) * 1.4);
+}
+.slide:not(.slide--title, .slide--full-bleed-image) > .slide-footer {
+  position: absolute;
+  grid-area: auto;
+  top: var(--pad-y);
+  inset-inline-end: var(--pad-x);
+  height: calc(var(--fs-small) * 1.4);
+  align-items: center;
+}
+.slide:not(.slide--title, .slide--full-bleed-image) > .slide-footer > span:first-child:empty { display: none; }
+.slide-header .brand { color: var(--muted); }
+.slide-logo {
+  position: absolute;
+  top: var(--pad-y);
+  inset-inline-end: var(--pad-x);
+  height: 88px;
+  width: auto;
+  max-width: 400px;
+  object-fit: contain;
+  filter: var(--logo-filter, none);
+  transform: translateY(calc(var(--fs-eyebrow) * 0.5 - 50%));
+}
+.slide-footer {
+  font-family: var(--font-body);
+  font-size: var(--fs-small);
+  font-style: italic;
+  font-variant-numeric: oldstyle-nums;
+  color: var(--muted);
+}
+.slide-footer > span:last-child { font-style: normal; }
+
+/* ─────────────────────────────────────────────
+   TYPOGRAPHY — roman for titles, italic for headings, old-style figures,
+   italic for emphasis and never colour
+   ───────────────────────────────────────────── */
+.slide {
+  font-variant-numeric: oldstyle-nums proportional-nums;
+  font-kerning: normal;
+  font-variant-ligatures: common-ligatures;
+}
+.eyebrow {
+  font-family: var(--font-body);
+  font-size: var(--fs-eyebrow);
+  font-variant-caps: all-small-caps;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  margin: 0 0 16px 0;
+}
+.display {
+  font-family: var(--font-display);
+  font-size: var(--fs-display);
+  font-weight: 400;
+  line-height: 1.04;
+  letter-spacing: -0.01em;
+  margin: 0;
+  color: var(--ink);
+  text-wrap: balance;
+}
+.title {
+  font-family: var(--font-display);
+  font-size: var(--fs-h);
+  font-weight: 400;
+  font-style: italic;
+  line-height: 1.1;
+  margin: 0;
+  color: var(--ink);
+  text-wrap: balance;
+}
+.subtitle {
+  font-family: var(--font-body);
+  font-size: var(--fs-sub);
+  font-weight: 400;
+  font-style: italic;
+  line-height: 1.25;
+  color: var(--ink-soft);
+  margin: 0;
+  text-wrap: pretty;
+}
+.body-text {
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: 1.45;
+  color: var(--ink);
+  margin: 0;
+  text-wrap: pretty;
+}
+.meta {
+  font-family: var(--font-body);
+  font-size: var(--fs-small);
+  color: var(--muted);
+}
+em { font-style: italic; color: inherit; }
+/* Inside italic, emphasis turns roman again. */
+:is(.title, .subtitle, h1, h2, h3, blockquote, .chapter-title, .callout) em { font-style: normal; }
+strong { color: var(--ink); font-weight: 600; }
+.slide-body a {
+  color: inherit;
+  text-decoration-line: underline;
+  text-decoration-thickness: 0.05em;
+  text-decoration-color: var(--accent);
+  text-underline-offset: 0.12em;
+}
+.slide-body sup { font-size: 0.6em; line-height: 0; vertical-align: 0.6em; font-variant-numeric: lining-nums; }
+/* The accent's one job: what ties the text to the margin. Note numbers in
+   the accent, here and beside their note; citations in its companion, so
+   the eye finds the reference beside them. */
+.slide-body sup { color: var(--accent); font-weight: 600; }
+.slide-body .citation { color: color-mix(in oklab, var(--accent-2) 80%, var(--ink)); }
+.slide-body code {
+  font-family: var(--font-mono);
+  font-size: 0.86em;
+  background: none;
+  padding: 0;
+}
+
+/* ─────────────────────────────────────────────
+   LAYOUT: TITLE — high on the page as on a handout: the title roman, the
+   subtitle italic, the author in italic below a space
+   ───────────────────────────────────────────── */
+.slide--title .slide-body {
+  justify-content: center;
+  padding-bottom: 80px;
+}
+.slide-body h1.display { font-size: var(--fs-display); font-style: normal; margin: 0; max-width: 1500px; }
+.slide--title .subtitle { margin-top: 36px; max-width: 1180px; }
+.slide--title .slide-footer > span:first-child { font-size: var(--fs-sub); color: var(--ink-soft); }
+.slide--title.has-image .slide-body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) var(--margin-width);
+  column-gap: var(--margin-gap);
+  align-items: center;
+}
+.slide--title.has-image .display { font-size: calc(var(--fs-display) * 0.78); }
+.slide--title.has-image .title-image { width: 100%; height: 640px; object-fit: cover; }
+
+/* ─────────────────────────────────────────────
+   LAYOUT: CHAPTER — "Chapter 2" in small caps, the title in italic, the
+   description roman, all flush to the text column
+   ───────────────────────────────────────────── */
+.slide--chapter .slide-body {
+  justify-content: center;
+  align-items: flex-start;
+}
+.slide--chapter .chapter-content { display: grid; grid-template-columns: auto 1fr; column-gap: 0.3em; align-items: baseline; justify-items: start; width: 100%; }
+.slide--chapter .chapter-content > * { grid-column: 1 / -1; }
+.slide--chapter .chapter-content > .chapter-meta { grid-column: 1; grid-row: 1; }
+.slide--chapter .chapter-content > .chapter-num { grid-column: 2; grid-row: 1; }
+.chapter-meta,
+.chapter-num {
+  font-family: var(--font-body);
+  font-size: var(--fs-sub);
+  font-variant-caps: all-small-caps;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  margin: 0;
+}
+.chapter-num { font-variant-numeric: oldstyle-nums; color: var(--accent); }
+.slide--chapter .chapter-title {
+  font-family: var(--font-display);
+  font-size: var(--fs-title);
+  font-weight: 400;
+  font-style: italic;
+  line-height: 1.04;
+  margin: 20px 0 40px 0;
+  color: var(--ink);
+  max-width: 1400px;
+  text-wrap: balance;
+}
+.slide--chapter .chapter-desc {
+  font-family: var(--font-body);
+  font-size: var(--fs-sub);
+  line-height: 1.3;
+  color: var(--ink-soft);
+  max-width: 1100px;
+  margin: 0;
+  text-wrap: pretty;
+}
+.slide--chapter.has-image .slide-body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) var(--margin-width);
+  column-gap: var(--margin-gap);
+  align-items: center;
+}
+.slide--chapter.has-image .chapter-title { font-size: calc(var(--fs-title) * 0.8); }
+.slide--chapter.has-image .chapter-image { width: 100%; height: 100%; max-height: 760px; object-fit: cover; }
+
+/* ─────────────────────────────────────────────
+   LAYOUT: FOCUS — an epigraph: the statement in italic in the text column,
+   the attribution set flush to its end, after a dash
+   ───────────────────────────────────────────── */
+.slide--focus .slide-body {
+  justify-content: center;
+  align-items: flex-start;
+}
+.focus-eyebrow {
+  font-family: var(--font-body);
+  font-size: var(--fs-eyebrow);
+  font-variant-caps: all-small-caps;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  margin: 0 0 40px 0;
+}
+.focus-content {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: 100%;
+  max-width: 1300px;
+}
+.focus-statement,
+.slide--focus .focus-content h1,
+.slide--focus .focus-content p {
+  font-family: var(--font-display);
+  font-size: var(--fs-focus);
+  font-weight: 400;
+  font-style: italic;
+  line-height: 1.25;
+  color: var(--ink);
+  margin: 0;
+  text-wrap: pretty;
+}
+.focus-attribution {
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  color: var(--ink-soft);
+  text-align: end;
+  max-width: 1300px;
+  width: 100%;
+  margin: 36px 0 0 0;
+}
+
+/* ─────────────────────────────────────────────
+   LAYOUT: IMAGE + TEXT — a figure: the picture in the text column, the
+   words beside it in the margin, as its caption
+   ───────────────────────────────────────────── */
+.slide--image-text .slide-body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) var(--margin-width);
+  column-gap: var(--margin-gap);
+  gap: 0 var(--margin-gap);
+}
+.image-pane {
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+}
+.image-placeholder { width: 100%; height: 100%; background: var(--surface); display: flex; align-items: center; justify-content: center; }
+.image-placeholder span { font-family: var(--font-body); font-size: var(--fs-small); font-style: italic; color: var(--muted); }
+.slide--image-text .text-pane {
+  justify-content: flex-end;
+  gap: 14px;
+  padding-bottom: 8px;
+}
+.slide--image-text .text-pane .title { font-size: var(--fs-sub); line-height: 1.15; }
+.slide--image-text .text-pane .body-text,
+.slide--image-text .text-pane p {
+  font-size: var(--fs-small);
+  line-height: 1.4;
+  color: var(--ink-soft);
+}
+
+/* ─────────────────────────────────────────────
+   LISTS — a small round bullet in the ink; a dash for the nested; numbers
+   in old-style figures
+   ───────────────────────────────────────────── */
+.slide-body ul > li { line-height: 1.4; padding-inline-start: 36px; position: relative; color: var(--ink); }
+.slide-body ul > li::before {
+  content: '';
+  position: absolute;
+  inset-inline-start: 4px;
+  top: 0.62em;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+.slide-body li ul > li::before {
+  width: 16px;
+  height: 1.5px;
+  border-radius: 0;
+  top: 0.72em;
+  inset-inline-start: 0;
+  background: var(--ink-soft);
+}
+.slide-body ol > li { line-height: 1.4; padding-inline-start: 48px; position: relative; color: var(--ink); }
+.slide-body ol > li::before {
+  content: counter(slide-ol) '.';
+  position: absolute;
+  inset-inline-start: 0;
+  color: var(--accent);
+  font-variant-numeric: oldstyle-nums tabular-nums;
+}
+
+/* ─────────────────────────────────────────────
+   LAYOUT: FULL-BLEED IMAGE — the picture alone; the title in italic on a
+   soft shade at its foot
+   ───────────────────────────────────────────── */
+.slide--full-bleed-image.has-overlay .slide-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.05) 55%);
+}
+.slide--full-bleed-image .overlay-title {
+  font-family: var(--font-display);
+  font-size: var(--fs-h);
+  font-weight: 400;
+  font-style: italic;
+  line-height: 1.1;
+  color: #fff;
+  margin: 0;
+  max-width: 1300px;
+  text-wrap: balance;
+  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.45);
+}
+
+/* ─────────────────────────────────────────────
+   CONTENT SLIDE — the heading in italic, the text in the ink at reading
+   size, and the first line after the heading in small caps, as Tufte
+   opens a new thought
+   ───────────────────────────────────────────── */
+.slide-body h1 {
+  font-family: var(--font-display);
+  font-size: var(--fs-h);
+  font-weight: 400;
+  font-style: italic;
+  line-height: 1.08;
+  color: var(--ink);
+  margin: 0 0 var(--gap-title) 0;
+  text-wrap: balance;
+}
+.slide-body h2 {
+  font-family: var(--font-display);
+  font-size: var(--fs-sub);
+  font-weight: 400;
+  font-style: italic;
+  line-height: 1.2;
+  color: var(--ink);
+  margin: 0 0 var(--gap-item) 0;
+}
+.slide-body h3 {
+  font-family: var(--font-display);
+  font-size: var(--fs-body);
+  font-weight: 400;
+  font-style: italic;
+  color: var(--ink);
+  margin: 0 0 calc(var(--gap-item) * 0.5) 0;
+}
+.slide-body p {
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: 1.45;
+  color: var(--ink);
+  margin: 0 0 var(--gap-item) 0;
+  text-wrap: pretty;
+  hanging-punctuation: first;
+}
+.slide-body > h1 + p::first-line,
+.split-heading h1 + p::first-line {
+  font-variant-caps: small-caps;
+  letter-spacing: 0.04em;
+}
+/* As grid rows, lists keep their room from what follows them. */
+.slide:not([class*="slide--"]) > .slide-body > :is(ul, ol) { margin-bottom: var(--gap-item); }
+
+/* ─────────────────────────────────────────────
+   SPLIT — two columns inside the text column; the heading above both
+   ───────────────────────────────────────────── */
+.split-columns { gap: 72px; }
+/* The heading and the columns together in the middle, like a content slide. */
+.slide--split .slide-body { justify-content: safe center; }
+.slide--split .split-columns { flex: 0 1 auto; }
+.split-left, .split-right { justify-content: flex-start; }
+.split-columns :is(p, li) { font-size: calc(var(--fs-body) * 0.9); }
+
+/* ─────────────────────────────────────────────
+   MARGIN NOTES — footnotes, references and callouts in the margin: small,
+   roman, in the softer ink, numbered like the text's superscripts
+   ───────────────────────────────────────────── */
+.slide-footnotes,
+.slide-citations {
+  font-family: var(--font-body);
+  font-size: var(--fs-small);
+  line-height: 1.35;
+  color: var(--ink-soft);
+  border-top: 0;
+  padding-top: 0;
+  margin-top: 0;
+  align-self: end;
+}
+.slide-footnotes + .slide-citations { padding-top: 18px; }
+.slide-citations:not(.slide-footnotes + .slide-citations) { padding-top: 0; }
+.slide-footnotes ol {
+  list-style: none;
+  padding: 0;
+  counter-reset: margin-fn;
+  gap: 14px;
+}
+.slide-footnotes li { counter-increment: margin-fn; position: relative; padding-inline-start: 0; }
+/* The note's number as in the text, a superscript before the note. */
+.slide-footnotes li::before {
+  content: counter(margin-fn);
+  font-size: 0.62em;
+  vertical-align: 0.55em;
+  line-height: 0;
+  font-variant-numeric: lining-nums;
+  font-weight: 600;
+  color: var(--accent);
+  margin-inline-end: 0.25em;
+}
+.slide-citations { font-size: calc(var(--fs-small) * 0.8); }
+.slide-citations .csl-bib-body { gap: 10px; }
+.slide-citations .csl-entry { line-height: 1.32; padding-inline-start: 1em; text-indent: -1em; }
+.slide-citations .csl-entry i, .slide-citations .csl-entry em { font-style: italic; }
+/* A sidenote cites without the link, as Tufte's do; the full entry with
+   its DOI stands on the slide of references (<bibliography />). */
+.slide-citations .csl-entry a { display: none; }
+.bibliography { font-family: var(--font-body); font-size: var(--fs-small); color: var(--ink); gap: 0.7em; max-width: 1200px; }
+
+/* A callout is a margin note beside the paragraph before it (see THE
+   PAGE), its title a word in small caps. In other layouts it stays in
+   place, set the same way. */
+.slide-body .callout {
+  background: none;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 0;
+  margin: 0 0 var(--gap-item) 0;
+  font-size: var(--fs-small);
+  line-height: 1.35;
+  color: var(--ink-soft);
+}
+.slide-body .callout-title {
+  font-family: var(--font-body);
+  font-size: var(--fs-small);
+  font-weight: 400;
+  font-variant-caps: all-small-caps;
+  letter-spacing: 0.1em;
+  text-transform: none;
+  margin: 0 0 4px 0;
+  color: var(--muted);
+}
+.slide-body .callout p,
+.slide-body .callout li {
+  font-size: var(--fs-small);
+  line-height: 1.35;
+  padding-inline-start: 0;
+  margin: 0 0 8px 0;
+  color: var(--ink-soft);
+}
+.slide-body .callout > :last-child { margin-bottom: 0; }
+/* Meaning in a mark, not a box: the title of a note in the accent, of a
+   warning beside a short bar in the third accent. */
+.slide-body .callout:is(.callout-note, .callout-tip, .callout-important) .callout-title { color: color-mix(in oklab, var(--accent) 70%, var(--ink)); }
+.slide-body .callout:is(.callout-warning, .callout-caution) .callout-title { color: color-mix(in oklab, var(--accent-3) 45%, var(--ink)); }
+.slide-body .callout:is(.callout-warning, .callout-caution) .callout-title::before {
+  content: '';
+  display: inline-block;
+  width: 22px;
+  height: 0.5em;
+  margin-inline-end: 0.4em;
+  background: var(--accent-3);
+  vertical-align: 0.05em;
+}
+/* Lecture blocks: definitions in the second accent, theorems and their kin
+   in the accent with the statement in italic. */
+.slide-body .callout.callout-definition .callout-title { color: color-mix(in oklab, var(--accent-2) 75%, var(--ink)); }
+.slide-body .callout:is(.callout-theorem, .callout-lemma, .callout-corollary, .callout-proposition) .callout-title { color: color-mix(in oklab, var(--accent) 70%, var(--ink)); }
+.slide-body .callout:is(.callout-theorem, .callout-lemma, .callout-corollary, .callout-proposition) > :not(.callout-title) { font-style: italic; }
+/* A proof belongs to the argument: it stays in the column, at text size. */
+.slide-body .callout.callout-proof,
+.slide-body .callout.callout-proof p { font-size: var(--fs-body); color: var(--ink); line-height: 1.45; }
+
+/* ─────────────────────────────────────────────
+   TABLES — booktabs: a heavy rule above and below, a light one under the
+   head, no vertical rules and no shading; lining, tabular figures so the
+   columns of numbers line up
+   ───────────────────────────────────────────── */
+.slide-body table {
+  width: auto;
+  min-width: 60%;
+  font-size: calc(var(--fs-body) * 0.88);
+  font-variant-numeric: lining-nums tabular-nums;
+  border-top: 2px solid var(--ink);
+  border-bottom: 2px solid var(--ink);
+}
+.slide-body th,
+.slide-body td {
+  padding: 10px 28px 10px 0;
+  border-bottom: 0;
+  line-height: 1.3;
+}
+.slide-body :is(th, td):last-child { padding-inline-end: 0; }
+/* Columns written as aligned (|--:|) keep it: numbers flush right. */
+.slide-body :is(th, td)[align="right"] { text-align: end; }
+.slide-body :is(th, td)[align="center"] { text-align: center; }
+.slide-body th {
+  font-weight: 400;
+  font-style: italic;
+  color: var(--ink);
+  border-bottom: 1px solid var(--ink);
+  padding-top: 12px;
+}
+.slide-body td { color: var(--ink); }
+.slide-body tbody tr:first-child td { padding-top: 14px; }
+.slide-body tbody tr:last-child td { padding-bottom: 14px; }
+
+/* ─────────────────────────────────────────────
+   CODE — as in tufte-css: no box and no background, set in from the
+   column, the type a little smaller than the text
+   ───────────────────────────────────────────── */
+.code-block {
+  --code-bg: transparent;
+  --code-radius: 0;
+  --code-size: 32px;
+  background: var(--code-bg);
+  border-radius: 0;
+  padding: 4px 0 4px 40px;
+  margin: 0 0 var(--gap-item) 0;
+  overflow: hidden;
+  font-size: var(--code-size);
+  font-family: var(--font-mono);
+  line-height: 1.45;
+  font-variant-numeric: lining-nums;
+}
+.code-block code { font-family: inherit; font-size: inherit; background: none; padding: 0; }
+
+/* ─────────────────────────────────────────────
+   AUDIENCE QUESTIONS — thin bars, like a sparkline
+   ───────────────────────────────────────────── */
+.slide .poll-track, .slide .scale-track { background: var(--rule); }
+.slide .poll-fill, .slide .scale-fill { background: var(--ink); }
+
+/* ─────────────────────────────────────────────
+   MATH (KaTeX)
+   ───────────────────────────────────────────── */
+.slide .katex { font-size: 1.02em; }
+.slide .katex-display {
+  font-size: calc(var(--fs-body) * 1.05);
+  margin: 24px 0 var(--gap-item);
+  text-align: start;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+.slide .katex-display > .katex { text-align: start; padding-inline-start: 40px; }
+
+/* ─────────────────────────────────────────────
+   QUOTATIONS — set in from both sides, in the softer ink, no bar
+   ───────────────────────────────────────────── */
+.slide-body blockquote {
+  margin-block: 0 var(--gap-item);
+  margin-inline: 48px 48px;
+  padding: 0;
+  border: 0;
+  font-style: italic;
+  color: var(--ink-soft);
+}
