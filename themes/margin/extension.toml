@@ -2,13 +2,13 @@ schema = 1
 kind = "theme"
 id = "margin"
 title = "Margin"
-description = "A handout in the manner of Edward Tufte: EB Garamond on ivory, a wide right margin where footnotes, references and callouts become sidenotes, italic headings, small caps, booktabs tables and nothing that is not content."
-version = "0.1.0"
+description = "A handout in the manner of Edward Tufte: EB Garamond on paper, a wide right margin where footnotes, references and callouts become sidenotes, italic headings, small caps, booktabs tables and nothing that is not content."
+version = "0.1.1"
 author = "Tilman Schieber"
 license = "MIT"
 mdeck = ">=3.7.0"  # the third accent, --accent-3
 # The palette this theme uses unless the deck sets one; colours come only from palettes.
-palette = "ivory"
+palette = "paper"
 fonts = [
   "https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..700;1,400..700&family=Inconsolata:wght@400;600&display=swap",
 ]
