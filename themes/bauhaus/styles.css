@@ -4,13 +4,9 @@
    three primaries: red marks emphasis, blue the second voice, yellow (the
    third accent, attention) the third. Title and chapter slides carry a red
    circle, a blue square and a yellow triangle, and a focus slide a yellow
-   disc; `shapes: none` takes them away and leaves type and bars. Lists are
+   disc; `shapes: 0` takes them away and leaves type and bars. Lists are
    marked with circle, square and triangle in turn. No rounded corners, no
    shadows, no gradients except under text on a photograph. */
-
-.slide {
-  --shape-display: var(--shapes, block);
-}
 
 /* ─────────────────────────────────────────────
    HEADER / FOOTER: small, quiet, above the shapes
@@ -99,15 +95,14 @@ strong { color: var(--ink); font-weight: 700; }
 :is(.slide--title, .slide--chapter):not(.has-image)::after,
 :is(.slide--title, .slide--chapter):not(.has-image) .slide-body::after {
   content: '';
-  display: var(--shape-display);
   position: absolute;
   z-index: 0;
   pointer-events: none;
 }
 /* the circle, high on the right */
 :is(.slide--title, .slide--chapter):not(.has-image)::before {
-  width: 330px;
-  height: 330px;
+  width: calc(330px * var(--shapes));
+  height: calc(330px * var(--shapes));
   top: 140px;
   inset-inline-end: 220px;
   border-radius: 50%;
@@ -115,16 +110,16 @@ strong { color: var(--ink); font-weight: 700; }
 }
 /* the square, low and further in */
 :is(.slide--title, .slide--chapter):not(.has-image)::after {
-  width: 300px;
-  height: 300px;
+  width: calc(300px * var(--shapes));
+  height: calc(300px * var(--shapes));
   bottom: 128px;
   inset-inline-end: 410px;
   background: var(--accent-2);
 }
 /* the triangle, low on the right */
 :is(.slide--title, .slide--chapter):not(.has-image) .slide-body::after {
-  width: 330px;
-  height: 286px;
+  width: calc(330px * var(--shapes));
+  height: calc(286px * var(--shapes));
   bottom: 80px;
   inset-inline-end: 48px;
   background: var(--accent-3);
@@ -218,13 +213,12 @@ strong { color: var(--ink); font-weight: 700; }
 .slide--focus .slide-body { justify-content: center; align-items: flex-start; }
 .slide--focus .slide-body::before {
   content: '';
-  display: var(--shape-display);
   flex: none;
-  width: 112px;
-  height: 112px;
+  width: calc(112px * var(--shapes));
+  height: calc(112px * var(--shapes));
   border-radius: 50%;
   background: var(--accent-3);
-  margin-bottom: 56px;
+  margin-bottom: calc(56px * var(--shapes));
 }
 .focus-content { display: flex; flex-direction: column; align-items: flex-start; max-width: 1480px; }
 .focus-statement,

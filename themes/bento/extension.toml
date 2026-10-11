@@ -3,7 +3,7 @@ kind = "theme"
 id = "bento"
 title = "Bento"
 description = "Rounded tiles, as on a product page: every list item, paragraph, table and callout on a tile of its own; lists become grids with a feature tile in the accent, bold figures become big numbers; Plus Jakarta Sans throughout."
-version = "0.1.0"
+version = "0.1.1"
 author = "Tilman Schieber"
 license = "MIT"
 mdeck = ">=3.7.0"  # the third accent, --accent-3
@@ -58,6 +58,7 @@ title = "Body font"
 [params.tileRadius]
 token = "--tile-radius"
 title = "Tile corners"
+description = "The corner radius: 32px by default, up to about 48px; 0px for square tiles."
 
 # What this theme is for and how to write for it: shown in listings, and read
 # by assistants that write slides as the theme author's advice.

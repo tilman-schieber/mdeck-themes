@@ -44,7 +44,32 @@ repository uses them, and mdeck's own base styles use some of them too:
 Sizes are in pixels on a 1920 × 1080 slide. A theme may add tokens of its
 own (lightbox has `--photo-share`); make one a `[params.name]` when authors
 should be able to change it. Offer `fontDisplay` and `fontBody` as
-parameters, as most themes here do.
+parameters, as every theme here does.
+
+### Parameters
+
+An author types a parameter's value into the deck, and it goes into the
+stylesheet as it is: mdeck does not check it. So every theme here takes the
+same three kinds of value:
+
+| Kind | Value | Off | Example |
+|---|---|---|---|
+| A size | pixels | `0px` | pop's `edge = "5px"` |
+| A strength | a number from 0 to 1 | `0` | riso's `grain = "0.5"` |
+| A switch | `1` or `0` | `0` | bauhaus's `shapes = "1"` |
+
+- No CSS keywords (`none`, `block`) and no `em`: an author should not need
+  to know CSS to change a value.
+- Write `0px` for a size, not `0`: a bare `0` breaks a `calc()` that adds
+  pixels to it.
+- A feature that can be left out is turned off with its parameter at zero;
+  do not add a second parameter for that.
+- A switch or strength is used by multiplying with it, as in
+  `calc(330px * var(--shapes))`. A value that is not a number then makes
+  the size invalid, and the shape is not drawn.
+- The `description` gives the default and a sensible range, so the design
+  page and assistants know what to write: "12px by default, from about 6px to
+  20px; 0px leaves headings without bars."
 
 ## The slide
 
