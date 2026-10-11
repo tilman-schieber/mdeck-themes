@@ -22,10 +22,19 @@
   header h1 { margin: 0; font-size: 22px; letter-spacing: -0.01em; }
   header p { margin: 0; color: var(--muted); flex: 1 1 360px; }
   header nav { display: flex; gap: 14px; font-size: 14px; }
-  .layout { display: grid; grid-template-columns: 280px minmax(0, 1fr); gap: 20px; padding: 0 24px 40px; align-items: start; }
+  /* The stage is no wider than lets the slide, its bar and the palettes fit
+     the window's height (the header and those take about 200px); on a wide
+     screen the two columns sit centred. */
+  .layout { display: grid; grid-template-columns: 280px minmax(0, calc((100vh - 200px) * 16 / 9)); justify-content: center; gap: 20px; padding: 0 24px 40px; align-items: start; }
   /* Theme list */
   .themes { background: var(--panel); border: 1px solid var(--rule); border-radius: 10px; padding: 6px; position: sticky; top: 12px; max-height: calc(100vh - 24px); overflow: auto; }
   .themes h2 { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin: 10px 10px 6px; font-weight: 600; }
+  .themes .head { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-right: 6px; }
+  .sort { display: inline-flex; gap: 2px; }
+  .sort .btn { padding: 1px 8px; font-size: 12px; }
+  /* By style: the list in three groups, each under a name and a line on what it means. */
+  .style h3 { margin: 12px 10px 0; font-size: 14px; }
+  .style p { margin: 0 10px 4px; font-size: 12px; color: var(--muted); }
   .theme { display: grid; grid-template-columns: 72px minmax(0, 1fr); gap: 10px; align-items: center; width: 100%; padding: 8px 10px; border: 0; border-radius: 7px; background: none; color: inherit; text-align: left; font: inherit; cursor: pointer; }
   .theme:hover { background: var(--hover); }
   .theme[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); }
@@ -69,7 +78,9 @@
     .layout { grid-template-columns: 1fr; }
     .themes { position: static; max-height: none; display: flex; gap: 6px; overflow-x: auto; padding: 8px; }
     .themes h2 { display: none; }
-    #themes { display: flex; gap: 6px; }
+    .themes .head { display: none; }
+    #themes, .style { display: contents; }
+    .style h3, .style p { display: none; }
     .theme { flex: 0 0 auto; width: auto; }
     .details { grid-template-columns: 1fr; }
   }
@@ -83,7 +94,7 @@
   <nav><a href="https://gh.tschieber.de/mdeck/theme-repository.html">How to install</a><a href="https://github.com/tilman-schieber/mdeck-themes">Add your own</a></nav>
 </header>
 <div class="layout">
-  <aside class="themes" aria-label="Themes"><h2>Themes</h2><div id="themes"></div></aside>
+  <aside class="themes" aria-label="Themes"><div class="head"><h2>Themes</h2><div class="sort" role="group" aria-label="Order of the themes"><button class="btn" id="by-style" aria-pressed="false">By style</button><button class="btn" id="by-name" aria-pressed="false">A–Z</button></div></div><div id="themes"></div></aside>
   <main class="stage">
     <div class="frame"><iframe id="deck" title="Sample deck in the chosen look"></iframe></div>
     <div class="bar">
@@ -108,7 +119,15 @@
   const esc = value => String(value ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c])
   const query = new URLSearchParams(location.search)
   let looks
-  const state = { theme: query.get('theme') || 'neue', palette: query.get('palette') || '', appearance: query.get('appearance') || '', slide: Number(query.get('slide')) || 1 }
+  const state = { theme: query.get('theme') || 'neue', palette: query.get('palette') || '', appearance: query.get('appearance') || '', slide: Number(query.get('slide')) || 1, sort: query.get('sort') === 'name' ? 'name' : 'style' }
+  // How loud each theme is, from nothing but the content to made to be
+  // remembered. A theme missing here shows with the middle group.
+  const STYLES = [
+    { id: 'quiet', title: 'Quiet', note: 'Nothing but the content', themes: ['academic', 'margin', 'minimal', 'plain', 'work'] },
+    { id: 'distinctive', title: 'Distinctive', note: 'A character of its own, still at the service of the content', themes: ['cinema', 'duet', 'editorial', 'fhnw', 'lightbox', 'neue'] },
+    { id: 'statement', title: 'Statement', note: 'Made to be remembered', themes: ['aurora', 'bauhaus', 'bento', 'glass', 'pop', 'sketch', 'terminal'] },
+  ]
+  const styleOf = id => (STYLES.find(s => s.themes.includes(id)) ?? STYLES[1]).id
 
   const theme = () => looks.themes.find(t => t.id === state.theme) ?? looks.themes[0]
   const palette = id => looks.palettes.find(p => p.id === id)
@@ -122,8 +141,13 @@
 
   function render(reload = true) {
     const t = theme(), p = shownPalette(), appearance = shownAppearance()
-    $('themes').innerHTML = looks.themes.map(item => `<button class="theme" aria-pressed="${item.id === t.id}" data-theme="${esc(item.id)}">
-      ${item.icon ? `<img class="icon" src="${esc(item.icon)}" alt="" width="72" height="41">` : chip(palette(item.palette), item.appearance)}<span><span class="name">${esc(item.title)}</span><span class="where">${item.builtIn ? 'comes with mdeck' : 'to install'}</span></span></button>`).join('')
+    const button = item => `<button class="theme" aria-pressed="${item.id === t.id}" data-theme="${esc(item.id)}">
+      ${item.icon ? `<img class="icon" src="${esc(item.icon)}" alt="" width="72" height="41">` : chip(palette(item.palette), item.appearance)}<span><span class="name">${esc(item.title)}</span><span class="where">${item.builtIn ? 'comes with mdeck' : 'to install'}</span></span></button>`
+    $('themes').innerHTML = state.sort === 'name' ? looks.themes.map(button).join('')
+      : STYLES.map(s => [s, looks.themes.filter(item => styleOf(item.id) === s.id)]).filter(([, items]) => items.length)
+        .map(([s, items]) => `<div class="style" role="group" aria-label="${esc(s.title)}"><h3>${esc(s.title)}</h3><p>${esc(s.note)}</p>${items.map(button).join('')}</div>`).join('')
+    $('by-style').setAttribute('aria-pressed', state.sort === 'style')
+    $('by-name').setAttribute('aria-pressed', state.sort === 'name')
     $('palettes').innerHTML = t.palettes.map(id => palette(id)).filter(Boolean).map(item => `<button class="palette" aria-pressed="${item.id === p.id}" data-palette="${esc(item.id)}">
       ${chip(item, appearance)}${esc(item.title)}${item.id === t.palette ? ' <small>default</small>' : ''}</button>`).join('')
     $('light').setAttribute('aria-pressed', appearance === 'light')
@@ -143,7 +167,7 @@
         <h3>At the top of the slide file</h3>${copyable(settings)}
         ${installs.length ? `<p class="note">Needs mdeck ${esc((t.mdeck ?? '').replace(/^>=\s*/, '') || looks.mdeck.split('.')[0])} or newer (<code>npm install -g mdeck</code>). This installs it for every deck; add a slide file to put it beside one deck.</p>` : ''}</div>`
 
-    const params = new URLSearchParams({ theme: t.id, ...(state.palette ? { palette: p.id } : {}), ...(state.appearance ? { appearance } : {}), ...(state.slide > 1 ? { slide: state.slide } : {}) })
+    const params = new URLSearchParams({ theme: t.id, ...(state.palette ? { palette: p.id } : {}), ...(state.appearance ? { appearance } : {}), ...(state.slide > 1 ? { slide: state.slide } : {}), ...(state.sort === 'name' ? { sort: 'name' } : {}) })
     history.replaceState(null, '', `?${params}`)
     if (reload) {
       $('count').textContent = ''
@@ -183,6 +207,8 @@
   })
   $('light').onclick = () => { state.appearance = theme().appearance === 'light' ? '' : 'light'; render() }
   $('dark').onclick = () => { state.appearance = theme().appearance === 'dark' ? '' : 'dark'; render() }
+  $('by-style').onclick = () => { state.sort = 'style'; render(false) }
+  $('by-name').onclick = () => { state.sort = 'name'; render(false) }
   $('prev').onclick = () => step(-1)
   $('next').onclick = () => step(1)
   document.addEventListener('keydown', event => {
