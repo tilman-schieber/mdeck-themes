@@ -10,7 +10,7 @@
 .slide {
   --hairline: color-mix(in oklab, var(--ink) 22%, var(--bg));
   --marker: color-mix(in oklab, var(--accent-2) 34%, transparent);
-  --paper-dot: color-mix(in oklab, var(--ink) 13%, transparent);
+  --paper-dot: color-mix(in oklab, var(--ink) calc(13% * var(--texture)), transparent);
   /* A hand-drawn outline: corners of different radii on every side */
   --wobble: 18px 225px 14px 255px / 255px 16px 225px 20px;
   --scribble: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 30' preserveAspectRatio='none'><path d='M5 17 C 60 7 120 21 180 13 S 270 8 295 12 M 22 25 C 90 17 170 26 282 18' fill='none' stroke='black' stroke-width='5' stroke-linecap='round'/></svg>");

@@ -3,10 +3,10 @@ kind = "theme"
 id = "aurora"
 title = "Aurora"
 description = "Northern lights: curtains of light in the accent colours, night-sky chapter and statement slides, frosted glass."
-version = "1.1.1"
+version = "1.2.0"
 author = "Tilman Schieber"
 license = "MIT"
-mdeck = ">=3.7.0"  # the third accent, --accent-3
+mdeck = ">=3.9.0"  # parameters with a type
 # The palette this theme uses unless the deck sets one; colours come only from palettes.
 palette = "neon"
 fonts = [
@@ -36,9 +36,17 @@ styles = "styles.css"
 "--gap-title" = "48px"
 "--gap-item" = "24px"
 
+# Whether the light drifts (1) or holds still (0).
+"--motion" = "1"
 # Type families
 "--font-display" = "\"Plus Jakarta Sans\", \"Helvetica Neue\", Helvetica, Arial, sans-serif"
 "--font-body" = "\"Plus Jakarta Sans\", \"Helvetica Neue\", Helvetica, Arial, sans-serif"
+
+[params.motion]
+token = "--motion"
+title = "Motion"
+type = "switch"
+description = "1 (the default) lets the curtains of light move while presenting; 0 keeps them still, for recordings or a calm room. Print and reduced motion are always still."
 
 # What this theme is for and how to write for it: shown in listings, and read
 # by assistants that write slides as the theme author's advice.

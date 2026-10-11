@@ -51,8 +51,9 @@
   .slide--title::before, .slide--chapter::before, .slide--focus::before { animation: aurora-drift 26s ease-in-out infinite alternate; }
 }
 @keyframes aurora-drift {
-  from { transform: skewX(-18deg) translateX(-2.5%); }
-  to { transform: skewX(-11deg) translateX(2.5%); }
+  /* motion: 0 holds the curtains still, halfway */
+  from { transform: skewX(calc(-14.5deg - 3.5deg * var(--motion))) translateX(calc(-2.5% * var(--motion))); }
+  to { transform: skewX(calc(-14.5deg + 3.5deg * var(--motion))) translateX(calc(2.5% * var(--motion))); }
 }
 deck-stage[data-deck-static] .slide::before { animation: none; }
 /* In a PDF the curtains print as images (Chrome rasterizes see-through

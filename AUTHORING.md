@@ -87,6 +87,20 @@ description = "12px by default, from about 6px to 20px; 0px leaves headings with
   the gallery show it beside the control, and assistants read it.
 - A theme with typed parameters sets `mdeck = ">=3.9.0"`.
 
+Offer what people change from one talk to the next, because of the room,
+the medium or the content; leave sizes, distances and corners at the
+values the theme was made with. Two settings come up in many themes, and
+they have the same name everywhere, so people learn them once:
+
+| Name | Kind | Turns off |
+|---|---|---|
+| `motion` | switch | everything that moves while presenting (a blinking cursor, drifting light), for recordings and calm rooms |
+| `texture` | switch | grain, paper and scanlines, for washed-out projectors and handouts |
+
+A theme with something that moves or a texture offers the one that fits.
+Moving things are still in print and for people who prefer less motion
+whatever `motion` says.
+
 ## The slide
 
 Every slide is a `<section>` with the same frame; layouts fill `.slide-body`.

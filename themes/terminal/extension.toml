@@ -3,10 +3,10 @@ kind = "theme"
 id = "terminal"
 title = "Terminal"
 description = "A terminal session: JetBrains Mono, headings at a prompt, a blinking cursor, log-line callouts and a tmux status bar; dark by default."
-version = "1.1.2"
+version = "1.2.0"
 author = "Tilman Schieber"
 license = "MIT"
-mdeck = ">=3.6.0"  # the [guide] below
+mdeck = ">=3.9.0"  # parameters with a type
 # The palette this theme uses unless the deck sets one; colours come only from palettes.
 palette = "phosphor"
 appearance = "dark"
@@ -21,6 +21,10 @@ styles = "styles.css"
 # Deck settings (params) override these.
 [tokens]
 
+# Whether the cursor blinks (1) or holds still (0).
+"--motion" = "1"
+# Whether chapters show scanlines (1) or not (0).
+"--texture" = "1"
 # Type families — monospace throughout
 "--font-display" = "'JetBrains Mono', ui-monospace, monospace"
 "--font-body" = "'JetBrains Mono', ui-monospace, monospace"
@@ -40,6 +44,18 @@ styles = "styles.css"
 "--pad-y" = "72px"
 "--gap-title" = "44px"
 "--gap-item" = "24px"
+
+[params.motion]
+token = "--motion"
+title = "Motion"
+type = "switch"
+description = "1 (the default) lets the cursor on the title move while presenting; 0 keeps it still, for recordings or a calm room. Print and reduced motion are always still."
+
+[params.texture]
+token = "--texture"
+title = "Texture"
+type = "switch"
+description = "1 (the default) shows faint scanlines on chapter slides; 0 leaves a clean screen, for a washed-out projector or a handout."
 
 # What this theme is for and how to write for it: shown in listings, and read
 # by assistants that write slides as the theme author's advice.

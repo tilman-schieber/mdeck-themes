@@ -202,14 +202,15 @@ strong { color: var(--ink); font-weight: 600; }
   margin-block: 0 8px; margin-inline: -6px 0;
   user-select: none;
 }
-/* A whole number shows as a Roman numeral (the layout passes it as
-   --chapter-number); anything else as written. */
+/* A whole number shows in the counter style --numerals names, Roman by
+   default (the layout passes it as --chapter-number); anything else as
+   written. */
 .chapter-num[style*="--chapter-number"] {
   counter-reset: chapter var(--chapter-number);
   font-size: 0;
 }
 .chapter-num[style*="--chapter-number"]::before {
-  content: counter(chapter, upper-roman);
+  content: counter(chapter, var(--numerals));
   font-size: 220px;
 }
 .chapter-meta {

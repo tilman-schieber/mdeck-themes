@@ -2,8 +2,8 @@ schema = 1
 kind = "theme"
 id = "riso"
 title = "Riso"
-description = "A risograph zine: two spot inks that overprint where they meet, halftone dots, paper grain and headings printed slightly out of register; Bricolage Grotesque with Space Mono for the small print."
-version = "0.2.0"
+description = "A risograph zine: two spot inks that overprint where they meet, halftone dots, paper grain, pictures printed in the inks and headings slightly out of register; Bricolage Grotesque with Space Mono for the small print."
+version = "0.3.0"
 author = "Tilman Schieber"
 license = "MIT"
 mdeck = ">=3.9.0"  # parameters with a type
@@ -33,8 +33,10 @@ styles = "styles.css"
 "--gap-item" = "24px"
 # How far the second ink is printed beside the first.
 "--misregister" = "5px"
-# Paper grain over the whole slide: 0 for none.
-"--grain" = "0.5"
+# Paper grain over the whole slide (1) or none (0).
+"--texture" = "1"
+# Pictures printed in the inks (1) or in their own colours (0).
+"--duotone" = "1"
 "--font-display" = "\"Bricolage Grotesque\", system-ui, sans-serif"
 "--font-body" = "\"Bricolage Grotesque\", system-ui, sans-serif"
 "--font-mono" = "\"Space Mono\", ui-monospace, Menlo, Consolas, monospace"
@@ -57,26 +59,30 @@ min = 0
 max = 10
 description = "How far the second ink sits beside the first: 5px by default, up to about 10px; 0px prints in register."
 
-[params.grain]
-token = "--grain"
-title = "Paper grain"
-type = "number"
-min = 0
-max = 1
-step = 0.05
-description = "From 0 (smooth paper, no grain) to 1 (rough newsprint); 0.5 by default."
+[params.texture]
+token = "--texture"
+title = "Texture"
+type = "switch"
+description = "1 (the default) lays paper grain over the slides; 0 leaves clean paper, for a washed-out projector or a handout."
+
+[params.duotone]
+token = "--duotone"
+title = "Pictures in the inks"
+type = "switch"
+description = "1 (the default) prints pictures in the two inks; 0 shows them in their own colours, for screenshots, products and photographs whose colours matter."
 
 # What this theme is for and how to write for it: shown in listings, and read
 # by assistants that write slides as the theme author's advice.
 [guide]
 suits = ["creative and community talks", "meetups and workshops", "student and art-school work", "event and festival announcements"]
-avoid = ["formal reports", "dense tables", "talks with many photographs that need true colour"]
+avoid = ["formal reports", "dense tables"]
 writing = """
 Like a zine printed in two inks: big, short headings, printed in the first
 ink with the second showing beside them, so keep them to a few words. Title
 and chapter slides carry a disc and a halftone block that overprint where
 they meet. Emphasis (*word*) is a highlighter stroke in the second ink; bold
-is set in the first. Pictures are printed as duotones in the two inks; use
-ones with clear shapes rather than ones whose colours matter. Small print
+is set in the first. Pictures are printed as duotones in the two inks, so
+pick ones with clear shapes; where their colours matter (screenshots,
+products), set params: duotone: 0 to show them as they are. Small print
 (eyebrows, captions, the footer) is set in a typewriter face.
 """

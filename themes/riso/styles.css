@@ -5,8 +5,9 @@
    ink and a halftone block in the second, overlapping. Headings are printed
    with the second ink a little out of register (--misregister), emphasis is a
    highlighter stroke in the second ink, and a fine paper grain lies over
-   everything (--grain). Pictures are printed too: beside text and full-bleed
-   in the second ink, elsewhere in black with a plate of the first ink beside
+   everything (--texture). Pictures are printed too (--duotone): beside text
+   and full-bleed in the second ink, elsewhere in black with a plate of the
+   first ink beside
    them. Bricolage Grotesque for the words, Space Mono for the small print.
    No rounded corners, no soft shadows except under text on a photograph. */
 
@@ -31,7 +32,7 @@
   z-index: 6;
   pointer-events: none;
   background: var(--ink);
-  opacity: calc(var(--grain) * 0.24);
+  opacity: calc(var(--texture) * 0.12);
   -webkit-mask: url("data:image/png;base64,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") 0 0 / 128px 128px repeat;
   mask: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAQAAABpN6lAAAAIeklEQVR42s1dbYLjuArUUetodRzfin07M5lOZAkKhLPP82O64wgB4qNAsnuM1YWP3zjd5fAuLn9GMJZb6vbn/+vXv5k73LjdSZG/Hwi6umwijf/RwHTv/u1/v/cS7jX2UyEm82gSn/SGYNQvHKuwc24kVDKRMpe8vd3nr3sI9JxlgoKVfUmPfYx3XRRmozveaorA9i4EJXpejON1/qRwvUUUUac/Q55dQ0usLw7nuipDLlkBcBjllvrV4pK/KSGkbKeuba5NwF1bOkrusZYrHY349jnOgp+6mizEBD2oIc03FAhjv36DkNevZeKkKAy3DJqgMNv8XIhhOP6GpVbVGr4RiXoQQLklbEvWELBI1yNnOkypEwm1WA4FRKtijenyN0uULQEl+7BYPPs6/IRDH4Xa05fFNhYnr739R9A3ms824OmliHW+4qcuLDTqdzIssKskTpOAt7/eOFBlU+ljEyPvontYcxbZjt2Qmdgxw0t/Qib8+0WfLgJ4tlqFqq2rJejhtnbWVOf5sSCaw7xylGmtVdaxYta1UpdVBZvE4GdmsMSk+5xC0a/vLTyGPJ+W1gXAq1FDom2icYeKu0bpyoJezjuosC3oqKtvB2uYihv3+39knRvS38KBdJsqHXEhcg3WA4gJpYhNjPEDTtm2pQJBcEuo+cGcS9HQ4jYGChxQ5IYZJVivBjeo7lq4nVpow7UA3YltrVGkVkHzvVxha0VrXM3vl2/o6MqMobU5EawxHqwySyGcBfSVr8kwOi8U1MH14LX4qrmrbDKkhYS47Nch0oYeZ33I5cx7CXVaCLdbHh4Zcx0rOfJ8gT6SpsR29q9AaSjCtt0YVg1aBz2v75sIWyJfhyy+ZS2Sbqvk+mUfNnKNaZM8/rf1oMXTTbobrr6JefQzrPEvykdDZmZjfmc0ytKe5dFhSZmrkmdF7wWHcVyrcucVTAi793p/WqbYpKy6amtEEq4zVeGB73OKPQ1RnttUZQeKPa3rkQln2rJxCRXOVpxC3X8ywzwS4/30wUqWgy5Q1aQ88Psj/BXwQsEt8J2ii8fjf2oCLMHT2K5qXRQEJ5pSBg3BgPvaqJb27flT3AJjaXpL+GKF7poGhChwbYp4zZaRN3k4A1kwzh21rhNHkjrvTUqG22LPl9Ar12sNaKpoSoZAURkQbe8s+PJkpWwBYNmcH3L0KGQMb7StyUG0ESYE1w5eUU50mPaeHkrqUMrHJh9HyXS5VSq2czhPxuyqdxNsxGTWMko6WVsTLM7UcsXry1oKo3cEKLQYPPZAqj/FzFXba8qz3d2KQndgzTTyK9BJx4bgjq4dxbI2S9qWaAi0q54ewZIt74zgyZnAubdg1chyVk5CMGZMGn/G5XQV2lo3fVsc7w9iceoFIaVQOuUPn+j+ne0FWoFO7hz/VXKY7RwWrgYl8i9avtCrA3K7otYPcndbtaAVYloUxZbRR2sxhy8sPn193rilymPogZE5pIog/7DVqccHwOfHk+0OaNSm6N7a5t8Dl7ZYDCzeKRAvl2WSGMfuMCudYuNKM8AWhe0f5eA28N2WbNVKXIlqU1ikm0TNw11Fg1aP3nNkT72N+SRnPIyFcsh7cAKJNokWnyhjWneAGgwpfnrf1srbRi5ArxT3rxJMCRS2CD9q3UZ5S/ysv0PZkTB/fh1Pg4In50IyN0bLwwbKH5peCmNbcyKXKu14zZX7DcAOy09mYd9h8r5KQHFO7cn17WkltHgaxYIKox9Qzx0BbIQ3rbXCgpFyfOPi9+azyZw1xih+yxLWh1Yb2XDFUqweS3DjdZB55Gaz2uQyN15qHvj+Sfz3UZ01rvMsA0aD9phypJHaKzgrgptpQ54e205MHKGzeOArYReFiX62T7/VPYJko23vzEPhnn1FEVRAr8b8buVNZAFOKbxmhstZubGtFUc7AdkTVsamsRGVvx7u4/Jtk1zSOvN46zJ1C47B++XFj7D2bWHG/8GEiktpD95xiyuQCHbQQ2EnArdcYArCmjePerKd4z++4rOm3m4vhYrUpia6Pa8RiAyPqUuA9hljy7GxbFuspuBRTDgtXTRQps0yoVIm9PnZA4A7joFt0QleTOC3zCtzGtGpuWY90i9N2tUKfDRDmR4N+BcDmHN6D2U9f0Ki2uv6onLYlAWx0AzvZSfH+fYoE4J9q8x6rE+we6FCpxlbzVHwAA7EVjWmdWyG8hSiv0mCrNPAVUH1PdQcq2e38LhJP4T2roJh1sMZmoWZ6HHstzaq+zdxvehHZS7/1EImfHtWeKkrRnetbVHjZwMYDg059+JHqgaCN6ijprg9TrvvIuHIW3nsUq7isYA/4+0kXwQzlT5v/CTqSvGQKwVmoRJTfrwfoT1rhiXddZr8fKKNBYSfOHyRDXBM02PoIg0oftnMsTpRe0B1q55QV+GThnPv53vxUf0r5JBkh0dvHlCVbedLhaE+yPA6eJp5imRvEe/vk4khcYQSkonQHokUpyBWgULWO6U6DY5nYZk79kr7/Kp2PHR9rxhZ5sA0FjtPge/SHwQ7xIN2/SAhCPfsQxlzSdMQzVVpsKjEcpOhyf/vEJgtzmTbClcim9W4vjGlPElgt2NYVwJGHbi2+veD6IxFOqN4s9qtYPqsYh/NyJHFrMPZHu9r54PmbhDkRTtMO1ZSTO+l9iJqf5Vo6xUN5II8jlCt+HhedJ1Ez9VvOdEQEuMj7hbjA/xRWO3QXf0PUH0JSa7eU0EpvWIcnF7D4Xpl/fgZWBZWtMrRJ33aExBrR1aHKrXoFZTSwZJQQSjYGsvO+EBuuiRD90Szdo58x2KYZdI6vzvDzETtrTN9F2TrQR+UgfT0vx8jcCDqDwRuykTai5TXm1q2QOsR+zgC3z7H8eu86Q2zApOaYu1otazpO7+ufwA5zIkrn2RdjgAAAABJRU5ErkJggg==") 0 0 / 128px 128px repeat;
 }
@@ -265,7 +266,7 @@ strong { color: var(--accent); font-weight: 800; }
    ───────────────────────────────────────────── */
 :is(.title-image, .chapter-image),
 .slide-body p :is(img, .themed-picture) {
-  filter: grayscale(1) contrast(1.08) drop-shadow(14px 14px 0 var(--accent));
+  filter: grayscale(var(--duotone)) contrast(calc(1 + 0.08 * var(--duotone))) drop-shadow(14px 14px 0 var(--accent));
 }
 
 /* ─────────────────────────────────────────────
@@ -332,7 +333,7 @@ strong { color: var(--accent); font-weight: 800; }
   position: relative;
   isolation: isolate;
 }
-.image-pane :is(img, .themed-picture) { filter: grayscale(1) contrast(1.1); }
+.image-pane :is(img, .themed-picture) { filter: grayscale(var(--duotone)) contrast(calc(1 + 0.1 * var(--duotone))); }
 .image-pane::after,
 .slide--full-bleed-image .slide-bg::before {
   content: '';
@@ -341,6 +342,7 @@ strong { color: var(--accent); font-weight: 800; }
   z-index: 1;
   background: color-mix(in oklab, var(--accent-2) 75%, var(--bg));
   mix-blend-mode: lighten;
+  opacity: var(--duotone);
   pointer-events: none;
 }
 .image-placeholder { width: 100%; height: 100%; background: var(--surface); display: flex; align-items: center; justify-content: center; }
@@ -357,7 +359,7 @@ strong { color: var(--accent); font-weight: 800; }
    shadow with the first ink beside it
    ───────────────────────────────────────────── */
 .slide--full-bleed-image .slide-bg { isolation: isolate; }
-.slide--full-bleed-image .slide-bg-picture { filter: grayscale(1) contrast(1.1); }
+.slide--full-bleed-image .slide-bg-picture { filter: grayscale(var(--duotone)) contrast(calc(1 + 0.1 * var(--duotone))); }
 .slide--full-bleed-image.has-overlay .slide-bg::after {
   content: '';
   position: absolute;
