@@ -1,0 +1,74 @@
+schema = 1
+kind = "theme"
+id = "ledger"
+title = "Ledger"
+description = "A report to the board: headings that state the finding, Spectral over Public Sans, tables ruled like an annual report with figures that line up, the section as a running head and sources under every slide."
+version = "0.1.0"
+author = "Tilman Schieber"
+license = "MIT"
+mdeck = ">=3.9.0"  # parameters with a type
+# The palette this theme uses unless the deck sets one; colours come only from palettes.
+palette = "nordic"
+fonts = [
+  "https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,500;0,600;1,500&family=Public+Sans:wght@400;500;600;700&display=swap",
+]
+
+[files]
+styles = "styles.css"
+
+# Type, spacing and fonts used by styles.css; colours come from the palette.
+# Deck settings (params) override these.
+[tokens]
+
+# Type scale (px) — projection-appropriate at 1920×1080. Headings are whole
+# sentences here, so they are smaller than in most themes.
+"--fs-display" = "112px"
+"--fs-title" = "96px"
+"--fs-focus" = "72px"
+"--fs-h" = "56px"
+"--fs-sub" = "38px"
+"--fs-body" = "32px"
+"--fs-small" = "24px"
+"--fs-eyebrow" = "22px"
+
+# Spacing
+"--pad-x" = "128px"
+"--pad-y" = "72px"
+"--gap-title" = "56px"
+"--gap-item" = "24px"
+
+# Type families
+"--font-display" = "Spectral, Georgia, \"Times New Roman\", serif"
+"--font-body" = "\"Public Sans\", \"Helvetica Neue\", Helvetica, Arial, sans-serif"
+
+# Settings authors can change under `params:` in the deck; each points at a token above.
+[params.fontDisplay]
+token = "--font-display"
+title = "Display font"
+type = "font"
+
+[params.fontBody]
+token = "--font-body"
+title = "Body font"
+type = "font"
+
+# What this theme is for and how to write for it: shown in listings, and read
+# by assistants that write slides as the theme author's advice.
+[guide]
+suits = [
+  "quarterly and annual reviews",
+  "board and management meetings",
+  "recommendations and business cases",
+  "results, budgets and key figures in tables",
+  "formal and institutional talks",
+]
+avoid = ["playful or loud talks", "photo-led talks"]
+writing = """
+Set like a report to a board. Each slide's heading is the finding in one
+sentence ("Costs fell 12 % while volume held"), not a topic ("Costs"); the
+slide is the evidence for it. A second-level heading becomes a small label
+above a table or chart, like "Exhibit 3". Right-align columns of figures
+(|---:|) so the digits line up, and end a table with its total row. Put
+sources in footnotes: they sit under the slide as a source line. A focus
+slide is the recommendation; a callout is the key takeaway.
+"""
