@@ -73,12 +73,14 @@
   pre { position: relative; margin: 0 0 10px; padding: 10px 12px; padding-right: 64px; background: var(--bg); border: 1px solid var(--rule); border-radius: 7px; font: 13px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace; white-space: pre-wrap; word-break: break-word; }
   pre .copy { position: absolute; top: 6px; right: 6px; padding: 2px 8px; font-size: 12px; }
   .note { font-size: 13px; color: var(--muted); }
-  /* The theme's settings: a slider, a box to tick or a list each; the preview follows as they move. */
-  .settings { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 10px 24px; padding: 4px 14px 14px; }
-  .settings[hidden] { display: none; }
-  .settings .head { grid-column: 1 / -1; display: flex; align-items: center; justify-content: space-between; gap: 8px; }
-  .settings .head .btn { padding: 1px 8px; font-size: 12px; }
-  .settings h3 { margin: 0; font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); font-weight: 600; }
+  /* The theme's settings, folded away before the install lines: a slider, a box to tick or a list
+     each; the preview follows as they move. */
+  .settings-box { margin: 0 0 14px; }
+  .settings-box summary { cursor: pointer; font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); font-weight: 600; }
+  .settings-box summary small { text-transform: none; letter-spacing: 0; font-weight: 400; }
+  .settings { display: grid; gap: 10px; padding: 10px 0 0; }
+  .settings .reset { justify-self: start; padding: 1px 8px; font-size: 12px; }
+  .settings .reset[hidden] { display: none; }
   .setting label { display: flex; justify-content: space-between; gap: 8px; font-size: 14px; font-weight: 600; }
   .setting output { font-weight: 400; color: var(--muted); font-variant-numeric: tabular-nums; }
   .setting input[type=range] { width: 100%; accent-color: var(--accent); margin: 4px 0 2px; }
@@ -120,7 +122,6 @@
         <button class="btn" id="next" aria-label="Next slide">→</button>
       </div>
     </div>
-    <section class="settings" id="settings" aria-label="The theme's settings" hidden></section>
     <div class="palettes" id="palettes" role="group" aria-label="Palettes this theme offers"></div>
     <section class="details" id="details" aria-live="polite"></section>
   </main>
@@ -130,7 +131,7 @@
   const esc = value => String(value ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c])
   const query = new URLSearchParams(location.search)
   let looks
-  const state = { theme: query.get('theme') || 'neue', palette: query.get('palette') || '', appearance: query.get('appearance') || '', slide: Number(query.get('slide')) || 1, sort: query.get('sort') === 'name' ? 'name' : 'style', params: {} }
+  const state = { theme: query.get('theme') || 'neue', palette: query.get('palette') || '', appearance: query.get('appearance') || '', slide: Number(query.get('slide')) || 1, sort: query.get('sort') === 'name' ? 'name' : 'style', params: {}, settingsOpen: false }
   // How loud each theme is, from nothing but the content to made to be
   // remembered. A theme missing here shows with the middle group.
   const STYLES = [
@@ -197,23 +198,27 @@
     // palette along, so another palette is installed on its own.
     const installs = [...(!t.builtIn ? [`mdeck themes install ${t.id}`] : []), ...(!p.builtIn && p.id !== t.palette ? [`mdeck palettes install ${p.id}`] : [])]
     const changed = Object.entries(state.params).filter(([name]) => t.params?.[name])
+    const offered = settingsOf(t)
     const settings = ['---', `theme: ${t.id}`, ...(p.id !== t.palette ? [`palette: ${p.id}`] : []), ...(appearance !== t.appearance ? [`appearance: ${appearance}`] : []),
       ...(changed.length ? ['params:', ...changed.map(([name, value]) => `  ${name}: ${css(t.params[name], value)}`)] : []), '---'].join('\n')
+    // Moving a setting only changes the lines to copy: the controls stay as they are.
+    if (reload === 'details') {
+      $('snippet').innerHTML = copyable(settings)
+      $('reset-settings').hidden = !changed.length
+      return
+    }
     $('details').innerHTML = `<div><h2>${esc(t.title)}${p.id !== t.palette ? ` <span style="font-weight:400;color:var(--muted)">with ${esc(p.title)}</span>` : ''}</h2>
         <p>${esc(t.description)}</p>${p.id !== t.palette && p.description ? `<p>${esc(p.title)}: ${esc(p.description)}</p>` : ''}
         ${t.guide?.suits ? `<p><strong>Good for</strong> ${esc(t.guide.suits.join(' · '))}</p>` : ''}
         ${t.guide?.avoid ? `<p><strong>Less suited to</strong> ${esc(t.guide.avoid.join(' · '))}</p>` : ''}
         ${t.guide?.writing ? `<details class="guide"><summary>Writing slides for it</summary><p>${esc(t.guide.writing)}</p></details>` : ''}</div>
-      <div><h3>Install</h3>${installs.length ? copyable(installs.join('\n')) : '<p class="note">Comes with mdeck: nothing to install.</p>'}
-        <h3>At the top of the slide file</h3>${copyable(settings)}
+      <div>${offered.length ? `<details class="settings-box" id="settings-box"${state.settingsOpen ? ' open' : ''}><summary>Settings <small>(${offered.length})</small></summary>
+          <div class="settings" id="settings">${offered.map(([name, def]) => control(name, def)).join('')}
+          <button class="btn reset" id="reset-settings"${changed.length ? '' : ' hidden'}>The theme's own</button></div></details>` : ''}
+        <h3>Install</h3>${installs.length ? copyable(installs.join('\n')) : '<p class="note">Comes with mdeck: nothing to install.</p>'}
+        <h3>At the top of the slide file</h3><div id="snippet">${copyable(settings)}</div>
         ${installs.length ? `<p class="note">Needs mdeck ${esc((t.mdeck ?? '').replace(/^>=\s*/, '') || looks.mdeck.split('.')[0])} or newer (<code>npm install -g mdeck</code>). This installs it for every deck; add a slide file to put it beside one deck.</p>` : ''}</div>`
 
-    const offered = settingsOf(t)
-    $('settings').hidden = !offered.length
-    if (reload !== 'details') $('settings').innerHTML = `<div class="head"><h3>Settings</h3>${Object.keys(state.params).length ? '<button class="btn" id="reset-settings">The theme\'s own</button>' : ''}</div>`
-      + offered.map(([name, def]) => control(name, def)).join('')
-    if (reload === 'details') { const reset = $('reset-settings'); if (!reset && Object.keys(state.params).length) $('settings').querySelector('.head').insertAdjacentHTML('beforeend', '<button class="btn" id="reset-settings">The theme\'s own</button>') }
-    if (reload === 'details') return
 
     const params = new URLSearchParams({ theme: t.id, ...(state.palette ? { palette: p.id } : {}), ...(state.appearance ? { appearance } : {}), ...(state.slide > 1 ? { slide: state.slide } : {}), ...(state.sort === 'name' ? { sort: 'name' } : {}) })
     history.replaceState(null, '', `?${params}`)
@@ -265,9 +270,10 @@
     applySettings()
     render('details')
   }
-  $('settings').addEventListener('input', setting)
-  $('settings').addEventListener('change', setting)
-  $('settings').addEventListener('click', event => {
+  $('details').addEventListener('input', setting)
+  $('details').addEventListener('change', setting)
+  $('details').addEventListener('toggle', event => { if (event.target.id === 'settings-box') state.settingsOpen = event.target.open }, true)
+  $('details').addEventListener('click', event => {
     if (event.target.id !== 'reset-settings') return
     state.params = {}
     applySettings()
