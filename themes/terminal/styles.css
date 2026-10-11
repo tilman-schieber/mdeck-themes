@@ -3,12 +3,9 @@
    the title waits at a blinking cursor, a chapter starts like running a new
    command, callouts are log lines, and the footer is a tmux status bar.
    Code is in the same face as the text, so it is set apart by a window
-   frame with a title bar. Dark by default; in light it reads as a printout
-   of the session. Colours come only from the palette roles. */
+   frame with a title bar. The prompt before each heading is --prompt, a
+   setting. Dark by default; in light it reads as a printout of the session. Colours come only from the palette roles. */
 
-.slide {
-  --prompt: '~/talk $ ';
-}
 
 /* ─────────────────────────────────────────────
    HEADER — the organisation as a comment, the section in brackets

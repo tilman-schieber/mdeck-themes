@@ -3,10 +3,10 @@ kind = "theme"
 id = "terminal"
 title = "Terminal"
 description = "A terminal session: JetBrains Mono, headings at a prompt, a blinking cursor, log-line callouts and a tmux status bar; dark by default."
-version = "1.2.0"
+version = "1.3.0"
 author = "Tilman Schieber"
 license = "MIT"
-mdeck = ">=3.9.0"  # parameters with a type
+mdeck = ">=3.10.1"  # a setting of the kind text
 # The palette this theme uses unless the deck sets one; colours come only from palettes.
 palette = "phosphor"
 appearance = "dark"
@@ -21,6 +21,8 @@ styles = "styles.css"
 # Deck settings (params) override these.
 [tokens]
 
+# The prompt before each heading, as a quoted CSS string.
+"--prompt" = "'~/talk $ '"
 # Whether the cursor blinks (1) or holds still (0).
 "--motion" = "1"
 # Whether chapters show scanlines (1) or not (0).
@@ -45,6 +47,12 @@ styles = "styles.css"
 "--gap-title" = "44px"
 "--gap-item" = "24px"
 
+[params.prompt]
+token = "--prompt"
+title = "Prompt"
+type = "text"
+description = "What stands before each heading, \"~/talk $ \" by default: your project, your host, the event (\"~/kubecon $ \"). Keep it short and end it with a space."
+
 [params.motion]
 token = "--motion"
 title = "Motion"
@@ -64,7 +72,8 @@ suits = ["developer and ops talks", "live demos and tooling", "command-line tuto
 avoid = ["photo-led talks", "non-technical audiences"]
 writing = """
 Monospace throughout, dark by default. Headings read as commands typed at a
-prompt, so short lowercase headings fit well ("install the tools"). Code
+prompt, so short lowercase headings fit well ("install the tools"); set
+the prompt to the project or the event (params: prompt: "~/kubecon $ "). Code
 blocks are terminal windows with a title bar; callouts are log lines. Use real
 commands and output where they make the point.
 """

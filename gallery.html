@@ -85,6 +85,7 @@
   .setting output { font-weight: 400; color: var(--muted); font-variant-numeric: tabular-nums; }
   .setting input[type=range] { width: 100%; accent-color: var(--accent); margin: 4px 0 2px; }
   .setting input[type=checkbox] { accent-color: var(--accent); width: 16px; height: 16px; }
+  .setting input[type=text] { width: 100%; margin: 4px 0 2px; font: 13px/1.4 ui-monospace, SFMono-Regular, Menlo, monospace; padding: 4px 6px; border: 1px solid var(--rule); border-radius: 6px; background: var(--bg); color: var(--ink); }
   .setting select { width: 100%; margin: 4px 0 2px; font: inherit; font-size: 14px; padding: 3px 6px; border: 1px solid var(--rule); border-radius: 6px; background: var(--bg); color: var(--ink); }
   .setting p { margin: 0; font-size: 12px; color: var(--muted); }
   @media (max-width: 860px) {
@@ -153,16 +154,21 @@
 
   // The settings the gallery offers: those with a kind it has a control for
   // (fonts need their stylesheets, so they are left to the deck).
-  const settingsOf = t => Object.entries(t.params ?? {}).filter(([, def]) => def.type === 'switch' || (def.type === 'choice' && def.choices?.length)
+  const settingsOf = t => Object.entries(t.params ?? {}).filter(([, def]) => def.type === 'switch' || def.type === 'text' || (def.type === 'choice' && def.choices?.length)
     || ((def.type === 'size' || def.type === 'number') && def.min != null && def.max != null))
   // A setting's value as CSS, from the number or text a control gives.
-  const css = (def, value) => def.type === 'size' ? `${value}px` : String(value)
-  const shownValue = (def, name) => state.params[name] ?? (def.type === 'size' ? parseFloat(def.default) : def.type === 'choice' ? def.default : Number(def.default))
+  // A text reaches CSS as a quoted string, as mdeck writes it.
+  const quoted = text => '"' + String(text).replace(/\\/g, '\\\\').replace(/"/g, '\\"') + '"'
+  const css = (def, value) => def.type === 'size' ? `${value}px` : def.type === 'text' ? quoted(value) : String(value)
+  // A text's default is a quoted CSS string; shown and copied without its quotes.
+  const plain = def => def.type === 'text' ? String(def.default).replace(/^(['"])([^]*)\1$/, '$2') : def.default
+  const shownValue = (def, name) => state.params[name] ?? (def.type === 'size' ? parseFloat(def.default) : def.type === 'choice' || def.type === 'text' ? plain(def) : Number(def.default))
   function control(name, def) {
     const value = shownValue(def, name)
     const id = `set-${esc(name)}`
     const hint = def.description ? `<p>${esc(def.description)}</p>` : ''
     if (def.type === 'switch') return `<div class="setting"><label for="${id}">${esc(def.title ?? name)}<input type="checkbox" id="${id}" data-param="${esc(name)}"${value === 1 ? ' checked' : ''}></label>${hint}</div>`
+    if (def.type === 'text') return `<div class="setting"><label for="${id}">${esc(def.title ?? name)}</label><input type="text" id="${id}" data-param="${esc(name)}" value="${esc(value)}" spellcheck="false">${hint}</div>`
     if (def.type === 'choice') return `<div class="setting"><label for="${id}">${esc(def.title ?? name)}</label><select id="${id}" data-param="${esc(name)}">${def.choices.map(choice => `<option${choice === value ? ' selected' : ''}>${esc(choice)}</option>`).join('')}</select>${hint}</div>`
     const step = def.step ?? (def.type === 'size' ? 1 : (def.max - def.min) / 100)
     return `<div class="setting"><label for="${id}">${esc(def.title ?? name)}<output id="${id}-value">${esc(css(def, value))}</output></label>
@@ -200,7 +206,7 @@
     const changed = Object.entries(state.params).filter(([name]) => t.params?.[name])
     const offered = settingsOf(t)
     const settings = ['---', `theme: ${t.id}`, ...(p.id !== t.palette ? [`palette: ${p.id}`] : []), ...(appearance !== t.appearance ? [`appearance: ${appearance}`] : []),
-      ...(changed.length ? ['params:', ...changed.map(([name, value]) => `  ${name}: ${css(t.params[name], value)}`)] : []), '---'].join('\n')
+      ...(changed.length ? ['params:', ...changed.map(([name, value]) => `  ${name}: ${t.params[name].type === 'text' ? JSON.stringify(value) : css(t.params[name], value)}`)] : []), '---'].join('\n')
     // Moving a setting only changes the lines to copy: the controls stay as they are.
     if (reload === 'details') {
       $('snippet').innerHTML = copyable(settings)
@@ -264,7 +270,7 @@
     const el = event.target.closest('[data-param]')
     if (!el) return
     const name = el.dataset.param, def = theme().params[name]
-    state.params[name] = el.type === 'checkbox' ? (el.checked ? 1 : 0) : el.tagName === 'SELECT' ? el.value : Number(el.value)
+    state.params[name] = el.type === 'checkbox' ? (el.checked ? 1 : 0) : el.tagName === 'SELECT' || el.type === 'text' ? el.value : Number(el.value)
     const shown = $(`set-${name}-value`)
     if (shown) shown.textContent = css(def, state.params[name])
     applySettings()
