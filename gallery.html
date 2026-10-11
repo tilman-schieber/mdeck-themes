@@ -74,7 +74,7 @@
   pre .copy { position: absolute; top: 6px; right: 6px; padding: 2px 8px; font-size: 12px; }
   .note { font-size: 13px; color: var(--muted); }
   /* The theme's settings: a slider, a box to tick or a list each; the preview follows as they move. */
-  .settings { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px 24px; padding: 14px; border-top: 1px solid var(--rule); }
+  .settings { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 10px 24px; padding: 4px 14px 14px; }
   .settings[hidden] { display: none; }
   .settings .head { grid-column: 1 / -1; display: flex; align-items: center; justify-content: space-between; gap: 8px; }
   .settings .head .btn { padding: 1px 8px; font-size: 12px; }
@@ -120,8 +120,8 @@
         <button class="btn" id="next" aria-label="Next slide">→</button>
       </div>
     </div>
-    <div class="palettes" id="palettes" role="group" aria-label="Palettes this theme offers"></div>
     <section class="settings" id="settings" aria-label="The theme's settings" hidden></section>
+    <div class="palettes" id="palettes" role="group" aria-label="Palettes this theme offers"></div>
     <section class="details" id="details" aria-live="polite"></section>
   </main>
 </div>
