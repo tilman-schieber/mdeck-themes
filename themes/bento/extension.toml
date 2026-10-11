@@ -3,10 +3,10 @@ kind = "theme"
 id = "bento"
 title = "Bento"
 description = "Rounded tiles, as on a product page: every list item, paragraph, table and callout on a tile of its own; lists become grids with a feature tile in the accent, bold figures become big numbers; Plus Jakarta Sans throughout."
-version = "0.1.1"
+version = "0.2.0"
 author = "Tilman Schieber"
 license = "MIT"
-mdeck = ">=3.7.0"  # the third accent, --accent-3
+mdeck = ">=3.9.0"  # parameters with a type
 # The palette this theme uses unless the deck sets one; colours come only from palettes.
 palette = "lagoon"
 fonts = [
@@ -50,14 +50,19 @@ styles = "styles.css"
 [params.fontDisplay]
 token = "--font-display"
 title = "Display font"
+type = "font"
 
 [params.fontBody]
 token = "--font-body"
 title = "Body font"
+type = "font"
 
 [params.tileRadius]
 token = "--tile-radius"
 title = "Tile corners"
+type = "size"
+min = 0
+max = 48
 description = "The corner radius: 32px by default, up to about 48px; 0px for square tiles."
 
 # What this theme is for and how to write for it: shown in listings, and read

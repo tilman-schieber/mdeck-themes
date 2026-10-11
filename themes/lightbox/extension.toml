@@ -3,10 +3,10 @@ kind = "theme"
 id = "lightbox"
 title = "Lightbox"
 description = "For talks made of photographs: pictures edge to edge, titles in Instrument Serif on a soft shadow, grids of photos from plain Markdown, neutral greys so nothing tints the pictures."
-version = "0.2.3"
+version = "0.3.0"
 author = "Tilman Schieber"
 license = "MIT"
-mdeck = ">=3.6.0"  # the [guide] below
+mdeck = ">=3.9.0"  # parameters with a type
 # The palette this theme uses unless the deck sets one; colours come only from palettes.
 # Neutral greys: a tinted background would tint the photographs.
 palette = "greyscale"
@@ -40,14 +40,19 @@ styles = "styles.css"
 [params.fontDisplay]
 token = "--font-display"
 title = "Display font"
+type = "font"
 
 [params.fontBody]
 token = "--font-body"
 title = "Body font"
+type = "font"
 
 [params.photoShare]
 token = "--photo-share"
 title = "Picture width on image + text slides"
+type = "size"
+min = 900
+max = 1300
 description = "1180px of the 1920px slide by default, from about 900px to 1300px; the text takes the rest."
 
 # What this theme is for and how to write for it: shown in listings, and read

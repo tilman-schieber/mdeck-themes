@@ -35,7 +35,7 @@ The extra settings:
 version = "1.0.0"          # raise it for every change
 author = "Your Name"
 license = "MIT"
-mdeck = ">=3.1.0"          # the oldest mdeck it works with (">=3.6.0" with a [guide])
+mdeck = ">=3.1.0"          # the oldest mdeck it works with (">=3.9.0" with typed [params])
 homepage = "https://…"     # optional
 ```
 

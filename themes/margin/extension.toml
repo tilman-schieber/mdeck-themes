@@ -3,10 +3,10 @@ kind = "theme"
 id = "margin"
 title = "Margin"
 description = "A handout in the manner of Edward Tufte: EB Garamond on paper, a wide right margin where footnotes, references and callouts become sidenotes, italic headings, small caps, booktabs tables and nothing that is not content."
-version = "0.1.2"
+version = "0.2.0"
 author = "Tilman Schieber"
 license = "MIT"
-mdeck = ">=3.7.0"  # the third accent, --accent-3
+mdeck = ">=3.9.0"  # parameters with a type
 # The palette this theme uses unless the deck sets one; colours come only from palettes.
 palette = "paper"
 fonts = [
@@ -50,14 +50,19 @@ styles = "styles.css"
 [params.fontDisplay]
 token = "--font-display"
 title = "Display font"
+type = "font"
 
 [params.fontBody]
 token = "--font-body"
 title = "Body font"
+type = "font"
 
 [params.marginWidth]
 token = "--margin-width"
 title = "Margin width"
+type = "size"
+min = 360
+max = 560
 description = "470px by default, from about 360px to 560px; the text column takes the rest."
 
 # What this theme is for and how to write for it: shown in listings, and read

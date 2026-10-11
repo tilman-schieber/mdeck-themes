@@ -3,10 +3,10 @@ kind = "theme"
 id = "sketch"
 title = "Sketch"
 description = "A sketchbook: Caveat and Patrick Hand on dotted paper, marker scribbles, circled numbers, sticky-note callouts and taped photos; a chalkboard in the dark."
-version = "1.2.1"
+version = "1.3.0"
 author = "Tilman Schieber"
 license = "MIT"
-mdeck = ">=3.7.0"  # the third accent, --accent-3
+mdeck = ">=3.9.0"  # parameters with a type
 # The palette this theme uses unless the deck sets one; colours come only from palettes.
 palette = "pastel"
 fonts = [
@@ -46,10 +46,12 @@ styles = "styles.css"
 [params.fontDisplay]
 token = "--font-display"
 title = "Display font"
+type = "font"
 
 [params.fontBody]
 token = "--font-body"
 title = "Body font"
+type = "font"
 
 # What this theme is for and how to write for it: shown in listings, and read
 # by assistants that write slides as the theme author's advice.

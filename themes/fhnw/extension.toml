@@ -3,10 +3,10 @@ kind = "theme"
 id = "fhnw"
 title = "FHNW"
 description = "The FHNW corporate design: Inter, black on white, yellow accent areas."
-version = "1.1.4"
+version = "1.2.0"
 author = "Tilman Schieber"
 license = "MIT"
-mdeck = ">=3.6.0"  # the [guide] below
+mdeck = ">=3.9.0"  # parameters with a type
 # The palette this theme uses unless the deck sets one; colours come only from palettes.
 palette = "brand"
 palettes = ["brand"]  # the corporate design: no other palettes
@@ -59,10 +59,12 @@ styles = "styles.css"
 [params.fontDisplay]
 token = "--font-display"
 title = "Display font"
+type = "font"
 
 [params.fontBody]
 token = "--font-body"
 title = "Body font"
+type = "font"
 
 # What this theme is for and how to write for it: shown in listings, and read
 # by assistants that write slides as the theme author's advice.

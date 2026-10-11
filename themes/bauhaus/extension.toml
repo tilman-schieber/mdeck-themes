@@ -3,10 +3,10 @@ kind = "theme"
 id = "bauhaus"
 title = "Bauhaus"
 description = "Red, blue and yellow on paper: Jost in bold capitals over thick black rules, circle, square and triangle on the title and chapter slides, lists marked with the three shapes."
-version = "0.3.0"
+version = "0.4.0"
 author = "Tilman Schieber"
 license = "MIT"
-mdeck = ">=3.7.0"  # the third accent, --accent-3
+mdeck = ">=3.9.0"  # parameters with a type
 # The palette this theme uses unless the deck sets one; colours come only from palettes.
 palette = "primaries"
 fonts = [
@@ -40,19 +40,25 @@ styles = "styles.css"
 [params.fontDisplay]
 token = "--font-display"
 title = "Display font"
+type = "font"
 
 [params.fontBody]
 token = "--font-body"
 title = "Body font"
+type = "font"
 
 [params.shapes]
 token = "--shapes"
 title = "Shapes on title, chapter and focus slides"
+type = "switch"
 description = "1 (the default) shows the circle, square and triangle; 0 leaves only type and bars."
 
 [params.bar]
 token = "--bar"
 title = "Thickness of the bar under headings"
+type = "size"
+min = 0
+max = 20
 description = "12px by default, from about 6px to 20px; 0px leaves headings without bars."
 
 # What this theme is for and how to write for it: shown in listings, and read

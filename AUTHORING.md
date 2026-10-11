@@ -48,28 +48,44 @@ parameters, as every theme here does.
 
 ### Parameters
 
-An author types a parameter's value into the deck, and it goes into the
-stylesheet as it is: mdeck does not check it. So every theme here takes the
-same three kinds of value:
+Every parameter says what kind of value it takes, with `type` (mdeck 3.9.0
+and newer). mdeck then checks what authors write, the editor and the gallery
+show a slider, a box to tick or a list, and `mdeck list themes` shows it.
+Every theme here takes the same kinds of value:
 
-| Kind | Value | Off | Example |
-|---|---|---|---|
-| A size | pixels | `0px` | pop's `edge = "5px"` |
-| A strength | a number from 0 to 1 | `0` | riso's `grain = "0.5"` |
-| A switch | `1` or `0` | `0` | bauhaus's `shapes = "1"` |
+| Kind | `type` | Value | Off | Example |
+|---|---|---|---|---|
+| A size | `size`, with `min` and `max` | pixels | `0px` | pop's `edge` |
+| A strength | `number`, with `min = 0` and `max = 1` | a number from 0 to 1 | `0` | riso's `grain` |
+| A switch | `switch` | `1` or `0` | `0` | bauhaus's `shapes` |
+| A font | `font` | a CSS font list | | every theme's `fontBody` |
 
+```toml
+[params.bar]
+token = "--bar"
+title = "Thickness of the bar under headings"
+type = "size"
+min = 0
+max = 20
+description = "12px by default, from about 6px to 20px; 0px leaves headings without bars."
+```
+
+- The token's value must be of that kind (`"12px"`, `"1"`); the theme check
+  fails otherwise.
+- `min` and `max` are the range the theme was made for: look at both ends
+  in `mdeck design` before you write them down.
 - No CSS keywords (`none`, `block`) and no `em`: an author should not need
-  to know CSS to change a value.
+  to know CSS to change a value. (`choice`, with `choices = [...]`, exists
+  for a real choice between named options, not for on and off.)
 - Write `0px` for a size, not `0`: a bare `0` breaks a `calc()` that adds
   pixels to it.
 - A feature that can be left out is turned off with its parameter at zero;
   do not add a second parameter for that.
 - A switch or strength is used by multiplying with it, as in
-  `calc(330px * var(--shapes))`. A value that is not a number then makes
-  the size invalid, and the shape is not drawn.
-- The `description` gives the default and a sensible range, so the design
-  page and assistants know what to write: "12px by default, from about 6px to
-  20px; 0px leaves headings without bars."
+  `calc(330px * var(--shapes))`.
+- The `description` gives the default and a sensible range: the editor and
+  the gallery show it beside the control, and assistants read it.
+- A theme with typed parameters sets `mdeck = ">=3.9.0"`.
 
 ## The slide
 
