@@ -122,14 +122,14 @@ strong { color: var(--ink); font-weight: 700; }
 
 /* ─────────────────────────────────────────────
    LAYOUT: TITLE — the boldest slide: all of it in the first accent, a band
-   of the second slanted like the chapter seam, the headline in the
-   accent's own text colour
+   of the second slanted like the chapter seam (left out beside a picture,
+   which it would cut across), the headline in the accent's own text colour
    ───────────────────────────────────────────── */
 .slide--title {
   background: var(--accent);
   color: var(--on-accent);
 }
-.slide--title::after {
+.slide--title:not(.has-image)::after {
   content: '';
   position: absolute;
   inset: 0;
