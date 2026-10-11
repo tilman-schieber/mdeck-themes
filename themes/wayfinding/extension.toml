@@ -1,0 +1,83 @@
+schema = 1
+kind = "theme"
+id = "wayfinding"
+title = "Wayfinding"
+description = "A station's signs and route map: a route under the title and along each chapter with its station marked, lists as stops on a line, headings on dark sign panels, callouts with pictograms and tables as a departure board; Overpass, after the highway sign alphabet."
+version = "0.1.0"
+author = "Tilman Schieber"
+license = "MIT"
+mdeck = ">=3.9.0"  # parameters with a type
+# The palette this theme uses unless the deck sets one; colours come only from palettes.
+palette = "cobalt"
+fonts = [
+  "https://fonts.googleapis.com/css2?family=Overpass:wght@400;600;800&family=Overpass+Mono:wght@400;600&display=swap",
+]
+
+[files]
+styles = "styles.css"
+
+# Type, spacing and fonts used by styles.css; colours come from the palette.
+# Deck settings (params) override these.
+[tokens]
+"--fs-display" = "128px"
+"--fs-title" = "100px"
+"--fs-focus" = "76px"
+"--fs-h" = "60px"
+"--fs-sub" = "38px"
+"--fs-body" = "34px"
+"--fs-small" = "22px"
+"--fs-eyebrow" = "22px"
+"--pad-x" = "128px"
+"--pad-y" = "72px"
+"--gap-title" = "52px"
+"--gap-item" = "30px"
+# The thickness of the lines that join the stops.
+"--line" = "10px"
+# The corners of signs and badges.
+"--radius" = "10px"
+"--font-display" = "\"Overpass\", \"Helvetica Neue\", Arial, sans-serif"
+"--font-body" = "\"Overpass\", \"Helvetica Neue\", Arial, sans-serif"
+"--font-mono" = "\"Overpass Mono\", ui-monospace, Menlo, Consolas, monospace"
+
+[params.fontDisplay]
+token = "--font-display"
+title = "Display font"
+type = "font"
+
+[params.fontBody]
+token = "--font-body"
+title = "Body font"
+type = "font"
+
+[params.line]
+token = "--line"
+title = "Thickness of the lines"
+type = "size"
+min = 0
+max = 16
+description = "The line that joins the stops of a list: 10px by default, from about 6px to 16px; 0px leaves the stops on their own."
+
+[params.radius]
+token = "--radius"
+title = "Corners of signs and badges"
+type = "size"
+min = 0
+max = 24
+description = "10px by default, up to about 24px; 0px for square signs."
+
+# What this theme is for and how to write for it: shown in listings, and read
+# by assistants that write slides as the theme author's advice.
+[guide]
+suits = ["agendas and roadmaps", "processes and step-by-step instructions", "onboarding and orientation", "project plans and timelines"]
+avoid = ["long running text", "essays and arguments", "photo-led talks"]
+writing = """
+Everything reads like a sign or a route map, so keep headings to a few
+words: each sits on a dark sign panel. Number the chapters (number: 1, 2,
+3 …): each chapter's foot shows the route with its station marked, eight
+stations at most, a good fit for the parts of an agenda. Lists are stops on
+a line: write them in order, one short stop per item, three to six to a
+list; a numbered list numbers the stations, a nested list branches off in
+the second colour. Callouts become signs with a pictogram (note, tip,
+warning). Tables are set as a departure board: short entries, figures in
+columns.
+"""
