@@ -3,8 +3,8 @@
    the title waits at a blinking cursor, a chapter starts like running a new
    command, callouts are log lines, and the footer is a tmux status bar.
    Code is in the same face as the text, so it is set apart by a window
-   frame with a title bar. The prompt before each heading is --prompt, a
-   setting. Dark by default; in light it reads as a printout of the session. Colours come only from the palette roles. */
+   frame with a title bar. The prompt before each heading and command is
+   --prompt, a setting. Dark by default; in light it reads as a printout of the session. Colours come only from the palette roles. */
 
 
 /* ─────────────────────────────────────────────
@@ -149,7 +149,7 @@ strong { color: var(--ink); font-weight: 700; }
   align-items: flex-start;
 }
 .slide--title .title-text::before {
-  content: '$ ./present';
+  content: var(--prompt) './present';
   display: block;
   font-size: var(--fs-sub);
   font-weight: 400;
@@ -218,7 +218,7 @@ deck-stage[data-deck-static] .slide--title .display::after { animation: none; }
   color: var(--ink);
   margin: 0 0 12px 0;
 }
-.chapter-num::before { content: '$ ./chapter '; color: var(--muted); font-weight: 400; }
+.chapter-num::before { content: var(--prompt) './chapter '; color: var(--muted); font-weight: 400; }
 .chapter-meta {
   font-family: var(--font-body);
   font-size: var(--fs-sub);
@@ -292,7 +292,7 @@ deck-stage[data-deck-static] .slide--title .display::after { animation: none; }
   width: 100%;
 }
 .focus-content::before {
-  content: '$ cat statement.txt';
+  content: var(--prompt) 'cat statement.txt';
   font-size: var(--fs-sub);
   font-weight: 400;
   color: var(--muted);

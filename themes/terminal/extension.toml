@@ -3,7 +3,7 @@ kind = "theme"
 id = "terminal"
 title = "Terminal"
 description = "A terminal session: JetBrains Mono, headings at a prompt, a blinking cursor, log-line callouts and a tmux status bar; dark by default."
-version = "1.3.0"
+version = "1.3.1"
 author = "Tilman Schieber"
 license = "MIT"
 mdeck = ">=3.10.1"  # a setting of the kind text
@@ -51,7 +51,7 @@ styles = "styles.css"
 token = "--prompt"
 title = "Prompt"
 type = "text"
-description = "What stands before each heading, \"~/talk $ \" by default: your project, your host, the event (\"~/kubecon $ \"). Keep it short and end it with a space."
+description = "What stands before each heading and command, \"~/talk $ \" by default: your project, your host, the event (\"~/kubecon $ \"). Keep it short and end it with a space."
 
 [params.motion]
 token = "--motion"
