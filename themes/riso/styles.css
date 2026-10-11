@@ -1,0 +1,543 @@
+/* Riso — a zine printed on a risograph in two spot inks.
+   The palette's accent is the first ink and its second accent the second;
+   where they meet they overprint, to a darker colour by day and a lighter one
+   at night (--overprint). Title and chapter slides carry a disc in the first
+   ink and a halftone block in the second, overlapping. Headings are printed
+   with the second ink a little out of register (--misregister), emphasis is a
+   highlighter stroke in the second ink, and a fine paper grain lies over
+   everything (--grain). Pictures are printed too: beside text and full-bleed
+   in the second ink, elsewhere in black with a plate of the first ink beside
+   them. Bricolage Grotesque for the words, Space Mono for the small print.
+   No rounded corners, no soft shadows except under text on a photograph. */
+
+.slide {
+  /* where the two inks overprint */
+  --overprint: color-mix(in oklab, color-mix(in oklab, var(--accent) 50%, var(--accent-2)) 45%, var(--ink));
+  /* the second ink, printed beside the first */
+  --offset: var(--misregister) var(--misregister) 0 color-mix(in oklab, var(--accent-2) 85%, transparent);
+  /* a halftone screen of 22px */
+  --screen: 22px 22px;
+}
+
+/* ─────────────────────────────────────────────
+   PAPER GRAIN — specks of ink over the whole sheet. Hung on the header,
+   which every slide has, so the slide's own ::before and ::after stay free
+   for the shapes.
+   ───────────────────────────────────────────── */
+.slide-header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  pointer-events: none;
+  background: var(--ink);
+  opacity: calc(var(--grain) * 0.24);
+  -webkit-mask: url("data:image/png;base64,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") 0 0 / 128px 128px repeat;
+  mask: url("data:image/png;base64,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") 0 0 / 128px 128px repeat;
+}
+
+/* ─────────────────────────────────────────────
+   HEADER / FOOTER — typewritten small print
+   ───────────────────────────────────────────── */
+.slide-header, .slide-footer {
+  position: relative;
+  z-index: 2;
+  font-family: var(--font-mono);
+  font-size: var(--fs-small);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.slide-header { position: static; }
+.slide-header > span { position: relative; z-index: 2; }
+.slide-header .brand { color: var(--muted); }
+.slide-footer > span:last-child { font-variant-numeric: tabular-nums; }
+.slide-logo {
+  position: absolute;
+  top: var(--pad-y);
+  inset-inline-end: var(--pad-x);
+  z-index: 2;
+  height: 84px;
+  width: auto;
+  max-width: 380px;
+  object-fit: contain;
+  filter: var(--logo-filter, none);
+}
+
+/* ─────────────────────────────────────────────
+   TYPE
+   ───────────────────────────────────────────── */
+.eyebrow, .focus-eyebrow, .chapter-meta {
+  font-family: var(--font-mono);
+  font-size: var(--fs-eyebrow);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0 0 24px 0;
+}
+.display, .title, .chapter-title, .overlay-title, .slide-body h1 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-variation-settings: "opsz" 96;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  text-shadow: var(--offset);
+  margin: 0;
+  text-wrap: balance;
+}
+.subtitle {
+  font-family: var(--font-body);
+  font-size: var(--fs-sub);
+  font-weight: 500;
+  line-height: 1.3;
+  color: var(--ink-soft);
+  margin: 0;
+  text-wrap: pretty;
+}
+.body-text {
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: 1.45;
+  color: var(--ink-soft);
+  margin: 0;
+  text-wrap: pretty;
+}
+.meta {
+  font-family: var(--font-mono);
+  font-size: var(--fs-small);
+  color: var(--muted);
+}
+/* emphasis: a highlighter stroke in the second ink */
+em {
+  font-style: normal;
+  color: var(--ink);
+  background: linear-gradient(transparent 58%, color-mix(in oklab, var(--accent-2) 38%, transparent) 58%, color-mix(in oklab, var(--accent-2) 38%, transparent) 92%, transparent 92%);
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  padding-inline: 0.06em;
+}
+strong { color: var(--accent); font-weight: 800; }
+.slide-body :not(pre) > code {
+  font-family: var(--font-mono);
+  font-size: 0.84em;
+  color: var(--ink);
+  background: var(--surface);
+  padding: 0.05em 0.3em;
+}
+.slide-body a { color: var(--ink); text-decoration-color: var(--accent); text-decoration-thickness: 0.1em; text-underline-offset: 0.15em; }
+
+/* ─────────────────────────────────────────────
+   THE PRINT: a disc in the first ink, a halftone block in the second, and
+   where they meet the overprint — on title and chapter slides without a
+   picture. The overprint is the block's own dots, clipped to the disc.
+   ───────────────────────────────────────────── */
+:is(.slide--title, .slide--chapter):not(.has-image) {
+  /* the disc: its size, its distance from the top and from the end edge */
+  --disc: 520px;
+  --disc-top: 150px;
+  --disc-end: 180px;
+  /* the block */
+  --block-w: 520px;
+  --block-h: 420px;
+  --block-top: 430px;
+  --block-end: 260px;
+  /* the disc's centre, from the block's corner */
+  --disc-x: calc(var(--block-end) + var(--block-w) - var(--disc-end) - var(--disc) / 2);
+  --disc-y: calc(var(--disc-top) + var(--disc) / 2 - var(--block-top));
+}
+.slide--chapter:not(.has-image) {
+  --disc: 400px;
+  --disc-top: 250px;
+  --disc-end: 200px;
+  --block-w: 440px;
+  --block-h: 340px;
+  --block-top: 470px;
+  --block-end: 340px;
+}
+:is(.slide--title, .slide--chapter):not(.has-image):dir(rtl) {
+  --disc-x: calc(var(--disc-end) + var(--disc) / 2 - var(--block-end));
+}
+:is(.slide--title, .slide--chapter):not(.has-image)::before,
+:is(.slide--title, .slide--chapter):not(.has-image)::after,
+:is(.slide--title, .slide--chapter):not(.has-image) .slide-body::after {
+  content: '';
+  position: absolute;
+  z-index: 0;
+  pointer-events: none;
+}
+/* the disc */
+:is(.slide--title, .slide--chapter):not(.has-image)::before {
+  top: var(--disc-top);
+  inset-inline-end: var(--disc-end);
+  width: var(--disc);
+  height: var(--disc);
+  border-radius: 50%;
+  background: var(--accent);
+}
+/* the halftone block, and over it the same dots where it meets the disc */
+:is(.slide--title, .slide--chapter):not(.has-image)::after,
+:is(.slide--title, .slide--chapter):not(.has-image) .slide-body::after {
+  top: var(--block-top);
+  inset-inline-end: var(--block-end);
+  width: var(--block-w);
+  height: var(--block-h);
+  background: radial-gradient(circle, var(--accent-2) 0 7px, transparent 7.5px) 0 0 / var(--screen);
+}
+:is(.slide--title, .slide--chapter):not(.has-image) .slide-body::after {
+  z-index: 1;
+  background-image: radial-gradient(circle, var(--overprint) 0 7px, transparent 7.5px);
+  clip-path: circle(calc(var(--disc) / 2) at var(--disc-x) var(--disc-y));
+}
+:is(.slide--title, .slide--chapter) .slide-body > * { position: relative; z-index: 2; }
+
+/* ─────────────────────────────────────────────
+   LAYOUT: TITLE — big type on the left of the print
+   ───────────────────────────────────────────── */
+.slide--title .slide-body { justify-content: center; align-items: flex-start; }
+.slide--title .title-text { max-width: 980px; }
+.slide--title .display {
+  font-size: var(--fs-display);
+  line-height: 0.94;
+}
+.slide--title .subtitle { margin-top: 44px; max-width: 860px; }
+.slide--title.has-image .slide-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 96px;
+  align-items: center;
+}
+.slide--title.has-image .title-text { max-width: none; }
+.slide--title.has-image .display { font-size: calc(var(--fs-display) * 0.62); }
+.slide--title.has-image .title-image { width: calc(100% - 18px); height: 700px; object-fit: cover; }
+
+/* ─────────────────────────────────────────────
+   LAYOUT: CHAPTER — the number in the first ink, typewritten "Chapter"
+   ───────────────────────────────────────────── */
+.slide--chapter .slide-body { justify-content: center; align-items: flex-start; }
+.slide--chapter .chapter-content {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: 0.6em;
+  align-items: baseline;
+  justify-items: start;
+  max-width: 1000px;
+}
+.slide--chapter .chapter-content > * { grid-column: 1 / -1; }
+.slide--chapter .chapter-content > .chapter-meta { grid-column: 1; grid-row: 1; }
+.slide--chapter .chapter-content > .chapter-num { grid-column: 2; grid-row: 1; }
+.chapter-num {
+  font-family: var(--font-display);
+  font-size: calc(var(--fs-title) * 0.8);
+  font-weight: 800;
+  line-height: 1;
+  color: var(--accent);
+  text-shadow: var(--offset);
+  font-variant-numeric: tabular-nums;
+  margin: 0;
+}
+.slide--chapter .chapter-title {
+  font-size: var(--fs-title);
+  line-height: 0.96;
+  margin: 20px 0 36px 0;
+}
+.slide--chapter .chapter-desc {
+  font-family: var(--font-body);
+  font-size: var(--fs-sub);
+  line-height: 1.35;
+  color: var(--ink-soft);
+  margin: 0;
+  max-width: 860px;
+}
+.slide--chapter.has-image .slide-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 96px;
+  align-items: center;
+}
+.slide--chapter.has-image .chapter-content { max-width: none; }
+.slide--chapter.has-image .chapter-title { font-size: calc(var(--fs-title) * 0.72); }
+.slide--chapter.has-image .chapter-image { width: calc(100% - 18px); height: 100%; max-height: 760px; object-fit: cover; }
+
+/* ─────────────────────────────────────────────
+   PICTURES ON THEIR OWN — in black, with a plate of the first ink set off
+   beside them
+   ───────────────────────────────────────────── */
+:is(.title-image, .chapter-image),
+.slide-body p :is(img, .themed-picture) {
+  filter: grayscale(1) contrast(1.08) drop-shadow(14px 14px 0 var(--accent));
+}
+
+/* ─────────────────────────────────────────────
+   LAYOUT: FOCUS — the statement, and a halftone disc in the first ink at
+   its end
+   ───────────────────────────────────────────── */
+.slide--focus .slide-body { justify-content: center; align-items: flex-start; }
+.slide--focus::before {
+  content: '';
+  position: absolute;
+  z-index: 0;
+  top: 120px;
+  inset-inline-end: -140px;
+  width: 620px;
+  height: 620px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--accent) 0 7px, transparent 7.5px) 0 0 / var(--screen);
+  pointer-events: none;
+}
+.focus-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  max-width: 1280px;
+}
+.focus-statement,
+.slide--focus .focus-content h1,
+.slide--focus .focus-content p {
+  font-family: var(--font-display);
+  font-size: var(--fs-focus);
+  font-weight: 800;
+  font-variation-settings: "opsz" 96;
+  letter-spacing: -0.015em;
+  line-height: 1.06;
+  color: var(--ink);
+  text-shadow: var(--offset);
+  margin: 0;
+  text-wrap: balance;
+}
+.focus-eyebrow { position: relative; z-index: 1; }
+.focus-attribution {
+  position: relative;
+  z-index: 1;
+  font-family: var(--font-mono);
+  font-size: var(--fs-small);
+  color: var(--muted);
+  margin: 36px 0 0 0;
+}
+
+/* ─────────────────────────────────────────────
+   LAYOUT: IMAGE + TEXT — the picture printed in the second ink: its
+   shadows take the ink, its lights stay paper
+   ───────────────────────────────────────────── */
+.image-pane {
+  flex: 1.1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--surface);
+  overflow: hidden;
+  position: relative;
+  isolation: isolate;
+}
+.image-pane :is(img, .themed-picture) { filter: grayscale(1) contrast(1.1); }
+.image-pane::after,
+.slide--full-bleed-image .slide-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: color-mix(in oklab, var(--accent-2) 75%, var(--bg));
+  mix-blend-mode: lighten;
+  pointer-events: none;
+}
+.image-placeholder { width: 100%; height: 100%; background: var(--surface); display: flex; align-items: center; justify-content: center; }
+.image-placeholder span { font-family: var(--font-mono); font-size: 22px; color: var(--muted); }
+.text-pane .title {
+  font-size: calc(var(--fs-h) * 0.9);
+  line-height: 1;
+  margin-bottom: var(--gap-title);
+}
+.text-pane .body-text + .body-text { margin-top: var(--gap-item); }
+
+/* ─────────────────────────────────────────────
+   LAYOUT: FULL-BLEED IMAGE — the photo in the second ink, white type on a
+   shadow with the first ink beside it
+   ───────────────────────────────────────────── */
+.slide--full-bleed-image .slide-bg { isolation: isolate; }
+.slide--full-bleed-image .slide-bg-picture { filter: grayscale(1) contrast(1.1); }
+.slide--full-bleed-image.has-overlay .slide-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.12) 60%);
+}
+.slide--full-bleed-image .overlay-title {
+  font-size: var(--fs-h);
+  line-height: 1;
+  color: #fff;
+  max-width: 1300px;
+  text-shadow: var(--misregister) var(--misregister) 0 var(--accent), 0 2px 28px rgba(0, 0, 0, 0.5);
+}
+
+/* ─────────────────────────────────────────────
+   CONTENT SLIDES
+   ───────────────────────────────────────────── */
+.slide-body h1 {
+  font-size: var(--fs-h);
+  line-height: 1;
+  max-width: 1500px;
+  margin: 0 0 var(--gap-title) 0;
+}
+.slide-body h2:not(.title, .chapter-title, .overlay-title) {
+  font-family: var(--font-mono);
+  font-size: calc(var(--fs-sub) * 0.82);
+  font-weight: 700;
+  line-height: 1.2;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: var(--ink);
+  margin: 0 0 var(--gap-item) 0;
+}
+.slide-body p {
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: 1.45;
+  color: var(--ink-soft);
+  margin: 0 0 var(--gap-item) 0;
+  text-wrap: pretty;
+}
+.slide-body .split-heading h1 { margin-bottom: 0; }
+
+/* ─────────────────────────────────────────────
+   LISTS — a dot of the first ink with the second beside it; typewritten
+   numbers
+   ───────────────────────────────────────────── */
+.slide-body li { line-height: 1.35; }
+.slide-body ul > li { padding-inline-start: 1.1em; }
+.slide-body ul > li::before {
+  content: '';
+  position: absolute;
+  inset-inline-start: 0.08em;
+  top: 0.44em;
+  width: 0.44em;
+  height: 0.44em;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0.09em 0.07em 0 color-mix(in oklab, var(--accent-2) 85%, transparent);
+}
+.slide-body li li { font-size: 0.9em; }
+.slide-body li li::before { background: var(--accent-2); box-shadow: none; }
+.slide-body ol > li { padding-inline-start: 1.7em; }
+.slide-body ol > li::before {
+  content: counter(slide-ol, decimal-leading-zero);
+  position: absolute;
+  inset-inline-start: 0;
+  top: 0.12em;
+  font-family: var(--font-mono);
+  font-size: 0.82em;
+  font-weight: 700;
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ─────────────────────────────────────────────
+   CALLOUTS — a sheet tinted in an ink, with a halftone plate of the same
+   ink set off beside it; the title typewritten
+   ───────────────────────────────────────────── */
+.slide-body .callout {
+  --ink-of: var(--accent);
+  position: relative;
+  background: color-mix(in oklab, var(--ink-of) 13%, var(--bg));
+  border: 0;
+  border-radius: 0;
+  padding: 22px 30px;
+  margin: 18px 18px 18px 0;
+  max-width: 1200px;
+  box-shadow: 12px 12px 0 color-mix(in oklab, var(--ink-of) 55%, var(--bg));
+}
+.slide-body .callout + .callout { margin-top: 30px; }
+.slide-body :is(.callout-note, .callout-tip, .callout-important) { --ink-of: var(--accent); }
+.slide-body :is(.callout-warning, .callout-caution) { --ink-of: var(--accent-3); }
+.slide-body :is(.callout-theorem, .callout-lemma, .callout-corollary, .callout-proposition) { --ink-of: var(--accent); }
+.slide-body .callout-definition { --ink-of: var(--accent-2); }
+.slide-body :is(.callout-example, .callout-remark, .callout-proof) { --ink-of: var(--muted); }
+.slide-body .callout-title {
+  font-family: var(--font-mono);
+  font-size: var(--fs-small);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: color-mix(in oklab, var(--ink-of) 45%, var(--ink));
+  margin-bottom: 6px;
+}
+.slide-body .callout p { color: var(--ink); font-size: var(--fs-body); margin: 0; }
+.slide-body .callout p + p { margin-top: 10px; }
+
+/* ─────────────────────────────────────────────
+   CODE — typewritten on the tinted sheet, the second ink's plate beside it
+   ───────────────────────────────────────────── */
+.code-block {
+  --code-bg: var(--surface);
+  --code-radius: 0;
+  --code-size: 25px;
+  background: var(--code-bg);
+  border-radius: 0;
+  padding: 26px 36px;
+  margin: 0 12px 12px 0;
+  box-shadow: 12px 12px 0 color-mix(in oklab, var(--accent-2) 50%, var(--bg));
+  overflow: hidden;
+  font-size: var(--code-size);
+  font-family: var(--font-mono);
+  line-height: 1.55;
+}
+.code-block code { font-family: inherit; font-size: inherit; background: none; padding: 0; }
+
+/* ─────────────────────────────────────────────
+   TABLES — a typewritten head on a halftone of the second ink
+   ───────────────────────────────────────────── */
+.slide-body table { border-top: 4px solid var(--ink); border-bottom: 4px solid var(--ink); }
+.slide-body th {
+  font-family: var(--font-mono);
+  font-size: var(--fs-small);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink);
+  background: color-mix(in oklab, var(--accent-2) 16%, var(--bg));
+  border-bottom: 2px solid var(--ink);
+}
+.slide-body td { font-variant-numeric: tabular-nums; border-bottom: 1px dashed var(--rule); }
+
+/* ─────────────────────────────────────────────
+   QUOTATIONS — a large quotation mark in the first ink, out of register
+   ───────────────────────────────────────────── */
+.slide-body blockquote {
+  position: relative;
+  margin: 0 0 var(--gap-item);
+  padding: 1.3em 0 4px;
+  border: 0;
+  color: var(--ink);
+  font-weight: 500;
+}
+.slide-body blockquote::before {
+  content: '\201C';
+  position: absolute;
+  inset-inline-start: -0.04em;
+  top: -0.4em;
+  font-family: var(--font-display);
+  font-size: 4.2em;
+  font-weight: 800;
+  line-height: 1;
+  color: var(--accent);
+  text-shadow: var(--offset);
+}
+.slide-body blockquote:dir(rtl)::before { content: '\201D'; }
+
+/* ─────────────────────────────────────────────
+   FOOTNOTES AND CITATIONS — typewritten
+   ───────────────────────────────────────────── */
+.slide-footnotes, .slide-citations { font-family: var(--font-mono); color: var(--muted); }
+
+/* ─────────────────────────────────────────────
+   MATHS, AUDIENCE QUESTIONS
+   ───────────────────────────────────────────── */
+.slide .katex-display { font-size: var(--fs-sub); margin: 32px 0; overflow-x: auto; overflow-y: hidden; }
+.slide .poll-track, .slide .scale-track {
+  background: radial-gradient(circle, color-mix(in oklab, var(--accent-2) 45%, var(--bg)) 0 3px, transparent 3.5px) 0 0 / 10px 10px, var(--surface);
+  border-radius: 0;
+}
+.slide .poll-fill, .slide .scale-fill { background: var(--accent); border-radius: 0; }

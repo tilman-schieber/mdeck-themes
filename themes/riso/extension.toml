@@ -1,0 +1,73 @@
+schema = 1
+kind = "theme"
+id = "riso"
+title = "Riso"
+description = "A risograph zine: two spot inks that overprint where they meet, halftone dots, paper grain and headings printed slightly out of register; Bricolage Grotesque with Space Mono for the small print."
+version = "0.1.0"
+author = "Tilman Schieber"
+license = "MIT"
+mdeck = ">=3.7.0"  # the third accent, --accent-3
+# The palette this theme uses unless the deck sets one; colours come only from palettes.
+palette = "fluoro"
+fonts = [
+  "https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Space+Mono:wght@400;700&display=swap",
+]
+
+[files]
+styles = "styles.css"
+
+# Type, spacing and fonts used by styles.css; colours come from the palette.
+# Deck settings (params) override these.
+[tokens]
+"--fs-display" = "150px"
+"--fs-title" = "116px"
+"--fs-focus" = "84px"
+"--fs-h" = "70px"
+"--fs-sub" = "38px"
+"--fs-body" = "33px"
+"--fs-small" = "22px"
+"--fs-eyebrow" = "21px"
+"--pad-x" = "140px"
+"--pad-y" = "76px"
+"--gap-title" = "48px"
+"--gap-item" = "24px"
+# How far the second ink is printed beside the first.
+"--misregister" = "5px"
+# Paper grain over the whole slide: 0 for none.
+"--grain" = "0.5"
+"--font-display" = "\"Bricolage Grotesque\", system-ui, sans-serif"
+"--font-body" = "\"Bricolage Grotesque\", system-ui, sans-serif"
+"--font-mono" = "\"Space Mono\", ui-monospace, Menlo, Consolas, monospace"
+
+[params.fontDisplay]
+token = "--font-display"
+title = "Display font"
+
+[params.fontBody]
+token = "--font-body"
+title = "Body font"
+
+[params.misregister]
+token = "--misregister"
+title = "Misregistration of the headings"
+description = "How far the second ink sits beside the first: 5px by default, up to about 10px; 0px prints in register."
+
+[params.grain]
+token = "--grain"
+title = "Paper grain"
+description = "From 0 (smooth paper, no grain) to 1 (rough newsprint); 0.5 by default."
+
+# What this theme is for and how to write for it: shown in listings, and read
+# by assistants that write slides as the theme author's advice.
+[guide]
+suits = ["creative and community talks", "meetups and workshops", "student and art-school work", "event and festival announcements"]
+avoid = ["formal reports", "dense tables", "talks with many photographs that need true colour"]
+writing = """
+Like a zine printed in two inks: big, short headings, printed in the first
+ink with the second showing beside them, so keep them to a few words. Title
+and chapter slides carry a disc and a halftone block that overprint where
+they meet. Emphasis (*word*) is a highlighter stroke in the second ink; bold
+is set in the first. Pictures are printed as duotones in the two inks; use
+ones with clear shapes rather than ones whose colours matter. Small print
+(eyebrows, captions, the footer) is set in a typewriter face.
+"""

@@ -1,0 +1,52 @@
+schema = 1
+kind = "palette"
+id = "fluoro"
+title = "Fluoro"
+description = "Two risograph inks, fluorescent pink and teal, on grey newsprint with text in deep blue; at night, the same inks on black paper."
+version = "0.1.0"
+author = "Tilman Schieber"
+license = "MIT"
+mdeck = ">=3.1.0"
+
+# Pink is the accent, teal the second: two spot inks that overprint to a deep
+# blue, which is why the text is that blue rather than black. Marigold, the
+# third accent, is too light to read as text; it marks warnings. The pink is
+# a shade darker by day than the ink it is named after, so it can be read.
+
+[light]
+"--bg" = "#efece4"
+"--surface" = "#e4e0d5"
+"--ink" = "#232b4f"
+"--ink-soft" = "#38406a"
+"--muted" = "#5f6280"
+"--rule" = "#d6d1c3"
+"--accent" = "#e0247f"
+"--accent-2" = "#00797f"
+"--accent-3" = "#f5a800"
+"--on-accent" = "#ffffff"
+"--token-default" = "#232b4f"
+"--token-comment" = "#6c6e88"
+"--token-string" = "#00666b"
+"--token-number" = "#c0186b"
+"--token-keyword" = "#c0186b"
+"--token-function" = "#00666b"
+"--token-operator" = "#5f6280"
+
+[dark]
+"--bg" = "#1c1a1b"
+"--surface" = "#29262a"
+"--ink" = "#f1ede4"
+"--ink-soft" = "#d8d3c8"
+"--muted" = "#a29c94"
+"--rule" = "#363236"
+"--accent" = "#ff4fae"
+"--accent-2" = "#2ec4c4"
+"--accent-3" = "#ffe14a"
+"--on-accent" = "#1c1a1b"
+"--token-default" = "#f1ede4"
+"--token-comment" = "#8f8981"
+"--token-string" = "#5fd6d6"
+"--token-number" = "#ff7fc4"
+"--token-keyword" = "#ff7fc4"
+"--token-function" = "#5fd6d6"
+"--token-operator" = "#b7b1a8"
