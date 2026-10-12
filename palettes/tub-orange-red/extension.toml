@@ -1,0 +1,41 @@
+schema = 1
+kind = "palette"
+id = "tub-orange-red"
+title = "TU Berlin Orange–Red"
+description = "TU Berlin's orange–red gradient (Verlauf) with TU red for headings, dark grey text on white."
+version = "0.1.0"
+author = "Tilman Schieber"
+license = "MIT"
+mdeck = ">=3.1.0"
+# Only for the tuberlin theme: the screen colours of TU Berlin's corporate
+# design. TU red is the accent, the only one set as text (headings,
+# emphasis); the gradient runs from the second accent to the third. The
+# design has no dark version; the dark one is made of its colours too:
+# TU black, white and light grey, the same red and gradients, and the
+# logo in white.
+theme = "tuberlin"
+
+[light]
+"--bg" = "#ffffff"
+"--surface" = "#f0f0f0"
+"--ink" = "#434343"
+"--ink-soft" = "#434343"
+"--muted" = "#6b6b6b"
+"--rule" = "#b2b2b2"
+"--accent" = "#c40d1e"
+"--accent-2" = "#ff6c00"
+"--accent-3" = "#c40d1e"
+"--on-accent" = "#ffffff"
+
+[dark]
+"--bg" = "#000000"
+"--surface" = "#1e1e1e"
+"--ink" = "#ffffff"
+"--ink-soft" = "#e0e0e0"
+"--muted" = "#b2b2b2"
+"--rule" = "#434343"
+"--accent" = "#c40d1e"
+"--accent-2" = "#ff6c00"
+"--accent-3" = "#c40d1e"
+"--on-accent" = "#ffffff"
+"--logo-filter" = "brightness(0) invert(1)"

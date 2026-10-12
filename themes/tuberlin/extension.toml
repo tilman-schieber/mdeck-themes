@@ -1,0 +1,71 @@
+schema = 1
+kind = "theme"
+id = "tuberlin"
+title = "TU Berlin"
+description = "The corporate design of TU Berlin, after the tubci Typst template (unofficial): red headings on white, a slanted gradient band along the foot, gradient title, section and focus slides; Mulish."
+version = "0.1.0"
+author = "Tilman Schieber"
+license = "MIT"
+mdeck = ">=3.9.0"  # parameters with a type
+homepage = "https://github.com/tilman-schieber/tubci"
+# The palette this theme uses unless the deck sets one; colours come only from palettes.
+palette = "tub-blue-violet"
+palettes = ["tub-blue-violet", "tub-blue-green", "tub-orange-red", "tub-red-violet"]  # the corporate design's four gradients: no other palettes
+fonts = [
+  "https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,400;0,600;0,700;0,800;1,400;1,700&display=swap",
+]
+
+[files]
+styles = "styles.css"
+
+# Type, spacing and fonts used by styles.css; colours come from the palette.
+# The sizes are the template's, from a 297 mm slide scaled to 1920 px
+# (18 pt text, 24 pt headings, 28 pt titles, 14 pt footer).
+[tokens]
+"--fs-display" = "64px"
+"--fs-title" = "64px"
+"--fs-focus" = "62px"
+"--fs-h" = "55px"
+"--fs-sub" = "44px"
+"--fs-body" = "41px"
+"--fs-small" = "32px"
+"--fs-eyebrow" = "26px"
+# Margins: 14 mm at the sides, 10 mm above.
+"--pad-x" = "90px"
+"--pad-y" = "65px"
+"--gap-title" = "52px"
+"--gap-item" = "26px"
+# The rise of every slanted edge: 4 % of the slide's height.
+"--slant" = "43px"
+# The band along the foot of a content slide, measured at its high end.
+"--band" = "140px"
+"--font-display" = "\"Mulish\", \"Muli\", \"Helvetica Neue\", Arial, sans-serif"
+"--font-body" = "\"Mulish\", \"Muli\", \"Helvetica Neue\", Arial, sans-serif"
+"--font-mono" = "ui-monospace, \"SF Mono\", Menlo, Consolas, monospace"
+
+[params.fontDisplay]
+token = "--font-display"
+title = "Display font"
+type = "font"
+
+[params.fontBody]
+token = "--font-body"
+title = "Body font"
+type = "font"
+
+# What this theme is for and how to write for it: shown in listings, and read
+# by assistants that write slides as the theme author's advice.
+[guide]
+suits = ["TU Berlin lectures and talks", "TU Berlin seminars and colloquia", "TU Berlin project reports"]
+avoid = ["talks outside TU Berlin"]
+writing = """
+The corporate design of TU Berlin, and only its own four gradients as
+palettes (tub-blue-violet, tub-blue-green, tub-orange-red, tub-red-violet).
+Headings are TU red on white, short enough for one line. Emphasis (*word*)
+is TU red, as the template's alert. Set meta.logo to the TU logo for the
+title slide, and show.author: all to put name, institute and date in the
+footer band of every slide, as the template does. Use chapter slides for
+sections and focus slides for one statement or formula: both are filled
+with the gradient. A title slide with an image puts the picture in a
+slanted band between the logo and the title.
+"""
