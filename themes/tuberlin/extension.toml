@@ -3,7 +3,7 @@ kind = "theme"
 id = "tuberlin"
 title = "TU Berlin"
 description = "The corporate design of TU Berlin, after the tubci Typst template (unofficial): red headings on white, a slanted gradient band along the foot, gradient title, section and focus slides; Mulish."
-version = "0.1.0"
+version = "0.1.1"
 author = "Tilman Schieber"
 license = "MIT"
 mdeck = ">=3.9.0"  # parameters with a type

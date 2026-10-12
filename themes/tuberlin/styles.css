@@ -121,6 +121,14 @@
 .meta { font-family: var(--font-body); font-size: var(--fs-small); color: var(--muted); }
 /* Emphasis is the template's alert: TU red. */
 em { font-style: normal; color: var(--accent); }
+/* In a red heading and on the gradient, red would not show: there the
+   emphasis keeps the colour of its text and is underlined. */
+:is(.slide-body h1, .display, .chapter-title, .overlay-title, .text-pane .title, .slide--focus, .slide--chapter) em {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-thickness: 0.07em;
+  text-underline-offset: 0.14em;
+}
 strong { font-weight: 700; color: var(--ink); }
 .slide-body :not(pre) > code {
   font-family: var(--font-mono);
@@ -134,10 +142,10 @@ strong { font-weight: 700; color: var(--ink); }
    CONTENT SLIDES — the heading in TU red, bold, in a strip 19 mm high
    that leaves the top right to the logo
    ───────────────────────────────────────────── */
-.slide-body h1 {
-  display: flex;
-  align-items: center;
-  min-height: 123px;
+/* A one-line heading sits in the middle of the strip; a longer one grows
+   it. (No flex here: it would cut an emphasised word out of the line.) */
+.slide-body h1:not(.display, .title, .chapter-title, .overlay-title) {
+  padding-block: calc((123px - 1.2em) / 2);
   max-width: calc(100% - 207px);
   font-size: var(--fs-h);
   color: var(--accent);
@@ -285,9 +293,9 @@ strong { font-weight: 700; color: var(--ink); }
   min-height: 0;
   text-wrap: balance;
 }
-.slide--focus .focus-content h1 { display: block; font-weight: 700; }
+.slide--focus .focus-content h1 { display: block; padding: 0; font-weight: 700; }
 .slide--focus .focus-content :is(p, h1) + :is(p, h1) { margin-top: 24px; }
-.slide--focus :is(em, strong, a) { color: #fff; }
+.slide--focus :is(strong, a) { color: #fff; }
 .slide--focus .katex-display { font-size: var(--fs-focus); }
 .focus-attribution {
   font-family: var(--font-body);
