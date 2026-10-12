@@ -1,0 +1,66 @@
+schema = 1
+kind = "theme"
+id = "headline"
+title = "Headline"
+description = "A poster on a coloured field: tall condensed capitals in Anton that fill the slide, thick black rules, quiet Barlow for the text."
+version = "0.1.0"
+author = "Tilman Schieber"
+license = "MIT"
+mdeck = ">=3.9.0"  # parameters with a type
+# The palette this theme uses unless the deck sets one; colours come only from palettes.
+palette = "sage"
+fonts = [
+  "https://fonts.googleapis.com/css2?family=Anton&family=Barlow:ital,wght@0,400;0,500;0,600;1,400&family=Barlow+Condensed:wght@600;700&display=swap",
+]
+
+[files]
+styles = "styles.css"
+
+# Type, spacing and fonts used by styles.css; colours come from the palette.
+# Deck settings (params) override these. Condensed capitals take little room
+# across, so the headings are larger than in other themes.
+[tokens]
+
+# Type scale (px) — projection-appropriate at 1920×1080
+"--fs-display" = "220px"
+"--fs-title" = "164px"
+"--fs-focus" = "150px"
+"--fs-h" = "104px"
+"--fs-sub" = "44px"
+"--fs-body" = "34px"
+"--fs-small" = "26px"
+"--fs-eyebrow" = "26px"
+
+# Spacing
+"--pad-x" = "120px"
+"--pad-y" = "72px"
+"--gap-title" = "48px"
+"--gap-item" = "26px"
+
+# Type families
+"--font-display" = "Anton, Impact, \"Arial Narrow\", sans-serif"
+"--font-body" = "Barlow, \"Helvetica Neue\", Helvetica, Arial, sans-serif"
+"--font-label" = "\"Barlow Condensed\", \"Arial Narrow\", Arial, sans-serif"
+
+# Settings authors can change under `params:` in the deck; each points at a token above.
+[params.fontDisplay]
+token = "--font-display"
+title = "Display font"
+type = "font"
+
+[params.fontBody]
+token = "--font-body"
+title = "Body font"
+type = "font"
+
+# What this theme is for and how to write for it: shown in listings, and read
+# by assistants that write slides as the theme author's advice.
+[guide]
+suits = ["keynotes and opening talks", "campaigns, launches and announcements", "talks with few words per slide", "sport, culture and events"]
+avoid = ["long running text", "dense tables", "formal reports"]
+writing = """
+A poster on every slide: headings are tall condensed capitals, set so large
+that three to six words fill a line. Write headings as short statements and
+let one slide say one thing. Body text is plain and smaller, so keep it to a
+few lines or a short list. A focus slide is the loudest: one sentence.
+"""

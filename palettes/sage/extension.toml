@@ -1,0 +1,51 @@
+schema = 1
+kind = "palette"
+id = "sage"
+title = "Sage"
+description = "A muted sage green field with near-black ink, brick red and deep pine; at night, the same on dark olive."
+version = "0.1.0"
+author = "Tilman Schieber"
+license = "MIT"
+mdeck = ">=3.1.0"
+
+# The background is a colour, but a quiet one: grey-green, so a whole talk on
+# it does not tire. Brick red is the accent, pine the second; ochre, the third,
+# only marks things.
+
+[light]
+"--bg" = "#c9d2be"
+"--surface" = "#bcc6b0"
+"--ink" = "#1b2018"
+"--ink-soft" = "#2e3529"
+"--muted" = "#465041"
+"--rule" = "#a9b49c"
+"--accent" = "#8c2f1a"
+"--accent-2" = "#2b5a4c"
+"--accent-3" = "#c9861f"
+"--on-accent" = "#f3efe3"
+"--token-default" = "#1b2018"
+"--token-comment" = "#4e5848"
+"--token-string" = "#2b5a4c"
+"--token-number" = "#8c2f1a"
+"--token-keyword" = "#8c2f1a"
+"--token-function" = "#2b5a4c"
+"--token-operator" = "#465041"
+
+[dark]
+"--bg" = "#1e241d"
+"--surface" = "#283027"
+"--ink" = "#e7ebdc"
+"--ink-soft" = "#ccd2c0"
+"--muted" = "#a3ab98"
+"--rule" = "#353e33"
+"--accent" = "#ee8f6c"
+"--accent-2" = "#93c4ae"
+"--accent-3" = "#e2b04a"
+"--on-accent" = "#1e241d"
+"--token-default" = "#e7ebdc"
+"--token-comment" = "#8f9885"
+"--token-string" = "#93c4ae"
+"--token-number" = "#ee8f6c"
+"--token-keyword" = "#ee8f6c"
+"--token-function" = "#93c4ae"
+"--token-operator" = "#b4bba9"

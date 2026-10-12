@@ -1,0 +1,51 @@
+schema = 1
+kind = "palette"
+id = "apricot"
+title = "Apricot"
+description = "A soft apricot field with dark brown ink, oxblood and bottle green; at night, the same on dark walnut."
+version = "0.1.0"
+author = "Tilman Schieber"
+license = "MIT"
+mdeck = ">=3.1.0"
+
+# A warm colour for the background, kept soft so it carries a whole talk.
+# Oxblood is the accent, bottle green the second; amber, the third, only
+# marks things.
+
+[light]
+"--bg" = "#efcfb4"
+"--surface" = "#e6c1a2"
+"--ink" = "#251912"
+"--ink-soft" = "#3d2b20"
+"--muted" = "#5c4434"
+"--rule" = "#d9b293"
+"--accent" = "#8e2433"
+"--accent-2" = "#2f5a48"
+"--accent-3" = "#c47a12"
+"--on-accent" = "#f8ece0"
+"--token-default" = "#251912"
+"--token-comment" = "#6a5040"
+"--token-string" = "#2f5a48"
+"--token-number" = "#8e2433"
+"--token-keyword" = "#8e2433"
+"--token-function" = "#2f5a48"
+"--token-operator" = "#5c4434"
+
+[dark]
+"--bg" = "#2a1f19"
+"--surface" = "#362820"
+"--ink" = "#f5e5d5"
+"--ink-soft" = "#e0cbb8"
+"--muted" = "#b49c88"
+"--rule" = "#45342a"
+"--accent" = "#f4907f"
+"--accent-2" = "#97c7ae"
+"--accent-3" = "#eab651"
+"--on-accent" = "#2a1f19"
+"--token-default" = "#f5e5d5"
+"--token-comment" = "#9c8573"
+"--token-string" = "#97c7ae"
+"--token-number" = "#f4907f"
+"--token-keyword" = "#f4907f"
+"--token-function" = "#97c7ae"
+"--token-operator" = "#c9b29f"
