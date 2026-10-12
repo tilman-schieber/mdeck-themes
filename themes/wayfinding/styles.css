@@ -335,34 +335,40 @@ strong { color: var(--ink); font-weight: 800; }
    numbers its stations.
    ───────────────────────────────────────────── */
 .slide-body li { line-height: 1.35; }
-.slide-body ul > li { padding-inline-start: 1.25em; }
+/* A stop is as many whole pixels wider than the line as makes an even
+   number, so that the line runs through its middle and not half a pixel
+   beside it. */
+.slide-body ul > li { padding-inline-start: 1.25em; --stop-w: calc(var(--line) + round(0.62em - var(--line), 2px)); }
 .slide-body ul > li::before {
   content: '';
   position: absolute;
   z-index: 1;
   inset-inline-start: 0;
-  top: 0.365em;
-  width: 0.62em;
-  height: 0.62em;
+  top: calc(0.675em - var(--stop-w) / 2);
+  width: var(--stop-w);
+  height: var(--stop-w);
   box-sizing: border-box;
   border-radius: 50%;
   border: max(4px, calc(var(--line) * 0.75)) solid var(--stop, var(--accent));
   background: var(--bg);
 }
 .slide-body ul > li:is(:first-child, :last-child)::before { background: var(--stop, var(--accent)); }
+/* The line is drawn in a box as wide as the stop, centred in it; it
+   reaches the next stop across the list's gap, which a nested list
+   halves. */
 .slide-body :is(ul, ol) > li:not(:last-child)::after {
   content: '';
   position: absolute;
   z-index: 0;
-  inset-inline-start: calc(var(--stop-x, 0.31em) - var(--line) / 2);
+  inset-inline-start: 0;
   top: 0.6em;
-  width: var(--line);
-  height: calc(100% + var(--gap-item));
-  background: var(--stop, var(--accent));
+  width: var(--stop-w);
+  height: calc(100% + var(--list-gap, var(--gap-item)));
+  background: linear-gradient(var(--stop, var(--accent)), var(--stop, var(--accent))) 50% 0 / var(--line) 100% no-repeat;
 }
 .slide-body li li { font-size: 0.88em; }
-.slide-body li :is(ul, ol) { --stop: var(--accent-2); }
-.slide-body ol > li { padding-inline-start: 1.85em; --stop-x: 0.62em; }
+.slide-body li :is(ul, ol) { --stop: var(--accent-2); --list-gap: calc(var(--gap-item) * 0.5); }
+.slide-body ol > li { padding-inline-start: 1.85em; --stop-w: calc(var(--line) + round(1.2424em - var(--line), 2px)); }
 .slide-body ol > li::before {
   content: counter(slide-ol);
   position: absolute;
@@ -371,8 +377,8 @@ strong { color: var(--ink); font-weight: 800; }
   top: 0.08em;
   display: grid;
   place-items: center;
-  width: 1.74em;
-  height: 1.74em;
+  width: calc(var(--line) + round(1.74em - var(--line), 2px));
+  height: calc(var(--line) + round(1.74em - var(--line), 2px));
   padding-top: 0.1em;
   box-sizing: border-box;
   border-radius: 50%;
@@ -403,40 +409,41 @@ strong { color: var(--ink); font-weight: 800; }
   margin: 16px 0 0;
   max-width: 1300px;
 }
-.slide-body .callout:not(.callout-proof)::before {
-  content: 'i';
+/* The sign is two layers in the same cell: the panel (::before) and the
+   pictogram (::after), drawn as a mask so that it sits in the middle of the
+   panel whatever the font. */
+.slide-body .callout:not(.callout-proof)::before,
+.slide-body .callout:not(.callout-proof)::after {
+  content: '';
   grid-column: 1;
   grid-row: 1 / span 9;
-  display: grid;
-  place-items: center;
   width: 1.5em;
   height: 1.5em;
-  padding-top: 0.1em;
-  box-sizing: border-box;
+}
+.slide-body .callout:not(.callout-proof)::before {
   border-radius: var(--badge-radius);
   background: var(--mark);
-  color: var(--on-accent);
-  font-family: var(--font-display);
-  font-weight: 800;
-  line-height: 1;
+}
+.slide-body .callout:not(.callout-proof)::after {
+  --glyph: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white' stroke='white'><circle cx='12' cy='6.6' r='2.1' stroke='none'/><rect x='10.2' y='10.2' width='3.6' height='9.2' rx='0.6' stroke='none'/></svg>");
+  background: var(--on-mark, var(--on-accent));
+  -webkit-mask: var(--glyph) 50% 50% / 74% no-repeat;
+  mask: var(--glyph) 50% 50% / 74% no-repeat;
 }
 .slide-body .callout:not(.callout-proof) > * { grid-column: 2; }
-.slide-body .callout.callout-tip::before { content: '\2713'; }
-.slide-body .callout.callout-important::before { content: '!'; }
-.slide-body .callout:is(.callout-warning, .callout-caution) { --mark: var(--accent-3); }
+.slide-body .callout.callout-tip::after { --glyph: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white' stroke='white'><path d='M6.2 12.4l3.9 4 7.7-8.8' fill='none' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'/></svg>"); }
+.slide-body .callout.callout-important::after { --glyph: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white' stroke='white'><rect x='10.2' y='4.6' width='3.6' height='9.6' rx='1.8' stroke='none'/><circle cx='12' cy='17.4' r='2.1' stroke='none'/></svg>"); }
+.slide-body .callout:is(.callout-warning, .callout-caution) { --mark: var(--accent-3); --on-mark: light-dark(var(--ink), var(--bg)); }
 .slide-body .callout:is(.callout-warning, .callout-caution)::before {
-  content: '!';
   border-radius: 0;
   clip-path: polygon(50% 4%, 100% 96%, 0 96%);
-  padding-top: 0.42em;
-  font-size: 0.92em;
-  color: light-dark(var(--ink), var(--bg));
 }
+.slide-body .callout:is(.callout-warning, .callout-caution)::after { --glyph: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white' stroke='white'><rect x='10.5' y='8.6' width='3' height='7.6' rx='1.5' stroke='none'/><circle cx='12' cy='19' r='1.7' stroke='none'/></svg>"); -webkit-mask-size: 100%; mask-size: 100%; }
 .slide-body .callout.callout-definition { --mark: var(--accent-2); }
-.slide-body .callout.callout-definition::before { content: '='; }
-.slide-body .callout:is(.callout-theorem, .callout-lemma, .callout-corollary, .callout-proposition)::before { content: '\2234'; }
-.slide-body .callout:is(.callout-example, .callout-remark) { --mark: var(--muted); }
-.slide-body .callout:is(.callout-example, .callout-remark)::before { content: '\203A'; color: var(--bg); }
+.slide-body .callout.callout-definition::after { --glyph: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white' stroke='white'><rect x='6' y='7.6' width='12' height='3.2' rx='0.6' stroke='none'/><rect x='6' y='13.2' width='12' height='3.2' rx='0.6' stroke='none'/></svg>"); }
+.slide-body .callout:is(.callout-theorem, .callout-lemma, .callout-corollary, .callout-proposition)::after { --glyph: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white' stroke='white'><circle cx='12' cy='7.6' r='2.1' stroke='none'/><circle cx='7' cy='16.4' r='2.1' stroke='none'/><circle cx='17' cy='16.4' r='2.1' stroke='none'/></svg>"); }
+.slide-body .callout:is(.callout-example, .callout-remark) { --mark: var(--muted); --on-mark: var(--bg); }
+.slide-body .callout:is(.callout-example, .callout-remark)::after { --glyph: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white' stroke='white'><path d='M9.8 6.5l5.5 5.5-5.5 5.5' fill='none' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'/></svg>"); }
 .slide-body .callout-title {
   font-family: var(--font-body);
   font-size: var(--fs-small);

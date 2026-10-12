@@ -3,7 +3,7 @@ kind = "theme"
 id = "wayfinding"
 title = "Wayfinding"
 description = "A station's signs and route map: a route under the title and along each chapter with its station marked, lists as stops on a line, headings on dark sign panels, callouts with pictograms and tables as a departure board; Overpass, after the highway sign alphabet."
-version = "0.1.0"
+version = "0.1.1"
 author = "Tilman Schieber"
 license = "MIT"
 mdeck = ">=3.9.0"  # parameters with a type
