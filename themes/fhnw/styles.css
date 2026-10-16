@@ -53,6 +53,16 @@ html, body { font-weight: 300; }
   filter: var(--logo-filter, none);
   transform: translateY(calc(var(--fs-eyebrow) * 0.5 - 50%));
 }
+/* On the other slides (show.organization: all) the logo keeps the brand's
+   place at the left, but in the header's line, so it no longer sits on the
+   heading. The section label stays at the right. */
+.slide:not(.slide--title) .slide-logo {
+  position: static;
+  height: 48px;
+  max-width: 240px;
+  margin-inline-end: auto;
+  transform: none;
+}
 
 /* Footer: a small yellow Akzentlinie (signature element) replaces the
    conventional hairline border-top. Rendered as a background-image
@@ -569,10 +579,11 @@ blockquote {
    yellow accent rule on the left edge but drops all corner
    radius and shadows.
    ───────────────────────────────────────────── */
+/* The size is set on .slide, so a split slide's columns can set a smaller one. */
+.slide { --code-size: 26px; }
 .code-block {
   --code-bg: var(--surface);
   --code-radius: 0;
-  --code-size: 26px;
   background: var(--code-bg);
   border-radius: 0;
   border-inline-start: 8px solid var(--accent);

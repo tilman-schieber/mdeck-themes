@@ -64,6 +64,15 @@
   object-fit: contain;
   filter: var(--logo-filter, none);
 }
+/* On the other slides (show.organization: all) it stands in the small
+   print's line, before the section, instead of in the corner. */
+.slide:not(.slide--title) .slide-logo {
+  position: static;
+  height: 40px;
+  max-width: 240px;
+  margin-inline-start: auto;
+}
+.slide:not(.slide--title) .slide-logo + span:not(:empty) { margin-inline-start: 32px; }
 
 /* ─────────────────────────────────────────────
    TYPE
@@ -475,7 +484,6 @@ strong { color: var(--accent); font-weight: 800; }
 .code-block {
   --code-bg: var(--surface);
   --code-radius: 0;
-  --code-size: 25px;
   background: var(--code-bg);
   border-radius: 0;
   padding: 26px 36px;
@@ -486,6 +494,9 @@ strong { color: var(--accent); font-weight: 800; }
   font-family: var(--font-mono);
   line-height: 1.55;
 }
+/* The size is set on the slide, so the split layout's smaller code (on its
+   columns) reaches the block. */
+.slide { --code-size: 25px; }
 .code-block code { font-family: inherit; font-size: inherit; background: none; padding: 0; }
 
 /* ─────────────────────────────────────────────

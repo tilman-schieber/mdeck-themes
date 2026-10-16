@@ -3,7 +3,7 @@ kind = "theme"
 id = "headline"
 title = "Headline"
 description = "A poster on a coloured field: tall condensed capitals in Anton that fill the slide, thick black rules, quiet Barlow for the text."
-version = "0.1.0"
+version = "0.1.1"
 author = "Tilman Schieber"
 license = "MIT"
 mdeck = ">=3.9.0"  # parameters with a type

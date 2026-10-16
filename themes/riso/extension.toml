@@ -3,7 +3,7 @@ kind = "theme"
 id = "riso"
 title = "Riso"
 description = "A risograph zine: two spot inks that overprint where they meet, halftone dots, paper grain, pictures printed in the inks and headings slightly out of register; Bricolage Grotesque with Space Mono for the small print."
-version = "0.3.0"
+version = "0.3.1"
 author = "Tilman Schieber"
 license = "MIT"
 mdeck = ">=3.9.0"  # parameters with a type

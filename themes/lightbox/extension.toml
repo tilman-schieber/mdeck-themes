@@ -3,7 +3,7 @@ kind = "theme"
 id = "lightbox"
 title = "Lightbox"
 description = "For talks made of photographs: pictures edge to edge, titles in Instrument Serif on a soft shadow, grids of photos from plain Markdown, neutral greys so nothing tints the pictures."
-version = "0.3.0"
+version = "0.3.1"
 author = "Tilman Schieber"
 license = "MIT"
 mdeck = ">=3.9.0"  # parameters with a type

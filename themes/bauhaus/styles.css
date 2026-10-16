@@ -32,6 +32,15 @@
   object-fit: contain;
   filter: var(--logo-filter, none);
 }
+/* On the other slides (show.organization: all) the logo stands in the
+   header's line, before the section, instead of in the corner. */
+.slide:not(.slide--title) .slide-logo {
+  position: static;
+  height: 40px;
+  max-width: 240px;
+  margin-inline-start: auto;
+}
+.slide:not(.slide--title) .slide-logo + span:not(:empty) { margin-inline-start: 32px; }
 
 /* ─────────────────────────────────────────────
    TYPE
@@ -380,10 +389,11 @@ strong { color: var(--ink); font-weight: 700; }
 /* ─────────────────────────────────────────────
    CODE — on the surface, a blue bar on the left
    ───────────────────────────────────────────── */
+/* The size is set on .slide, so a split slide's columns can set a smaller one. */
+.slide { --code-size: 26px; }
 .code-block {
   --code-bg: var(--surface);
   --code-radius: 0;
-  --code-size: 26px;
   background: var(--code-bg);
   border-radius: 0;
   border-inline-start: var(--bar) solid var(--accent-2);

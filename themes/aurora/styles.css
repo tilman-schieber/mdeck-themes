@@ -55,7 +55,7 @@
   from { transform: skewX(calc(-14.5deg - 3.5deg * var(--motion))) translateX(calc(-2.5% * var(--motion))); }
   to { transform: skewX(calc(-14.5deg + 3.5deg * var(--motion))) translateX(calc(2.5% * var(--motion))); }
 }
-deck-stage[data-deck-static] .slide::before { animation: none; }
+[data-deck-static] .slide::before { animation: none; }
 /* In a PDF the curtains print as images (Chrome rasterizes see-through
    gradients, about 800 KB a slide), so only the slides that carry the look
    keep them; a mask would print as an image too. */
@@ -92,6 +92,15 @@ deck-stage[data-deck-static] .slide::before { animation: none; }
   --accent: var(--inverse-accent);
   --accent-2: var(--inverse-accent-2);
   --on-accent: var(--inverse-on-accent);
+  /* Code and the logo follow the variant too (mdeck's appearance tokens). */
+  --logo-filter: var(--inverse-logo-filter, none);
+  --token-default: var(--inverse-token-default);
+  --token-comment: var(--inverse-token-comment);
+  --token-string: var(--inverse-token-string);
+  --token-number: var(--inverse-token-number);
+  --token-keyword: var(--inverse-token-keyword);
+  --token-function: var(--inverse-token-function);
+  --token-operator: var(--inverse-token-operator);
   background: var(--bg);
   color: var(--ink);
 }
@@ -150,6 +159,16 @@ deck-stage[data-deck-static] .slide::before { animation: none; }
   filter: var(--logo-filter, none);
   transform: translateY(calc(var(--fs-eyebrow) * 0.5 - 50%));
 }
+/* On the other slides (show.organization: all) the logo stands in the
+   header's line, before the section, instead of in the corner. */
+.slide:not(.slide--title) .slide-logo {
+  position: static;
+  height: 40px;
+  max-width: 240px;
+  margin-inline-start: auto;
+  transform: none;
+}
+.slide:not(.slide--title) .slide-logo + span:not(:empty) { margin-inline-start: 32px; }
 
 .slide-footer {
   font-family: var(--font-body);
@@ -600,10 +619,11 @@ strong { color: var(--ink); font-weight: 700; }
 .slide-body :is(.callout-theorem, .callout-lemma, .callout-corollary) .callout-title { color: var(--accent); }
 .slide-body .callout-definition .callout-title { color: var(--accent-2); }
 
+/* The size is set on .slide, so a split slide's columns can set a smaller one. */
+.slide { --code-size: 30px; }
 .code-block {
   --code-bg: color-mix(in oklab, var(--surface) 92%, transparent);
   --code-radius: 20px;
-  --code-size: 30px;
   background: var(--code-bg);
   border-radius: var(--code-radius);
   padding: 40px 48px;

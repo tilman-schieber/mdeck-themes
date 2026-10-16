@@ -3,7 +3,7 @@ kind = "theme"
 id = "margin"
 title = "Margin"
 description = "A handout in the manner of Edward Tufte: EB Garamond on paper, a wide right margin where footnotes, references and callouts become sidenotes, italic headings, small caps, booktabs tables and nothing that is not content."
-version = "0.2.0"
+version = "0.2.1"
 author = "Tilman Schieber"
 license = "MIT"
 mdeck = ">=3.9.0"  # parameters with a type

@@ -3,7 +3,7 @@ kind = "theme"
 id = "fhnw"
 title = "FHNW"
 description = "The FHNW corporate design: Inter, black on white, yellow accent areas."
-version = "1.2.0"
+version = "1.2.1"
 author = "Tilman Schieber"
 license = "MIT"
 mdeck = ">=3.9.0"  # parameters with a type

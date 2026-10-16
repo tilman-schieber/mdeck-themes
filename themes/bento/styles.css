@@ -45,6 +45,15 @@
   object-fit: contain;
   filter: var(--logo-filter, none);
 }
+/* On the other slides (show.organization: all) the logo stands in the
+   header's line, before the section, instead of in the corner. */
+.slide:not(.slide--title) .slide-logo {
+  position: static;
+  height: 36px;
+  max-width: 240px;
+  margin-inline-start: auto;
+}
+.slide:not(.slide--title) .slide-logo + span:not(:empty) { margin-inline-start: 32px; }
 .slide-footer {
   font-family: var(--font-body);
   font-size: var(--fs-small);
@@ -426,7 +435,10 @@ strong { color: var(--ink); font-weight: 700; }
   grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
   grid-auto-rows: minmax(160px, 1fr);
   gap: var(--tile-gap);
-  /* The tiles take the room the slide has left, as a bento box is full. */
+}
+/* The tiles take the room the slide has left, as a bento box is full — when
+   the list is the last block; before another block they size to their content. */
+.slide:not([class*="slide--"]) > .slide-body > :is(ul, ol):last-child {
   flex: 1 1 auto;
   min-height: 0;
   max-height: 760px;
@@ -597,10 +609,11 @@ strong { color: var(--ink); font-weight: 700; }
 /* ─────────────────────────────────────────────
    CODE — a tile of its own
    ───────────────────────────────────────────── */
+/* The size is set on .slide, so a split slide's columns can set a smaller one. */
+.slide { --code-size: 28px; }
 .code-block {
   --code-bg: var(--tile-bg);
   --code-radius: var(--tile-radius);
-  --code-size: 28px;
   background: var(--code-bg);
   border-radius: var(--code-radius);
   padding: 36px 44px;
