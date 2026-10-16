@@ -51,8 +51,8 @@
 .slide-header > span:empty { display: none; }
 .slide-header:has(.slide-logo) .brand { visibility: hidden; }
 /* On the other slides (show.organization: all) the logo keeps its corner,
-   as in the template, and the hidden organisation leaves the line, so the
-   section stands at the start of it, clear of the logo. */
+   and the hidden organisation leaves the line, so the section stands at
+   the start of it, clear of the logo. */
 .slide:not(.slide--title) .slide-header:has(.slide-logo) .brand { display: none; }
 .slide-logo {
   position: absolute;
