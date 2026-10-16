@@ -3,7 +3,7 @@ kind = "theme"
 id = "bento"
 title = "Bento"
 description = "Rounded tiles, as on a product page: every list item, paragraph, table and callout on a tile of its own; lists become grids with a feature tile in the accent, bold figures become big numbers; Plus Jakarta Sans throughout."
-version = "0.2.0"
+version = "0.2.1"
 author = "Tilman Schieber"
 license = "MIT"
 mdeck = ">=3.9.0"  # parameters with a type

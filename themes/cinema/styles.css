@@ -26,6 +26,16 @@
   filter: var(--logo-filter, none);
   transform: translateY(calc(var(--fs-eyebrow) * 0.5 - 50%));
 }
+/* On the other slides (show.organization: all) the logo stands in the
+   header's line, before the section, instead of in the corner. */
+.slide:not(.slide--title) .slide-logo {
+  position: static;
+  height: 40px;
+  max-width: 240px;
+  margin-inline-start: auto;
+  transform: none;
+}
+.slide:not(.slide--title) .slide-logo + span:not(:empty) { margin-inline-start: 32px; }
 .slide-footer {
   font-family: var(--font-body);
   font-size: var(--fs-small);
@@ -308,10 +318,11 @@ strong { color: var(--ink); font-weight: 600; }
 /* ─────────────────────────────────────────────
    CODE — on the surface, no frame
    ───────────────────────────────────────────── */
+/* The size is set on .slide, so a split slide's columns can set a smaller one. */
+.slide { --code-size: 28px; }
 .code-block {
   --code-bg: var(--surface, var(--rule));
   --code-radius: 6px;
-  --code-size: 28px;
   background: var(--code-bg);
   border-radius: var(--code-radius);
   padding: 36px 44px;
@@ -401,6 +412,9 @@ strong { color: var(--ink); font-weight: 600; }
 .slide-body > :is(ul, ol, p, .callout, table, .code-block, .columns), .slide-body .katex-display { margin-inline-start: auto; margin-inline-end: auto; }
 .slide-body ul, .slide-body ol { text-align: start; }
 .slide-body p { max-width: 1250px; }
+/* A chart (and the box mdeck puts it in) takes the body's width; centred, it
+   would shrink to a column. */
+.slide-body > :is(.dataview, :has(> .dataview)) { width: 100%; max-width: 1250px; }
 .slide-body ul > li::before { width: 24px; height: 1px; background: var(--accent); top: 0.75em; }
 .slide-body ol > li::before { color: var(--accent); font-family: var(--font-display); font-style: italic; }
 .slide-body .callout { width: 1000px; max-width: 100%; text-align: start; border-inline-start: 0; border-top: 1px solid var(--accent); padding: 16px 0 0; }

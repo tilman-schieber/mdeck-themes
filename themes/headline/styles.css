@@ -35,6 +35,16 @@
   filter: var(--logo-filter, none);
   transform: translateY(calc(var(--fs-eyebrow) * 0.5 - 50%));
 }
+/* On the other slides (show.organization: all) the logo stands in the
+   header's line, before the section, instead of in the corner. */
+.slide:not(.slide--title) .slide-logo {
+  position: static;
+  height: 40px;
+  max-width: 240px;
+  margin-inline-start: auto;
+  transform: none;
+}
+.slide:not(.slide--title) .slide-logo + span:not(:empty) { margin-inline-start: 32px; }
 
 .slide-footer {
   font-family: var(--font-label);
@@ -469,10 +479,11 @@ strong { color: var(--ink); font-weight: 600; }
 /* ─────────────────────────────────────────────
    CODE BLOCK — on the surface, square
    ───────────────────────────────────────────── */
+/* The size is set on .slide, so a split slide's columns can set a smaller one. */
+.slide { --code-size: 27px; }
 .code-block {
   --code-bg: var(--surface);
   --code-radius: 0;
-  --code-size: 27px;
   background: var(--code-bg);
   border-radius: 0;
   padding: 36px 44px;
