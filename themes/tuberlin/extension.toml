@@ -2,12 +2,11 @@ schema = 1
 kind = "theme"
 id = "tuberlin"
 title = "TU Berlin"
-description = "The corporate design of TU Berlin, after the tubci Typst template (unofficial): red headings on white, a slanted gradient band along the foot, gradient title, section and focus slides; Mulish."
-version = "0.1.2"
+description = "The corporate design of TU Berlin (unofficial): red headings on white, a slanted gradient band along the foot, gradient title, section and focus slides; Mulish."
+version = "0.1.3"
 author = "Tilman Schieber"
 license = "MIT"
 mdeck = ">=3.9.0"  # parameters with a type
-homepage = "https://github.com/tilman-schieber/tubci"
 # The palette this theme uses unless the deck sets one; colours come only from palettes.
 palette = "tub-blue-violet"
 palettes = ["tub-blue-violet", "tub-blue-green", "tub-orange-red", "tub-red-violet"]  # the corporate design's four gradients: no other palettes
@@ -19,7 +18,7 @@ fonts = [
 styles = "styles.css"
 
 # Type, spacing and fonts used by styles.css; colours come from the palette.
-# The sizes are the template's, from a 297 mm slide scaled to 1920 px
+# The sizes are the design's, from a 297 mm slide scaled to 1920 px
 # (18 pt text, 24 pt headings, 28 pt titles, 14 pt footer).
 [tokens]
 "--fs-display" = "64px"
@@ -62,11 +61,11 @@ writing = """
 The corporate design of TU Berlin, and only its own four gradients as
 palettes (tub-blue-violet, tub-blue-green, tub-orange-red, tub-red-violet).
 Headings are TU red on white, short enough for one line. Emphasis (*word*)
-is TU red, as the template's alert. Set meta.logo to the TU logo for the
+is TU red. Set meta.logo to the TU logo for the
 title slide, and show.author: all to put name, institute and date in the
-footer band of every slide, as the template does. In the dark the logo is
-printed in white, as the TU wordmark should be on the gradient; a logo in
-its own colours becomes a white shape there. Use chapter slides for
+footer band of every slide. In the dark the logo is printed in white, as
+the TU wordmark should be on the gradient; a logo in its own colours
+becomes a white shape there. Use chapter slides for
 sections and focus slides for one statement or formula: both are filled
 with the gradient. A title slide with an image puts the picture in a
 slanted band between the logo and the title.
