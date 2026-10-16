@@ -97,6 +97,15 @@
   filter: var(--logo-filter, none);
   transform: translateY(calc(var(--fs-eyebrow) * 0.5 - 50%));
 }
+/* On the other slides (show.organization: all) it stands in the running
+   head, between the organisation and the section (the head's gap keeps
+   them apart), so the page number keeps its corner. */
+.slide:not(.slide--title) .slide-logo {
+  position: static;
+  height: 36px;
+  max-width: 240px;
+  transform: none;
+}
 .slide-footer {
   font-family: var(--font-body);
   font-size: var(--fs-small);
@@ -594,7 +603,6 @@ strong { color: var(--ink); font-weight: 600; }
 .code-block {
   --code-bg: transparent;
   --code-radius: 0;
-  --code-size: 32px;
   background: var(--code-bg);
   border-radius: 0;
   padding: 4px 0 4px 40px;
@@ -605,6 +613,9 @@ strong { color: var(--ink); font-weight: 600; }
   line-height: 1.45;
   font-variant-numeric: lining-nums;
 }
+/* The size is set on the slide, so the split layout's smaller code (on its
+   columns) reaches the block. */
+.slide { --code-size: 32px; }
 .code-block code { font-family: inherit; font-size: inherit; background: none; padding: 0; }
 
 /* ─────────────────────────────────────────────

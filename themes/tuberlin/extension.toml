@@ -3,7 +3,7 @@ kind = "theme"
 id = "tuberlin"
 title = "TU Berlin"
 description = "The corporate design of TU Berlin, after the tubci Typst template (unofficial): red headings on white, a slanted gradient band along the foot, gradient title, section and focus slides; Mulish."
-version = "0.1.1"
+version = "0.1.2"
 author = "Tilman Schieber"
 license = "MIT"
 mdeck = ">=3.9.0"  # parameters with a type
@@ -64,7 +64,9 @@ palettes (tub-blue-violet, tub-blue-green, tub-orange-red, tub-red-violet).
 Headings are TU red on white, short enough for one line. Emphasis (*word*)
 is TU red, as the template's alert. Set meta.logo to the TU logo for the
 title slide, and show.author: all to put name, institute and date in the
-footer band of every slide, as the template does. Use chapter slides for
+footer band of every slide, as the template does. In the dark the logo is
+printed in white, as the TU wordmark should be on the gradient; a logo in
+its own colours becomes a white shape there. Use chapter slides for
 sections and focus slides for one statement or formula: both are filled
 with the gradient. A title slide with an image puts the picture in a
 slanted band between the logo and the title.

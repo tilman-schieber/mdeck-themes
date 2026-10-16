@@ -50,6 +50,10 @@
 }
 .slide-header > span:empty { display: none; }
 .slide-header:has(.slide-logo) .brand { visibility: hidden; }
+/* On the other slides (show.organization: all) the logo keeps its corner,
+   as in the template, and the hidden organisation leaves the line, so the
+   section stands at the start of it, clear of the logo. */
+.slide:not(.slide--title) .slide-header:has(.slide-logo) .brand { display: none; }
 .slide-logo {
   position: absolute;
   top: calc(52px - var(--pad-y));
@@ -373,7 +377,6 @@ strong { font-weight: 700; color: var(--ink); }
 .code-block {
   --code-bg: var(--surface);
   --code-radius: 0;
-  --code-size: 28px;
   background: var(--code-bg);
   border-radius: 0;
   padding: 26px 36px;
@@ -383,6 +386,9 @@ strong { font-weight: 700; color: var(--ink); }
   font-family: var(--font-mono);
   line-height: 1.5;
 }
+/* The size is set on the slide, so the split layout's smaller code (on its
+   columns) reaches the block. */
+.slide { --code-size: 28px; }
 .code-block code { font-family: inherit; font-size: inherit; background: none; padding: 0; }
 
 .slide-body table { border-collapse: collapse; font-size: var(--fs-small); }

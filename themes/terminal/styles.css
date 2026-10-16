@@ -31,6 +31,16 @@
   filter: var(--logo-filter, none);
   transform: translateY(calc(var(--fs-eyebrow) * 0.5 - 50%));
 }
+/* On the other slides (show.organization: all) it stands in the header's
+   line, before the bracketed section, instead of in the corner. */
+.slide:not(.slide--title) .slide-logo {
+  position: static;
+  height: 40px;
+  max-width: 240px;
+  margin-inline-start: auto;
+  transform: none;
+}
+.slide:not(.slide--title) .slide-logo + span:not(:empty) { margin-inline-start: 32px; }
 
 /* ─────────────────────────────────────────────
    FOOTER — a tmux status bar across the bottom edge: the session (the
@@ -195,7 +205,7 @@ strong { color: var(--ink); font-weight: 700; }
 }
 /* motion: 0 holds the cursor steady */
 @keyframes terminal-blink { 50% { opacity: calc(1 - var(--motion)); } }
-deck-stage[data-deck-static] .slide--title .display::after { animation: none; }
+[data-deck-static] .slide--title .display::after { animation: none; }
 
 /* ─────────────────────────────────────────────
    LAYOUT: CHAPTER — running a new command: the command line, the part as
@@ -495,7 +505,6 @@ deck-stage[data-deck-static] .slide--title .display::after { animation: none; }
 .code-block {
   --code-bg: var(--bg);
   --code-radius: 0;
-  --code-size: 26px;
   background: var(--code-bg);
   border: 2px solid var(--rule);
   border-top: 0;
@@ -507,6 +516,9 @@ deck-stage[data-deck-static] .slide--title .display::after { animation: none; }
   font-family: var(--font-body);
   line-height: 1.6;
 }
+/* The size is set on the slide, so the split layout's smaller code (on its
+   columns) reaches the block. */
+.slide { --code-size: 26px; }
 /* The title bar with three window buttons, above the code (outside it, so
    it stays when tall code scrolls). */
 .code-block-wrapper::before {

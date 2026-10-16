@@ -41,6 +41,15 @@
   object-fit: contain;
   filter: var(--logo-filter, none);
 }
+/* On the other slides (show.organization: all) it stands in the caption's
+   line, before the section, instead of under it. */
+.slide:not(.slide--title) .slide-logo {
+  position: static;
+  height: 36px;
+  max-width: 240px;
+  margin-inline-start: auto;
+}
+.slide:not(.slide--title) .slide-logo + span:not(:empty) { margin-inline-start: 32px; }
 
 /* ─────────────────────────────────────────────
    TYPOGRAPHY HELPERS
@@ -359,7 +368,6 @@ strong { font-weight: 600; color: var(--ink); }
 .code-block {
   --code-bg: var(--surface);
   --code-radius: 2px;
-  --code-size: 24px;
   background: var(--code-bg);
   border-radius: 2px;
   padding: 24px 32px;
@@ -369,6 +377,9 @@ strong { font-weight: 600; color: var(--ink); }
   font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
   line-height: 1.55;
 }
+/* The size is set on the slide, so the split layout's smaller code (on its
+   columns) reaches the block. */
+.slide { --code-size: 24px; }
 .code-block code { font-family: inherit; font-size: inherit; background: none; padding: 0; }
 .slide-body th { font-family: var(--font-body); font-weight: 600; font-size: var(--fs-eyebrow); letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); border-bottom: 1px solid var(--hairline); }
 .slide-body td { border-bottom: 1px solid var(--hairline); }
