@@ -221,6 +221,12 @@ blockquote {
   /* The akzentfläche must remain 100% opaque — no shadow, no transparency. */
   box-shadow: none;
 }
+/* The title is already on yellow: the <em> highlighter would add nothing,
+   and its box reaches into the line above and cuts its letters off. */
+.slide--title .display em {
+  background: none;
+  padding: 0;
+}
 /* If the slide also has a subtitle, let the akzentfläche hug content. */
 .slide--title .display + .subtitle {
   padding-inline-start: 0;
